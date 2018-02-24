@@ -2,11 +2,16 @@ package walkgame.objects.guns;
 
 import javafx.scene.image.ImageView;
 
-public class Gun {
+import java.util.ArrayList;
+
+public abstract class Gun {
+
+    private static ArrayList<Gun> guns = new ArrayList<>();
 
     private String name;
-    private int clipSize;
     private int ammoCount;
+
+    private int clipSize;
     private ImageView bullet;
 
     private double rateOfFire;
@@ -16,15 +21,17 @@ public class Gun {
     private boolean automatic;
 
 
-    public Gun(String name, int clipSize, int ammoCount, ImageView bullet, double rateOfFire, double reach, double reloadTime, boolean automatic) {
+    public Gun(String name, int ammoCount, int clipSize, ImageView bullet, double rateOfFire, double reach, double reloadTime, boolean automatic) {
         this.name = name;
-        this.clipSize = clipSize;
         this.ammoCount = ammoCount;
+        this.clipSize = clipSize;
         this.bullet = bullet;
         this.rateOfFire = rateOfFire;
         this.reach = reach;
         this.reloadTime = reloadTime;
         this.automatic = automatic;
+
+        guns.add(this);
     }
 
     public Gun()
@@ -69,5 +76,21 @@ public class Gun {
 
     public boolean isAutomatic() {
         return automatic;
+    }
+
+    public static Gun getGunByName(String name) {
+        for(Gun gun: guns)
+        {
+            if(gun.name.equals(name))
+            {
+                return gun;
+            }
+        }
+
+        return null;
+    }
+
+    public void setAmmoCount(int ammoCount) {
+        this.ammoCount = ammoCount;
     }
 }
