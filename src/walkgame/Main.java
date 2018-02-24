@@ -2,14 +2,15 @@ package walkgame;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import walkgame.views.FirstView;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage){
-        View view = new View(primaryStage);
+        FirstView firstView = new FirstView(primaryStage);
 
-        primaryStage.setScene(view.scene);
+        primaryStage.setScene(firstView.scene);
 
         primaryStage.setTitle("WalkGame");
         primaryStage.setResizable(false);

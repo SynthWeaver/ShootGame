@@ -1,16 +1,17 @@
-package walkgame;
+package walkgame.controllers;
 
 
 import gameloop.GameLoop;
 import javafx.scene.input.KeyCode;
+import walkgame.views.FirstView;
 import walkgame.objects.Floor;
 
-public class Controller extends gameloop.Controller{
+public class FirstController extends Controller{
 
-    View view;
+    FirstView firstView;
 
-    public Controller(View view) {
-        this.view = view;
+    public FirstController(FirstView firstView) {
+        this.firstView = firstView;
         new GameLoop(this).start();
     }
 
@@ -19,7 +20,7 @@ public class Controller extends gameloop.Controller{
     public void pressButton(KeyCode k)
     {
         GameLoop.logicUpdate = true;
-        view.player.pressButton(k);
+        firstView.player.pressButton(k);
         for(Floor f : Floor.floorList)
         {
             f.pressButton(k);
@@ -28,7 +29,7 @@ public class Controller extends gameloop.Controller{
 
     public void releaseButton(KeyCode k)
     {
-        view.player.releaseButton(k);
+        firstView.player.releaseButton(k);
         for(Floor f : Floor.floorList)
         {
             f.releaseButton(k);
@@ -45,7 +46,7 @@ public class Controller extends gameloop.Controller{
     @Override
     public void tick()
     {
-        view.player.move();
+        firstView.player.move();
         for (Floor floor : Floor.floorList)
         {
             floor.move();
@@ -55,6 +56,6 @@ public class Controller extends gameloop.Controller{
     @Override
     public void render()
     {
-        view.render();
+        firstView.render();
     }
 }
