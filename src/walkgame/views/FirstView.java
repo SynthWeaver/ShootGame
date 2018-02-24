@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 import walkgame.controllers.FirstController;
 import walkgame.objects.Floor;
 import walkgame.objects.Player;
-import walkgame.objects.guns.Gun;
-import walkgame.objects.microObjects.Coordinate;
+import walkgame.objects.guns.Pistol;
+import walkgame.objects.microObjects.Coordinates;
 
 public class FirstView extends View
 {
@@ -23,14 +23,15 @@ public class FirstView extends View
     public Scene scene;
     private Stage primaryStage;
 
-    private static Coordinate screenSize = new Coordinate(300, 300);
-    private Coordinate gameSize = new Coordinate(400, 400);
-    public static Coordinate screenCenter = new Coordinate(screenSize.getX() / 2f, screenSize.getY() / 2f);
+    private static Coordinates screenSize = new Coordinates(300, 300);
+    private Coordinates gameSize = new Coordinates(400, 400);
+    public static Coordinates screenCenter = new Coordinates(screenSize.getX() / 2f, screenSize.getY() / 2f);
+    private static Coordinates playerSpawn = new Coordinates(screenCenter.getX() - (Player.PLAYER_SIZE.getX() / 2f) , screenCenter.getY() - (Player.PLAYER_SIZE.getY() / 2f));
 
     public FirstView(Stage primaryStage)
     {
         firstController = new FirstController(this);
-        player = new Player(screenCenter, "Jack", new Gun());
+        player = new Player(playerSpawn, "Jack", new Pistol());
 
         createFloor();
         createRoot();
@@ -51,8 +52,9 @@ public class FirstView extends View
 
     private void createFloor()
     {
-        new Floor(player.getX(), player.getY(), new Image("walkgame/res/floor1.png"));
-        new Floor(Floor.floorList.get(0).getX() + new Image("walkgame/res/floor1.png").getWidth(), player.getY(), new Image("walkgame/res/floor1.png"));
+        new Floor(player.getCoordinate(), new Image("walkgame/res/floor1.png"));
+
+        new Floor(new Coordinates(Floor.floorList.get(0).getX() + new Image("walkgame/res/floor1.png").getWidth(), player.getY()), new Image("walkgame/res/floor1.png"));
     }
 
     @Override
@@ -94,6 +96,10 @@ public class FirstView extends View
             {
                 firstController.mouseClick();
             }
+        });
+
+        scene.setOnMouseMoved(event -> {
+            player.rotateImage(new Coordinates(event.getX(), event.getY()));
         });
     }
 }

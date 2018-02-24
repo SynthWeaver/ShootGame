@@ -3,13 +3,16 @@ package walkgame.objects.parentObjects;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.objects.microObjects.Coordinates;
+import walkgame.objects.microObjects.Sprites;
 
 public class Character extends GameObject implements Moveable, Destructible
 {
-    public Character(double x, double y, Image image, int health, double speed) {
-        super(x, y, image);
+    public Character(Coordinates coordinates, Sprites sprites, int health, double speed) {
+        super(coordinates);
         this.speed = speed;
         this.health = health;
+        this.sprites = sprites;
     }
 
     private double speed = 0;
@@ -18,6 +21,9 @@ public class Character extends GameObject implements Moveable, Destructible
     private double velocityX = 0;
     private double velocityY = 0;
     protected boolean goNorth, goSouth, goEast, goWest;
+
+    protected Sprites sprites;
+
 
 
     public double getSpeed()
@@ -47,6 +53,18 @@ public class Character extends GameObject implements Moveable, Destructible
         this.health = health;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public double getVelocityX() {
+        return velocityX;
+    }
+
+    public double getVelocityY() {
+        return velocityY;
+    }
+
     @Override
     public void move()
     {
@@ -74,48 +92,48 @@ public class Character extends GameObject implements Moveable, Destructible
 
     @Override
     public void rotateImage() {
-        int rotate = 0;
+        Image image = sprites.getSprite(Coordinates.SOUTH);
 
         if(goEast)
         {
-            rotate = 90;
+            image = sprites.getSprite(Coordinates.EAST);
         }
         else if(goWest)
         {
-            rotate = -90;
+            image = sprites.getSprite(Coordinates.WEST);
         }
 
         if(goNorth)
         {
             if(goEast)
             {
-                rotate = 45;
+                image = sprites.getSprite(Coordinates.NORTH_EAST);
             }
             else if(goWest)
             {
-                rotate = -45;
+                image = sprites.getSprite(Coordinates.NORTH_WEST);
             }
             else
             {
-                rotate = 0;
+                image = sprites.getSprite(Coordinates.NORTH);
             }
         }
         else if(goSouth)
         {
             if(goEast)
             {
-                rotate = 135;
+                image = sprites.getSprite(Coordinates.SOUTH_EAST);
             }
             else if(goWest)
             {
-                rotate = -135;
+                image = sprites.getSprite(Coordinates.SOUTH_WEST);
             }
             else
             {
-                rotate = 180;
+                image = sprites.getSprite(Coordinates.SOUTH);
             }
         }
 
-        super.setRotate(rotate);
+        super.setImage(image);
     }
 }

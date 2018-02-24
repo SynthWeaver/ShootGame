@@ -2,21 +2,26 @@ package walkgame.objects.parentObjects;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import walkgame.objects.microObjects.Coordinates;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameObject extends ImageView
 {
     public final static ArrayList<Integer> ID_LIST = new ArrayList<>();
 
-    public GameObject(double x, double y, Image image)
+    public GameObject(Coordinates coordinates, Image image)
     {
         super(image);
         createID();
 
-        super.setX(x);
-        super.setY(y);
+        super.setX(coordinates.getX());
+        super.setY(coordinates.getY());
+    }
+
+    public GameObject(Coordinates coordinates)
+    {
+        this(coordinates, null);
     }
 
     private int id;
@@ -25,5 +30,10 @@ public class GameObject extends ImageView
     {
         id = ID_LIST.size();
         ID_LIST.add(id);
+    }
+
+    public Coordinates getCoordinate()
+    {
+        return new Coordinates(getX(), getY());
     }
 }

@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
+import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentObjects.GameObject;
 
 import java.util.ArrayList;
@@ -12,8 +13,8 @@ public class Floor extends GameObject implements Controllable, Moveable
 {
     public static ArrayList<Floor> floorList = new ArrayList<>();
 
-    public Floor(double x, double y, Image image) {
-        super(x, y, image);
+    public Floor(Coordinates coordinates, Image image) {
+        super(coordinates, image);
         Floor.floorList.add(this);
     }
 
