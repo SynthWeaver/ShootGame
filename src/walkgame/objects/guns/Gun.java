@@ -1,7 +1,5 @@
 package walkgame.objects.guns;
 
-import javafx.scene.image.ImageView;
-
 import java.util.ArrayList;
 
 public abstract class Gun {
@@ -12,7 +10,7 @@ public abstract class Gun {
     private int ammoCount;
 
     private int clipSize;
-    private ImageView bullet;
+    private int bulletID;
 
     private double rateOfFire;
     private double reach;
@@ -21,29 +19,17 @@ public abstract class Gun {
     private boolean automatic;
 
 
-    public Gun(String name, int ammoCount, int clipSize, ImageView bullet, double rateOfFire, double reach, double reloadTime, boolean automatic) {
+    public Gun(String name, int ammoCount, int clipSize, int bulletID, double rateOfFire, double reach, double reloadTime, boolean automatic) {
         this.name = name;
         this.ammoCount = ammoCount;
         this.clipSize = clipSize;
-        this.bullet = bullet;
+        this.bulletID = bulletID;
         this.rateOfFire = rateOfFire;
         this.reach = reach;
         this.reloadTime = reloadTime;
         this.automatic = automatic;
 
         guns.add(this);
-    }
-
-    public Gun()
-    {
-        this.name = "None";
-        this.clipSize = 0;
-        this.ammoCount = 0;
-        this.bullet = new ImageView();
-        this.rateOfFire = 0;
-        this.reach = 0;
-        this.reloadTime = 0;
-        this.automatic = false;
     }
 
     public String getName() {
@@ -58,8 +44,8 @@ public abstract class Gun {
         return ammoCount;
     }
 
-    public ImageView getBullet() {
-        return bullet;
+    public int getBulletID() {
+        return bulletID;
     }
 
     public double getRateOfFire() {
