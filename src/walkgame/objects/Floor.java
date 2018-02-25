@@ -13,8 +13,8 @@ public class Floor extends GameObject implements Controllable, Moveable
 {
     public static ArrayList<Floor> floorList = new ArrayList<>();
 
-    public Floor(Coordinates coordinates, Image image) {
-        super(coordinates, image);
+    public Floor(Image image, Coordinates coordinates) {
+        super(image, coordinates);
         Floor.floorList.add(this);
     }
 
@@ -44,14 +44,27 @@ public class Floor extends GameObject implements Controllable, Moveable
     }
 
 
+
     @Override
-    public void setSpeed(double speed) {
-        this.speed = speed;
+    public double getVelocityX() {
+        return 0;
+    }
+
+    @Override
+    public double getVelocityY() {
+        return 0;
     }
 
     @Override
     public double getSpeed() {
         return this.speed;
+    }
+
+
+
+    @Override
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 
     @Override
@@ -63,6 +76,7 @@ public class Floor extends GameObject implements Controllable, Moveable
     public void setVelocityY(double velocity) {
         this.velocityY = velocity;
     }
+
 
 
     @Override
@@ -99,6 +113,11 @@ public class Floor extends GameObject implements Controllable, Moveable
             case S: goSouth = false; break;
             case A: goWest = false; break;
         }
+    }
+
+    @Override
+    public void rotateImage(Coordinates mouseCoordinates) {
+
     }
 
     @Override
