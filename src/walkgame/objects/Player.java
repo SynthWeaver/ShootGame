@@ -90,7 +90,7 @@ public class Player extends Character implements Controllable, Nameable {
         {
             image = sprites.getSprite(Coordinates.NORTH_EAST);
         }
-        else if(angle > Coordinates.NORTH_NORTH_EAST && angle < Coordinates.SOUTH_SOUTH_EAST)
+        else if(angle > Coordinates.NORTH_EAST && angle < Coordinates.SOUTH_EAST)
         {
             image = sprites.getSprite(Coordinates.EAST);
         }
@@ -98,7 +98,7 @@ public class Player extends Character implements Controllable, Nameable {
         {
             image = sprites.getSprite(Coordinates.SOUTH_EAST);
         }
-        else if(angle > Coordinates.SOUTH_SOUTH_EAST && angle < Coordinates.SOUTH_SOUTH_WEST)
+        else if(angle > Coordinates.SOUTH_EAST && angle < Coordinates.SOUTH_WEST)
         {
             image = sprites.getSprite(Coordinates.SOUTH);
         }
@@ -106,7 +106,7 @@ public class Player extends Character implements Controllable, Nameable {
         {
             image = sprites.getSprite(Coordinates.SOUTH_WEST);
         }
-        else if(angle > Coordinates.SOUTH_SOUTH_WEST && angle < Coordinates.NORTH_NORTH_WEST)
+        else if(angle > Coordinates.SOUTH_WEST && angle < Coordinates.NORTH_WEST)
         {
             image = sprites.getSprite(Coordinates.WEST);
         }
@@ -114,7 +114,7 @@ public class Player extends Character implements Controllable, Nameable {
         {
             image = sprites.getSprite(Coordinates.NORTH_WEST);
         }
-        else if(angle > Coordinates.NORTH_NORTH_WEST || angle < Coordinates.NORTH_NORTH_EAST)
+        else if(angle > Coordinates.NORTH_WEST || angle < Coordinates.NORTH_EAST)
         {
             image = sprites.getSprite(Coordinates.NORTH);
         }
