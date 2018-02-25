@@ -80,6 +80,7 @@ public class Player extends Character implements Controllable, Nameable {
         }
     }
 
+    @Override
     public void rotateImage(Coordinates mouseCoordinates) {
         Image image = sprites.getSprite(Coordinates.SOUTH);
         double angle = Functions.getAngle(FirstView.screenCenter, mouseCoordinates);

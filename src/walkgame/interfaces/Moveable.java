@@ -6,7 +6,6 @@ public interface Moveable
     void rotateImage();
 
     void setSpeed(double speed);
-    double getSpeed();
 
     void setVelocityX(double velocity);
     void setVelocityY(double velocity);
@@ -14,8 +13,11 @@ public interface Moveable
     void setX(double x);
     void setY(double y);
 
+    double getSpeed();
+
+    double getVelocityX();
+    double getVelocityY();
+
     double getX();
     double getY();
-
-
 }
