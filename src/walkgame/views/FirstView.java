@@ -52,9 +52,9 @@ public class FirstView extends View
 
     private void createFloor()
     {
-        new Floor(player.getCoordinate(), new Image("walkgame/res/floor1.png"));
+        new Floor(new Image("walkgame/res/floor1.png"), player.getCoordinate());
 
-        new Floor(new Coordinates(Floor.floorList.get(0).getX() + new Image("walkgame/res/floor1.png").getWidth(), player.getY()), new Image("walkgame/res/floor1.png"));
+        new Floor( new Image("walkgame/res/floor1.png"), new Coordinates(Floor.floorList.get(0).getX() + new Image("walkgame/res/floor1.png").getWidth(), player.getY()));
     }
 
     @Override

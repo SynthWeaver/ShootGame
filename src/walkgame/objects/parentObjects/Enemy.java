@@ -6,6 +6,6 @@ import walkgame.objects.microObjects.Sprites;
 public class Enemy extends Character
 {
     public Enemy(Coordinates coordinates, Sprites sprites, int health, double speed) {
-        super(coordinates, sprites, health, speed);
+        super(sprites, coordinates, health, speed);
     }
 }

@@ -16,7 +16,7 @@ public class Player extends Character implements Controllable, Nameable {
     private static final double PLAYER_SPEED = 0;
     public static final Coordinates PLAYER_SIZE  = new Coordinates(32,32);
 
-    private static Sprites playerSprites = new Sprites(
+    private static final Sprites PLAYER_SPRITES = new Sprites(
             new Image("walkgame/res/player/none/north.png"),
             new Image("walkgame/res/player/none/north_east.png"),
             new Image("walkgame/res/player/none/east.png"),
@@ -28,9 +28,9 @@ public class Player extends Character implements Controllable, Nameable {
     );
 
 
-    public Player(Coordinates playerSpawn, Sprites sprites, String name, Gun currentGun)
+    public Player(Sprites sprites, Coordinates playerSpawn, String name, Gun currentGun)
     {
-        super(playerSpawn, sprites, PLAYER_HEALTH, PLAYER_SPEED);
+        super(sprites, playerSpawn, PLAYER_HEALTH, PLAYER_SPEED);
         this.name = name;
         this.currentGun = currentGun;
         super.setImage(sprites.getSprite(Coordinates.SOUTH));
@@ -38,7 +38,7 @@ public class Player extends Character implements Controllable, Nameable {
 
     public Player(Coordinates playerSpawn, String name, Gun currentGun)
     {
-        this(playerSpawn, playerSprites, name, currentGun);
+        this(PLAYER_SPRITES, playerSpawn, name, currentGun);
     }
 
     private String name;

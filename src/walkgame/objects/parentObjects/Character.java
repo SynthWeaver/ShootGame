@@ -8,7 +8,7 @@ import walkgame.objects.microObjects.Sprites;
 
 public class Character extends GameObject implements Moveable, Destructible
 {
-    public Character(Coordinates coordinates, Sprites sprites, int health, double speed) {
+    public Character(Sprites sprites, Coordinates coordinates, int health, double speed) {
         super(coordinates, health);
         this.speed = speed;
         this.sprites = sprites;

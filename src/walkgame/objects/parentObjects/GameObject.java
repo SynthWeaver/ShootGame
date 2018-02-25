@@ -10,7 +10,7 @@ public class GameObject extends ImageView
 {
     public static final ArrayList<Integer> ID_LIST = new ArrayList<>();
 
-    public GameObject(Coordinates coordinates, Image image, int health)
+    public GameObject(Image image, Coordinates coordinates, int health)
     {
         super(image);
         createID();
@@ -20,19 +20,19 @@ public class GameObject extends ImageView
         this.health = health;
     }
 
-    public GameObject(Coordinates coordinates, Image image)
+    public GameObject(Image image, Coordinates coordinates)
     {
-        this(coordinates, image, Integer.MAX_VALUE);
+        this(image, coordinates, Integer.MAX_VALUE);
     }
 
     public GameObject(Coordinates coordinates , int health)
     {
-        this(coordinates, null, health);
+        this( null, coordinates, health);
     }
 
     public GameObject(Coordinates coordinates)
     {
-        this(coordinates, null, Integer.MAX_VALUE);
+        this(null, coordinates, Integer.MAX_VALUE);
     }
 
     private int id;
