@@ -4,13 +4,13 @@ package walkgame.controllers;
 import javafx.scene.input.KeyCode;
 import walkgame.objects.Floor;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.views.FirstView;
+import walkgame.views.FirstMainView;
 
-public class FirstViewController extends Controller{
+public class FirstViewMainController extends MainController {
 
-    FirstView firstView;
+    FirstMainView firstView;
 
-    public FirstViewController(FirstView firstView) {
+    public FirstViewMainController(FirstMainView firstView) {
         this.firstView = firstView;
     }
 

@@ -8,7 +8,7 @@ import walkgame.objects.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentObjects.GameObject;
 
-public abstract class View extends gameloop.View {
+public abstract class MainView extends gameloop.View {
 
     private Group root;
     public Scene scene;
@@ -19,7 +19,7 @@ public abstract class View extends gameloop.View {
     public static Coordinates screenCenter = new Coordinates(screenSize.getX() / 2f, screenSize.getY() / 2f);
     protected static Coordinates playerSpawn = new Coordinates(screenCenter.getX() - (Player.PLAYER_SIZE.getX() / 2f) , screenCenter.getY() - (Player.PLAYER_SIZE.getY() / 2f));
 
-    public View(Stage primaryStage) {
+    public MainView(Stage primaryStage) {
         root = new Group();
 
         this.primaryStage = primaryStage;
@@ -45,6 +45,6 @@ public abstract class View extends gameloop.View {
 
     protected void createScene()
     {
-        scene = new Scene(root, FirstView.screenSize.getX(), FirstView.screenSize.getY(), Color.BLACK);
+        scene = new Scene(root, FirstMainView.screenSize.getX(), FirstMainView.screenSize.getY(), Color.BLACK);
     }
 }

@@ -3,13 +3,12 @@ package walkgame.objects;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import walkgame.interfaces.*;
-import walkgame.objects.bullets.Bullet;
 import walkgame.objects.guns.Gun;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.microObjects.Sprites;
 import walkgame.objects.parentObjects.Character;
-import walkgame.views.FirstView;
+import walkgame.views.FirstMainView;
 
 public class Player extends Character implements Controllable, Nameable, Shootable {
 
@@ -63,7 +62,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void shoot(Coordinates mouseCoordinates)
     {
-        currentGun.shoot(FirstView.screenCenter, mouseCoordinates);
+        currentGun.shoot(FirstMainView.screenCenter, mouseCoordinates);
     }
 
     @Override
@@ -90,7 +89,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void rotateImage(Coordinates mouseCoordinates) {
         Image image = sprites.getSprite(Coordinates.SOUTH);
-        double angle = Functions.getAngle(FirstView.screenCenter, mouseCoordinates);
+        double angle = Functions.getAngle(FirstMainView.screenCenter, mouseCoordinates);
 
 
         if(angle > Coordinates.NORTH_NORTH_EAST && angle < Coordinates.NORTH_EAST_EAST)

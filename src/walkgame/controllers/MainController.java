@@ -3,7 +3,7 @@ package walkgame.controllers;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.parentObjects.GameObject;
 
-public abstract class Controller extends gameloop.Controller {
+public abstract class MainController extends gameloop.Controller {
     @Override
     public void tick()
     {

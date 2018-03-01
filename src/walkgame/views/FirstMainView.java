@@ -4,21 +4,21 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
-import walkgame.controllers.FirstViewController;
+import walkgame.controllers.FirstViewMainController;
 import walkgame.objects.Floor;
 import walkgame.objects.Player;
 import walkgame.objects.guns.Pistol;
 import walkgame.objects.microObjects.Coordinates;
 
-public class FirstView extends View
+public class FirstMainView extends MainView
 {
-    public FirstViewController firstViewController;
+    public FirstViewMainController firstViewController;
     public Player player;
 
-    public FirstView(Stage primaryStage)
+    public FirstMainView(Stage primaryStage)
     {
         super(primaryStage);
-        firstViewController = new FirstViewController(this);
+        firstViewController = new FirstViewMainController(this);
 
         createFloor();
         player = new Player(playerSpawn, "Jack", new Pistol());
@@ -29,8 +29,8 @@ public class FirstView extends View
     private void createFloor()
     {
         Image floorImage = new Image("walkgame/res/floor1.png");
-        double spawnX = FirstView.screenCenter.getX() - (floorImage.getWidth() / 2f);
-        double spawnY = FirstView.screenCenter.getY() - (floorImage.getHeight() / 2f);;
+        double spawnX = FirstMainView.screenCenter.getX() - (floorImage.getWidth() / 2f);
+        double spawnY = FirstMainView.screenCenter.getY() - (floorImage.getHeight() / 2f);;
 
         new Floor(floorImage, new Coordinates(spawnX, spawnY));
 
