@@ -34,8 +34,6 @@ public class FirstView extends View
     {
         firstViewController = new FirstViewController(this);
 
-
-
         root = new Group(); //createRoot();
         createFloor();
         player = new Player(playerSpawn, "Jack", new Pistol());
@@ -76,39 +74,6 @@ public class FirstView extends View
                 root.getChildren().add(gameObject);
             }
         }
-    }
-
-    @Override
-    protected void createRoot()
-    {
-        Group background = new Group();
-        Group forground = new Group();
-        Pane map = new Pane();
-        map.setMinSize(gameSize.getX(), gameSize.getY());
-
-
-        for(GameObject gameObject : GameObject.gameObjectList)
-        {
-            if(gameObject instanceof Player)
-            {
-                continue;
-            }
-            else if(gameObject instanceof Floor)
-            {
-                map.getChildren().add(gameObject);
-            }
-            else if(gameObject instanceof Moveable)
-            {
-                forground.getChildren().add(gameObject);
-            }
-            else{
-                background.getChildren().add(gameObject);
-            }
-        }
-
-        map.getChildren().addAll(background, forground);
-
-        root = new Group(map, this.player);
     }
 
     @Override
