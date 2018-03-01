@@ -3,8 +3,10 @@ package walkgame.controllers;
 
 import gameloop.GameLoop;
 import javafx.scene.input.KeyCode;
+import walkgame.interfaces.Moveable;
 import walkgame.objects.bullets.Bullet;
 import walkgame.objects.microObjects.Coordinates;
+import walkgame.objects.parentObjects.GameObject;
 import walkgame.views.FirstView;
 import walkgame.objects.Floor;
 
@@ -47,10 +49,12 @@ public class FirstViewController extends Controller{
     @Override
     public void tick()
     {
-        firstView.player.move();
-        for (Floor floor : Floor.floorList)
+        for(GameObject object : GameObject.gameObjectList)
         {
-            floor.move();
+            if(object instanceof Moveable)
+            {
+                ((Moveable) object).move();
+            }
         }
     }
 
