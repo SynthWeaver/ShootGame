@@ -3,6 +3,7 @@ package walkgame.objects;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import walkgame.interfaces.*;
+import walkgame.objects.bullets.Bullet;
 import walkgame.objects.guns.Gun;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
@@ -10,7 +11,7 @@ import walkgame.objects.microObjects.Sprites;
 import walkgame.objects.parentObjects.Character;
 import walkgame.views.FirstView;
 
-public class Player extends Character implements Controllable, Nameable {
+public class Player extends Character implements Controllable, Nameable, Shootable {
 
     private static final int PLAYER_HEALTH = 100;
     private static final double PLAYER_SPEED = 0;
@@ -57,6 +58,12 @@ public class Player extends Character implements Controllable, Nameable {
 
     public Gun getCurrentGun() {
         return currentGun;
+    }
+
+    @Override
+    public void shoot(Coordinates mouseCoordinates)
+    {
+        currentGun.shoot(FirstView.screenCenter, mouseCoordinates);
     }
 
     @Override

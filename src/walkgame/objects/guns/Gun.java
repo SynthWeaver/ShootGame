@@ -1,5 +1,8 @@
 package walkgame.objects.guns;
 
+import walkgame.objects.bullets.Bullet;
+import walkgame.objects.microObjects.Coordinates;
+
 import java.util.ArrayList;
 
 public abstract class Gun {
@@ -10,7 +13,6 @@ public abstract class Gun {
     private int ammoCount;
 
     private int clipSize;
-    private int bulletID;
 
     private double rateOfFire;
     private double reach;
@@ -19,11 +21,10 @@ public abstract class Gun {
     private boolean automatic;
 
 
-    public Gun(String name, int ammoCount, int clipSize, int bulletID, double rateOfFire, double reach, double reloadTime, boolean automatic) {
+    public Gun(String name, int ammoCount, int clipSize, double rateOfFire, double reach, double reloadTime, boolean automatic) {
         this.name = name;
         this.ammoCount = ammoCount;
         this.clipSize = clipSize;
-        this.bulletID = bulletID;
         this.rateOfFire = rateOfFire;
         this.reach = reach;
         this.reloadTime = reloadTime;
@@ -31,6 +32,8 @@ public abstract class Gun {
 
         guns.add(this);
     }
+
+    public abstract void shoot(Coordinates gunCoordinates, Coordinates directionCoordinates);
 
     public String getName() {
         return name;
@@ -42,10 +45,6 @@ public abstract class Gun {
 
     public int getAmmoCount() {
         return ammoCount;
-    }
-
-    public int getBulletID() {
-        return bulletID;
     }
 
     public double getRateOfFire() {

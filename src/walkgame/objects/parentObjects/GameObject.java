@@ -1,5 +1,6 @@
 package walkgame.objects.parentObjects;
 
+import gameloop.GameLoop;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import walkgame.objects.microObjects.Coordinates;
@@ -8,48 +9,29 @@ import java.util.ArrayList;
 
 public class GameObject extends ImageView
 {
-    public static final ArrayList<Integer> ID_LIST = new ArrayList<>();
-
-    public GameObject(Image image, Coordinates coordinates, int health)
-    {
-        super(image);
-        createID();
-
-        super.setX(coordinates.getX());
-        super.setY(coordinates.getY());
-        this.health = health;
-    }
+    public static final ArrayList<GameObject> gameObjectList = new ArrayList<>();
 
     public GameObject(Image image, Coordinates coordinates)
     {
-        this(image, coordinates, Integer.MAX_VALUE);
-    }
+        super(image);
+        this.id = gameObjectList.size();
 
-    public GameObject(Coordinates coordinates , int health)
-    {
-        this( null, coordinates, health);
+        super.setX(coordinates.getX());
+        super.setY(coordinates.getY());
+
+        gameObjectList.add(this);
+        GameLoop.doLogicUpdate();
     }
 
     public GameObject(Coordinates coordinates)
     {
-        this(null, coordinates, Integer.MAX_VALUE);
+        this( null, coordinates);
     }
 
     private int id;
-    int health;
-
-    private void createID()
-    {
-        id = ID_LIST.size();
-        ID_LIST.add(id);
-    }
 
     public Coordinates getCoordinate()
     {
         return new Coordinates(getX(), getY());
-    }
-
-    public int getHealth() {
-        return health;
     }
 }

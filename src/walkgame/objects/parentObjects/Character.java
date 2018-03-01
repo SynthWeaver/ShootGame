@@ -9,15 +9,16 @@ import walkgame.objects.microObjects.Sprites;
 public class Character extends GameObject implements Moveable, Destructible
 {
     public Character(Sprites sprites, Coordinates coordinates, int health, double speed) {
-        super(coordinates, health);
+        super(coordinates);
         this.speed = speed;
         this.sprites = sprites;
+        this.health = health;
     }
 
+    private int health = 0;
     private double speed = 0;
 
-    private double velocityX = 0;
-    private double velocityY = 0;
+    private double velocityX = 0, velocityY = 0;
     protected boolean goNorth, goSouth, goEast, goWest;
 
     protected Sprites sprites;
@@ -48,7 +49,7 @@ public class Character extends GameObject implements Moveable, Destructible
     @Override
     public void setHealth(int health)
     {
-        super.health = health;
+        this.health = health;
     }
 
     @Override
@@ -59,6 +60,11 @@ public class Character extends GameObject implements Moveable, Destructible
     @Override
     public double getVelocityY() {
         return velocityY;
+    }
+
+    @Override
+    public int getHealth() {
+        return 0;
     }
 
     @Override
