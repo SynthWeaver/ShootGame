@@ -27,9 +27,10 @@ public abstract class Bullet extends GameObject implements Moveable, Destructibl
     private void shoot(Coordinates directionCoordinates)
     {
         double angle = Functions.getAngle(super.getCoordinate(), directionCoordinates);
+        angle -= 90;
 
-        this.velocityX = this.speed * (float)Math.cos((angle/180)*Math.PI);
-        this.velocityY = this.speed * (float)Math.sin((angle/180)*Math.PI);
+        this.velocityX = this.speed * Math.cos((angle/180) * Math.PI);
+        this.velocityY = this.speed * Math.sin((angle/180) * Math.PI);
     }
 
     @Override
