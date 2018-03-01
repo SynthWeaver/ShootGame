@@ -10,14 +10,14 @@ import walkgame.objects.parentObjects.GameObject;
 
 public abstract class MainView extends gameloop.View {
 
-    private Group root;
+    public Group root;
     public Scene scene;
     private Stage primaryStage;
 
-    protected static Coordinates screenSize = new Coordinates(300, 300);
-    public Coordinates gameSize = new Coordinates(400, 400);
+    public static Coordinates screenSize = new Coordinates(300, 300);
+    //public Coordinates gameSize = new Coordinates(400, 400);
     public static Coordinates screenCenter = new Coordinates(screenSize.getX() / 2f, screenSize.getY() / 2f);
-    protected static Coordinates playerSpawn = new Coordinates(screenCenter.getX() - (Player.PLAYER_SIZE.getX() / 2f) , screenCenter.getY() - (Player.PLAYER_SIZE.getY() / 2f));
+    public static Coordinates playerSpawn = new Coordinates(screenCenter.getX() - (Player.PLAYER_SIZE.getX() / 2f) , screenCenter.getY() - (Player.PLAYER_SIZE.getY() / 2f));
 
     public MainView(Stage primaryStage) {
         root = new Group();
@@ -45,6 +45,6 @@ public abstract class MainView extends gameloop.View {
 
     protected void createScene()
     {
-        scene = new Scene(root, FirstMainView.screenSize.getX(), FirstMainView.screenSize.getY(), Color.BLACK);
+        scene = new Scene(root, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.BLACK);
     }
 }

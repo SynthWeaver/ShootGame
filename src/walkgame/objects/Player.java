@@ -9,6 +9,7 @@ import walkgame.objects.microObjects.Functions;
 import walkgame.objects.microObjects.Sprites;
 import walkgame.objects.parentObjects.Character;
 import walkgame.views.FirstMainView;
+import walkgame.views.MainView;
 
 public class Player extends Character implements Controllable, Nameable, Shootable {
 
@@ -62,7 +63,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void shoot(Coordinates mouseCoordinates)
     {
-        currentGun.shoot(FirstMainView.screenCenter, mouseCoordinates);
+        currentGun.shoot(MainView.screenCenter, mouseCoordinates);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void rotateImage(Coordinates mouseCoordinates) {
         Image image = sprites.getSprite(Coordinates.SOUTH);
-        double angle = Functions.getAngle(FirstMainView.screenCenter, mouseCoordinates);
+        double angle = Functions.getAngle(MainView.screenCenter, mouseCoordinates);
 
 
         if(angle > Coordinates.NORTH_NORTH_EAST && angle < Coordinates.NORTH_EAST_EAST)

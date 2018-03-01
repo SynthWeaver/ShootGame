@@ -4,4 +4,5 @@ public interface Destructible
 {
     void setHealth(int health);
     int getHealth();
+    void destroy();
 }

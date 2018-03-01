@@ -1,18 +1,9 @@
 package walkgame.controllers;
 
+import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.parentObjects.GameObject;
 
 public abstract class MainController extends gameloop.Controller {
-    @Override
-    public void tick()
-    {
-        for(GameObject object : GameObject.gameObjectList)
-        {
-            if(object instanceof Moveable)
-            {
-                ((Moveable) object).move();
-            }
-        }
-    }
+
 }

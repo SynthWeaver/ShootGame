@@ -1,11 +1,13 @@
 package walkgame.objects.bullets;
 
+import gameloop.GameLoop;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.parentObjects.GameObject;
+import walkgame.views.MainView;
 
 public abstract class Bullet extends GameObject implements Moveable, Destructible {
 
@@ -31,6 +33,13 @@ public abstract class Bullet extends GameObject implements Moveable, Destructibl
 
         this.velocityX = this.speed * Math.cos((angle/180) * Math.PI);
         this.velocityY = this.speed * Math.sin((angle/180) * Math.PI);
+    }
+
+    @Override
+    public void destroy()
+    {
+        GameObject.gameObjectList.remove(this);
+        GameLoop.doLogicUpdate();
     }
 
     @Override
@@ -75,7 +84,22 @@ public abstract class Bullet extends GameObject implements Moveable, Destructibl
 
     @Override
     public void move() {
+        double x = super.getX();
+        double y = super.getY();
 
+        if(x > MainView.screenSize.getX() + 20 || x < 0 - 20)
+        {
+            this.setHealth(0);
+        }
+        else if(y > MainView.screenSize.getY() + 20 || y < 0 - 20)
+        {
+            this.setHealth(0);
+        }
+        else
+        {
+            super.setX(x + velocityX);
+            super.setY(y + velocityY);
+        }
     }
 
     @Override

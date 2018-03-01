@@ -2,8 +2,11 @@ package walkgame.controllers;
 
 
 import javafx.scene.input.KeyCode;
+import walkgame.interfaces.Destructible;
+import walkgame.interfaces.Moveable;
 import walkgame.objects.Floor;
 import walkgame.objects.microObjects.Coordinates;
+import walkgame.objects.parentObjects.GameObject;
 import walkgame.views.FirstMainView;
 
 public class FirstViewMainController extends MainController {
@@ -37,6 +40,26 @@ public class FirstViewMainController extends MainController {
     public void mouseClick(Coordinates mouseCoordinates)
     {
         firstView.player.shoot(mouseCoordinates);
+    }
+
+    @Override
+    public void tick()
+    {
+        for(GameObject object : GameObject.gameObjectList)
+        {
+            if(object instanceof Moveable)
+            {
+                ((Moveable) object).move();
+            }
+            if(object instanceof Destructible)
+            {
+                if(((Destructible) object).getHealth() <= 0) {
+                    firstView.root.getChildren().remove(object);
+                    ((Destructible) object).destroy();
+                    break;
+                }
+            }
+        }
     }
 
     @Override

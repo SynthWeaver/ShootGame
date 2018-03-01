@@ -1,5 +1,6 @@
 package walkgame.objects.parentObjects;
 
+import gameloop.GameLoop;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
@@ -64,7 +65,13 @@ public class Character extends GameObject implements Moveable, Destructible
 
     @Override
     public int getHealth() {
-        return 0;
+        return this.health;
+    }
+
+    public void destroy()
+    {
+        GameObject.gameObjectList.remove(this);
+        GameLoop.doLogicUpdate();
     }
 
     @Override
@@ -91,6 +98,8 @@ public class Character extends GameObject implements Moveable, Destructible
             super.setY(y + velocityY);
         }
     }
+
+
 
     @Override
     public void rotateImage() {
