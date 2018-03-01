@@ -3,14 +3,16 @@ package walkgame.controllers;
 
 import gameloop.GameLoop;
 import javafx.scene.input.KeyCode;
+import walkgame.objects.bullets.Bullet;
+import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.FirstView;
 import walkgame.objects.Floor;
 
-public class FirstController extends Controller{
+public class FirstViewController extends Controller{
 
     FirstView firstView;
 
-    public FirstController(FirstView firstView) {
+    public FirstViewController(FirstView firstView) {
         this.firstView = firstView;
         new GameLoop(this).start();
     }
@@ -19,7 +21,6 @@ public class FirstController extends Controller{
 
     public void pressButton(KeyCode k)
     {
-        GameLoop.logicUpdate = true;
         firstView.player.pressButton(k);
         for(Floor f : Floor.floorList)
         {
@@ -36,9 +37,9 @@ public class FirstController extends Controller{
         }
     }
 
-    public void mouseClick()
+    public void mouseClick(Coordinates mouseCoordinates)
     {
-
+        firstView.player.shoot(mouseCoordinates);
     }
 
 

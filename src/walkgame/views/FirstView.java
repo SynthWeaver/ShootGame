@@ -8,15 +8,17 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import walkgame.controllers.FirstController;
+import walkgame.controllers.FirstViewController;
+import walkgame.interfaces.Moveable;
 import walkgame.objects.Floor;
 import walkgame.objects.Player;
 import walkgame.objects.guns.Pistol;
 import walkgame.objects.microObjects.Coordinates;
+import walkgame.objects.parentObjects.GameObject;
 
 public class FirstView extends View
 {
-    private FirstController firstController;
+    private FirstViewController firstViewController;
     public Player player;
 
     private Group root;
@@ -30,11 +32,14 @@ public class FirstView extends View
 
     public FirstView(Stage primaryStage)
     {
-        firstController = new FirstController(this);
+        firstViewController = new FirstViewController(this);
+
+
+
+        root = new Group(); //createRoot();
+        createFloor();
         player = new Player(playerSpawn, "Jack", new Pistol());
 
-        createFloor();
-        createRoot();
         createScene();
 
         this.primaryStage = primaryStage;
@@ -45,28 +50,65 @@ public class FirstView extends View
     @Override
     public void render()
     {
-
+        updateRoot();
     }
 
 
 
     private void createFloor()
     {
-        new Floor(new Image("walkgame/res/floor1.png"), player.getCoordinate());
+        Image floorImage = new Image("walkgame/res/floor1.png");
+        double spawnX = FirstView.screenCenter.getX() - (floorImage.getWidth() / 2f);
+        double spawnY = FirstView.screenCenter.getY() - (floorImage.getHeight() / 2f);;
 
-        new Floor( new Image("walkgame/res/floor1.png"), new Coordinates(Floor.floorList.get(0).getX() + new Image("walkgame/res/floor1.png").getWidth(), player.getY()));
+        new Floor(floorImage, new Coordinates(spawnX, spawnY));
+
+        new Floor(floorImage, new Coordinates(Floor.floorList.get(0).getX() + floorImage.getWidth(), spawnY));
+    }
+
+    @Override
+    protected void updateRoot()
+    {
+        for(GameObject gameObject : GameObject.gameObjectList)
+        {
+            if(!root.getChildren().contains(gameObject))
+            {
+                root.getChildren().add(gameObject);
+            }
+        }
     }
 
     @Override
     protected void createRoot()
     {
+        Group background = new Group();
+        Group forground = new Group();
         Pane map = new Pane();
-        for (Floor f : Floor.floorList) {
-            map.getChildren().add(f);
+        map.setMinSize(gameSize.getX(), gameSize.getY());
+
+
+        for(GameObject gameObject : GameObject.gameObjectList)
+        {
+            if(gameObject instanceof Player)
+            {
+                continue;
+            }
+            else if(gameObject instanceof Floor)
+            {
+                map.getChildren().add(gameObject);
+            }
+            else if(gameObject instanceof Moveable)
+            {
+                forground.getChildren().add(gameObject);
+            }
+            else{
+                background.getChildren().add(gameObject);
+            }
         }
 
-        map.setMinSize(gameSize.getX(), gameSize.getY());
-        root = new Group(map, player);
+        map.getChildren().addAll(background, forground);
+
+        root = new Group(map, this.player);
     }
 
     @Override
@@ -78,7 +120,7 @@ public class FirstView extends View
             KeyCode k = event.getCode();
             if(k == KeyCode.W || k == KeyCode.D || k == KeyCode.S || k == KeyCode.A)
             {
-                firstController.pressButton(k);
+                firstViewController.pressButton(k);
             }
         });
 
@@ -86,15 +128,14 @@ public class FirstView extends View
             KeyCode k = event.getCode();
             if(k == KeyCode.W || k == KeyCode.D || k == KeyCode.S || k == KeyCode.A)
             {
-                firstController.releaseButton(k);
+                firstViewController.releaseButton(k);
             }
         });
 
         scene.setOnMouseClicked(event -> {
-            MouseButton mouseButton = event.getButton();
-            if(mouseButton == MouseButton.PRIMARY)
+            if(event.getButton() == MouseButton.PRIMARY)
             {
-                firstController.mouseClick();
+                firstViewController.mouseClick(new Coordinates(event.getX(), event.getY()));
             }
         });
 
