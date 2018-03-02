@@ -21,7 +21,7 @@ public class FirstViewMainController extends MainController {
 
 
 
-    public void pressButton(KeyCode k)
+    public void pressKeyButton(KeyCode k)
     {
         firstView.player.pressButton(k);
         for(Floor f : Floor.floorList)
@@ -30,7 +30,7 @@ public class FirstViewMainController extends MainController {
         }
     }
 
-    public void releaseButton(KeyCode k)
+    public void releaseKeyButton(KeyCode k)
     {
         firstView.player.releaseButton(k);
         for(Floor f : Floor.floorList)

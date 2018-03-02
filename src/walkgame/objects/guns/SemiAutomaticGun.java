@@ -6,26 +6,27 @@ import walkgame.objects.parentObjects.GameObject;
 
 abstract class SemiAutomaticGun extends Gun {
 
-    private static final int RATE_OF_FIRE = 0;
-
     SemiAutomaticGun(String name, int ammoCount, int clipSize, double reloadTime) {
-        super(name, ammoCount, clipSize, RATE_OF_FIRE, reloadTime);
+        super(name, ammoCount, clipSize, reloadTime);
     }
 
     @Override
     public void shoot(Coordinates gunCoordinates, Coordinates directionCoordinates) {
-        boolean containsBullet = false;
-        for (GameObject object : GameObject.gameObjectList)
-        {
-            if(object instanceof Bullet)
-            {
-                containsBullet = true;
+        if(super.getClipAmmo() >= 1) {
+            boolean containsBullet = false;
+            for (GameObject object : GameObject.gameObjectList) {
+                if (object instanceof Bullet) {
+                    containsBullet = true;
+                }
+            }
+
+            if (!containsBullet) {
+                shootBullet(gunCoordinates, directionCoordinates);
+                super.removeBulletFromClip();
             }
         }
-
-        if(!containsBullet)
-        {
-            shootBullet(gunCoordinates, directionCoordinates);
+        else{
+            //todo: no ammo warning
         }
     }
 

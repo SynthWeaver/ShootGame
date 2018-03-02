@@ -4,8 +4,11 @@ import walkgame.objects.microObjects.Coordinates;
 
 abstract class AutomaticGun extends Gun {
 
+    private double rateOfFire;
+
     AutomaticGun(String name, int ammoCount, int clipSize, double rateOfFire, double reloadTime) {
-        super(name, ammoCount, clipSize, rateOfFire, reloadTime);
+        super(name, ammoCount, clipSize, reloadTime);
+        this.rateOfFire = rateOfFire;
     }
 
     @Override
@@ -16,5 +19,9 @@ abstract class AutomaticGun extends Gun {
     @Override
     public void releaseTrigger() {
 
+    }
+
+    public double getRateOfFire() {
+        return rateOfFire;
     }
 }

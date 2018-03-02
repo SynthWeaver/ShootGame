@@ -10,18 +10,16 @@ public abstract class Gun {
     private int clipSize;
     private int clipAmmo;
 
-    private double rateOfFire;
     private double reloadTime;
 
     protected boolean shooting;
 
 
-    public Gun(String name, int ammoCount, int clipSize, double rateOfFire, double reloadTime) {
+    public Gun(String name, int ammoCount, int clipSize, double reloadTime) {
         this.name = name;
         this.ammoCount = ammoCount;
         this.clipSize = clipSize;
         this.clipAmmo = clipSize;
-        this.rateOfFire = rateOfFire;
         this.reloadTime = reloadTime;
 
         this.shooting = false;
@@ -32,6 +30,17 @@ public abstract class Gun {
     public abstract void releaseTrigger();
 
     abstract void shootBullet(Coordinates gunCoordinates, Coordinates directionCoordinates);
+
+    protected void removeBulletFromClip()
+    {
+        this.clipAmmo --;
+    }
+
+    public void reload()
+    {
+        this.clipAmmo = this.clipSize;
+        this.ammoCount -= this.clipSize;
+    }
 
     public String getName() {
         return name;
@@ -47,10 +56,6 @@ public abstract class Gun {
 
     public int getClipAmmo() {
         return clipAmmo;
-    }
-
-    protected double getRateOfFire() {
-        return rateOfFire;
     }
 
     public double getReloadTime() {

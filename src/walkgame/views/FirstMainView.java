@@ -1,8 +1,10 @@
 package walkgame.views;
 
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import walkgame.controllers.FirstViewMainController;
 import walkgame.objects.Floor;
@@ -44,19 +46,11 @@ public class FirstMainView extends MainView
         super.createScene();
 
         scene.setOnKeyPressed(event -> {
-            KeyCode k = event.getCode();
-            if(k == KeyCode.W || k == KeyCode.D || k == KeyCode.S || k == KeyCode.A)
-            {
-                firstViewController.pressButton(k);
-            }
+            firstViewController.pressKeyButton(event.getCode());
         });
 
         scene.setOnKeyReleased(event -> {
-            KeyCode k = event.getCode();
-            if(k == KeyCode.W || k == KeyCode.D || k == KeyCode.S || k == KeyCode.A)
-            {
-                firstViewController.releaseButton(k);
-            }
+            firstViewController.releaseKeyButton(event.getCode());
         });
 
         scene.setOnMousePressed(event -> {
@@ -74,6 +68,10 @@ public class FirstMainView extends MainView
         });
 
         scene.setOnMouseMoved(event -> {
+            player.rotateImage(new Coordinates(event.getX(), event.getY()));
+        });
+        
+        scene.setOnMouseDragged(event -> {
             player.rotateImage(new Coordinates(event.getX(), event.getY()));
         });
     }

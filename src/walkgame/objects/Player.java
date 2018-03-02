@@ -146,6 +146,9 @@ public class Player extends Character implements Controllable, Nameable, Shootab
                 goWest = true;
                 goEast = false;
                 break;
+            case R:
+                this.currentGun.reload();
+                break;
         }
     }
 
