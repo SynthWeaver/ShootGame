@@ -1,18 +1,22 @@
 package walkgame.objects.guns;
 
-import views.View;
-import walkgame.objects.bullets.Bullet;
 import walkgame.objects.bullets.PistolBullet;
 import walkgame.objects.microObjects.Coordinates;
 
-public class Pistol extends Gun {
+public class Pistol extends SemiAutomaticGun {
+
+    private static final String NAME = "Pistol";
+    private static final int AMMO_COUNT = 100;
+    private static final int CLIP_SIZE = 9;
+    private static final int RELOAD_TIME = 9;
+
 
     public Pistol() {
-        super("Pistol", 9, 0, 1, View.SCREEN_HEIGHT, 3, false);
+        super(NAME, AMMO_COUNT, CLIP_SIZE, RELOAD_TIME);
     }
 
     @Override
-    public void shoot(Coordinates gunCoordinates, Coordinates directionCoordinates)
+    void shootBullet(Coordinates gunCoordinates, Coordinates directionCoordinates)
     {
         new PistolBullet(gunCoordinates, directionCoordinates);
     }

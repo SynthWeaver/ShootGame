@@ -1,81 +1,75 @@
 package walkgame.objects.guns;
 
-import walkgame.objects.bullets.Bullet;
 import walkgame.objects.microObjects.Coordinates;
 
-import java.util.ArrayList;
-
 public abstract class Gun {
-
-    private static ArrayList<Gun> guns = new ArrayList<>();
 
     private String name;
     private int ammoCount;
 
     private int clipSize;
+    private int clipAmmo;
 
     private double rateOfFire;
-    private double reach;
     private double reloadTime;
 
-    private boolean automatic;
+    protected boolean shooting;
 
 
-    public Gun(String name, int ammoCount, int clipSize, double rateOfFire, double reach, double reloadTime, boolean automatic) {
+    public Gun(String name, int ammoCount, int clipSize, double rateOfFire, double reloadTime) {
         this.name = name;
         this.ammoCount = ammoCount;
         this.clipSize = clipSize;
+        this.clipAmmo = clipSize;
         this.rateOfFire = rateOfFire;
-        this.reach = reach;
         this.reloadTime = reloadTime;
-        this.automatic = automatic;
 
-        guns.add(this);
+        this.shooting = false;
     }
 
     public abstract void shoot(Coordinates gunCoordinates, Coordinates directionCoordinates);
 
+    public abstract void releaseTrigger();
+
+    abstract void shootBullet(Coordinates gunCoordinates, Coordinates directionCoordinates);
+
     public String getName() {
         return name;
-    }
-
-    public int getClipSize() {
-        return clipSize;
     }
 
     public int getAmmoCount() {
         return ammoCount;
     }
 
-    public double getRateOfFire() {
-        return rateOfFire;
+    protected int getClipSize() {
+        return clipSize;
     }
 
-    public double getReach() {
-        return reach;
+    public int getClipAmmo() {
+        return clipAmmo;
+    }
+
+    protected double getRateOfFire() {
+        return rateOfFire;
     }
 
     public double getReloadTime() {
         return reloadTime;
     }
 
-    public boolean isAutomatic() {
-        return automatic;
+    protected boolean isShooting() {
+        return shooting;
     }
 
-    public static Gun getGunByName(String name) {
-        for(Gun gun: guns)
-        {
-            if(gun.name.equals(name))
-            {
-                return gun;
-            }
-        }
-
-        return null;
-    }
-
-    public void setAmmoCount(int ammoCount) {
+    protected void setAmmoCount(int ammoCount) {
         this.ammoCount = ammoCount;
+    }
+
+    protected void setClipAmmo(int clipAmmo) {
+        this.clipAmmo = clipAmmo;
+    }
+
+    protected void setShooting(boolean shooting) {
+        this.shooting = shooting;
     }
 }

@@ -61,12 +61,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public void shoot(Coordinates mouseCoordinates)
-    {
-        currentGun.shoot(MainView.screenCenter, mouseCoordinates);
-    }
-
-    @Override
     public void move()
     {
         if(!goNorth && !goSouth)

@@ -1,8 +1,10 @@
 package walkgame.interfaces;
 
 
+import walkgame.objects.guns.Gun;
 import walkgame.objects.microObjects.Coordinates;
 
 public interface Shootable {
-    void shoot(Coordinates mouseCoordinates);
+    void setCurrentGun(Gun currentGun);
+    Gun getCurrentGun();
 }

@@ -59,10 +59,17 @@ public class FirstMainView extends MainView
             }
         });
 
-        scene.setOnMouseClicked(event -> {
+        scene.setOnMousePressed(event -> {
             if(event.getButton() == MouseButton.PRIMARY)
             {
                 firstViewController.mouseClick(new Coordinates(event.getX(), event.getY()));
+            }
+        });
+
+        scene.setOnMouseReleased(event -> {
+            if(event.getButton() == MouseButton.PRIMARY)
+            {
+                firstViewController.mouseRelease();
             }
         });
 

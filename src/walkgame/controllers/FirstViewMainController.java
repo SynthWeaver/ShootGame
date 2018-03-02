@@ -5,9 +5,11 @@ import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.Floor;
+import walkgame.objects.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentObjects.GameObject;
 import walkgame.views.FirstMainView;
+import walkgame.views.MainView;
 
 public class FirstViewMainController extends MainController {
 
@@ -39,7 +41,12 @@ public class FirstViewMainController extends MainController {
 
     public void mouseClick(Coordinates mouseCoordinates)
     {
-        firstView.player.shoot(mouseCoordinates);
+        firstView.player.getCurrentGun().shoot(MainView.screenCenter, mouseCoordinates);
+    }
+
+    public void mouseRelease()
+    {
+       firstView.player.getCurrentGun().releaseTrigger();
     }
 
     @Override
@@ -53,7 +60,8 @@ public class FirstViewMainController extends MainController {
             }
             if(object instanceof Destructible)
             {
-                if(((Destructible) object).getHealth() <= 0) {
+                if(((Destructible) object).getHealth() <= 0)
+                {
                     firstView.root.getChildren().remove(object);
                     ((Destructible) object).destroy();
                     break;
