@@ -1,13 +1,12 @@
 package walkgame.controllers;
 
 
+import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.Floor;
-import walkgame.objects.Player;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.parentObjects.GameObject;
 import walkgame.views.FirstMainView;
 import walkgame.views.MainView;
 
@@ -52,7 +51,7 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()
     {
-        for(GameObject object : GameObject.gameObjectList)
+        for(Node object : MainView.nodeList)
         {
             if(object instanceof Moveable)
             {

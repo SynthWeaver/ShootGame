@@ -1,14 +1,18 @@
 package walkgame.views;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import walkgame.objects.Player;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.parentObjects.GameObject;
+
+import java.util.ArrayList;
 
 public abstract class MainView extends gameloop.View {
+
+    public static ArrayList<Node> nodeList = new ArrayList<>();//todo: naar root veranderen
 
     public Group root;
     public Scene scene;
@@ -34,7 +38,7 @@ public abstract class MainView extends gameloop.View {
 
     private void updateRoot()
     {
-        for(GameObject gameObject : GameObject.gameObjectList)
+        for(Node gameObject : MainView.nodeList)
         {
             if(!root.getChildren().contains(gameObject))
             {

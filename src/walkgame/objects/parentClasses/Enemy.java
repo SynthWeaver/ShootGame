@@ -1,4 +1,4 @@
-package walkgame.objects.parentObjects;
+package walkgame.objects.parentClasses;
 
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Sprites;

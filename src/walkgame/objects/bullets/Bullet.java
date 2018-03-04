@@ -6,7 +6,7 @@ import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
-import walkgame.objects.parentObjects.GameObject;
+import walkgame.objects.parentClasses.GameObject;
 import walkgame.views.MainView;
 
 public abstract class Bullet extends GameObject implements Moveable, Destructible {
@@ -38,7 +38,7 @@ public abstract class Bullet extends GameObject implements Moveable, Destructibl
     @Override
     public void destroy()
     {
-        GameObject.gameObjectList.remove(this);
+        MainView.nodeList.remove(this);
         GameLoop.doLogicUpdate();
     }
 

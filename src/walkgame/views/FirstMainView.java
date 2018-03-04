@@ -1,14 +1,12 @@
 package walkgame.views;
 
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import walkgame.controllers.FirstViewMainController;
 import walkgame.objects.Floor;
 import walkgame.objects.Player;
+import walkgame.objects.UI.PlayerStatus;
 import walkgame.objects.guns.Pistol;
 import walkgame.objects.microObjects.Coordinates;
 
@@ -16,6 +14,7 @@ public class FirstMainView extends MainView
 {
     public FirstViewMainController firstViewController;
     public Player player;
+    public PlayerStatus playerStatusUI;
 
     public FirstMainView(Stage primaryStage)
     {
@@ -24,6 +23,7 @@ public class FirstMainView extends MainView
 
         createFloor();
         player = new Player(MainView.playerSpawn, "Jack", new Pistol());
+        playerStatusUI = new PlayerStatus(player);
     }
 
 

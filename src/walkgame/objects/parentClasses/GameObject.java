@@ -1,26 +1,24 @@
-package walkgame.objects.parentObjects;
+package walkgame.objects.parentClasses;
 
 import gameloop.GameLoop;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import walkgame.interfaces.ListableNode;
 import walkgame.objects.microObjects.Coordinates;
+import walkgame.views.MainView;
 
-import java.util.ArrayList;
-
-public class GameObject extends ImageView
+public class GameObject extends ImageView implements ListableNode
 {
-    public static final ArrayList<GameObject> gameObjectList = new ArrayList<>();
 
     public GameObject(Image image, Coordinates coordinates)
     {
         super(image);
-        this.id = gameObjectList.size();
+        this.id = MainView.nodeList.size();
 
         super.setX(coordinates.getX());
         super.setY(coordinates.getY());
 
-        gameObjectList.add(this);
-        GameLoop.doLogicUpdate();
+        addNodeToList();
     }
 
     public GameObject(Coordinates coordinates)
@@ -33,5 +31,12 @@ public class GameObject extends ImageView
     public Coordinates getCoordinate()
     {
         return new Coordinates(getX(), getY());
+    }
+
+    @Override
+    public void addNodeToList()
+    {
+        MainView.nodeList.add(this);
+        GameLoop.doLogicUpdate();
     }
 }

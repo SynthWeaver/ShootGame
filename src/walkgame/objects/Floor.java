@@ -5,7 +5,7 @@ import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.parentObjects.GameObject;
+import walkgame.objects.parentClasses.GameObject;
 
 import java.util.ArrayList;
 

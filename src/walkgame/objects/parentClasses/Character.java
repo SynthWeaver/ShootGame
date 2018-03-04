@@ -1,4 +1,4 @@
-package walkgame.objects.parentObjects;
+package walkgame.objects.parentClasses;
 
 import gameloop.GameLoop;
 import javafx.scene.image.Image;
@@ -6,6 +6,7 @@ import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Sprites;
+import walkgame.views.MainView;
 
 public class Character extends GameObject implements Moveable, Destructible
 {
@@ -70,7 +71,7 @@ public class Character extends GameObject implements Moveable, Destructible
 
     public void destroy()
     {
-        GameObject.gameObjectList.remove(this);
+        MainView.nodeList.remove(this);
         GameLoop.doLogicUpdate();
     }
 
