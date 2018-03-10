@@ -23,7 +23,7 @@ public class FirstViewMainController extends MainController {
 
     public void pressKeyButton(KeyCode k)
     {
-        firstView.player.pressButton(k);
+        firstView.player.pressButton(k);//todo: hier een forloop bouwen van root
         for(Floor f : Floor.floorList)
         {
             f.pressButton(k);
