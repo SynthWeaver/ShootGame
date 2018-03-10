@@ -6,7 +6,7 @@ import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Sprites;
-import walkgame.views.MainView;
+import walkgame.views.parentClasses.MainView;
 
 public class Character extends GameObject implements Moveable, Destructible
 {

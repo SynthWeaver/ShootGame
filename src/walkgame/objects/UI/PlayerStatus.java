@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import walkgame.interfaces.ListableNode;
 import walkgame.objects.Player;
-import walkgame.views.MainView;
+import walkgame.views.parentClasses.MainView;
 
 public class PlayerStatus extends Pane implements ListableNode{
 

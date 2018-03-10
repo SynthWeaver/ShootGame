@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import walkgame.interfaces.ListableNode;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.views.MainView;
+import walkgame.views.parentClasses.MainView;
 
 public class GameObject extends ImageView implements ListableNode
 {

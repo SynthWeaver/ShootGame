@@ -1,4 +1,4 @@
-package walkgame.views;
+package walkgame.views.parentClasses;
 
 import javafx.scene.Group;
 import javafx.scene.Node;

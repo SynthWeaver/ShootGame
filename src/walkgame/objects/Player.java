@@ -11,7 +11,7 @@ import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.microObjects.Sprites;
 import walkgame.objects.parentClasses.Character;
-import walkgame.views.MainView;
+import walkgame.views.parentClasses.MainView;
 
 public class Player extends Character implements Controllable, Nameable, Shootable {
 

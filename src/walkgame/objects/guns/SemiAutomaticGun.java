@@ -3,7 +3,7 @@ package walkgame.objects.guns;
 import javafx.scene.Node;
 import walkgame.objects.bullets.Bullet;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.views.MainView;
+import walkgame.views.parentClasses.MainView;
 
 abstract class SemiAutomaticGun extends Gun {
 

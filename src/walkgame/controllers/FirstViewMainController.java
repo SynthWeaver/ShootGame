@@ -3,12 +3,13 @@ package walkgame.controllers;
 
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
+import walkgame.controllers.parentClasses.MainController;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.Floor;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.FirstMainView;
-import walkgame.views.MainView;
+import walkgame.views.parentClasses.MainView;
 
 public class FirstViewMainController extends MainController {
 

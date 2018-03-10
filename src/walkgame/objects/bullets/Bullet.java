@@ -7,7 +7,7 @@ import walkgame.interfaces.Moveable;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.parentClasses.GameObject;
-import walkgame.views.MainView;
+import walkgame.views.parentClasses.MainView;
 
 public abstract class Bullet extends GameObject implements Moveable, Destructible {
 

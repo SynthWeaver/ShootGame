@@ -9,6 +9,7 @@ import walkgame.objects.Player;
 import walkgame.objects.UI.PlayerStatus;
 import walkgame.objects.guns.Pistol;
 import walkgame.objects.microObjects.Coordinates;
+import walkgame.views.parentClasses.MainView;
 
 public class FirstMainView extends MainView
 {
