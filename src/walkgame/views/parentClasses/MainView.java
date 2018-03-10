@@ -1,5 +1,6 @@
 package walkgame.views.parentClasses;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -7,14 +8,16 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import walkgame.objects.Player;
 import walkgame.objects.microObjects.Coordinates;
-
-import java.util.ArrayList;
+import walkgame.objects.microObjects.Map;
 
 public abstract class MainView extends gameloop.View {
 
-    public static ArrayList<Node> nodeList = new ArrayList<>();//todo: naar root veranderen
+    protected static Map currentMapGroup = new Map();
+    public static ObservableList<Node> currentMap = currentMapGroup.getChildren();
 
-    public Group root;
+    private Group rootGroup = new Group();
+    public ObservableList<Node> root = rootGroup.getChildren();
+
     public Scene scene;
     private Stage primaryStage;
 
@@ -24,8 +27,6 @@ public abstract class MainView extends gameloop.View {
     public static Coordinates playerSpawn = new Coordinates(screenCenter.getX() - (Player.PLAYER_SIZE.getX() / 2f) , screenCenter.getY() - (Player.PLAYER_SIZE.getY() / 2f));
 
     public MainView(Stage primaryStage) {
-        root = new Group();
-
         this.primaryStage = primaryStage;
         createScene();
     }
@@ -33,22 +34,14 @@ public abstract class MainView extends gameloop.View {
     @Override
     public void render()
     {
-        updateRoot();
-    }
-
-    private void updateRoot()
-    {
-        for(Node gameObject : MainView.nodeList)
+        if(!root.contains(MainView.currentMapGroup))
         {
-            if(!root.getChildren().contains(gameObject))
-            {
-                root.getChildren().add(gameObject);
-            }
+            root.add(MainView.currentMapGroup);
         }
     }
 
     protected void createScene()
     {
-        scene = new Scene(root, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.BLACK);
+        scene = new Scene(rootGroup, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.BLACK);
     }
 }

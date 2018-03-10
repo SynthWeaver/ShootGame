@@ -13,7 +13,7 @@ public class GameObject extends ImageView implements ListableNode
     public GameObject(Image image, Coordinates coordinates)
     {
         super(image);
-        this.id = MainView.nodeList.size();
+        this.id = MainView.currentMap.size();
 
         super.setX(coordinates.getX());
         super.setY(coordinates.getY());
@@ -36,7 +36,7 @@ public class GameObject extends ImageView implements ListableNode
     @Override
     public void addNodeToList()
     {
-        MainView.nodeList.add(this);
+        MainView.currentMap.add(this);
         GameLoop.doLogicUpdate();
     }
 }

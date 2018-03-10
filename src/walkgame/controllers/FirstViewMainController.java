@@ -52,7 +52,7 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()
     {
-        for(Node object : MainView.nodeList)
+        for(Node object : MainView.currentMap)
         {
             if(object instanceof Moveable)
             {
@@ -62,7 +62,7 @@ public class FirstViewMainController extends MainController {
             {
                 if(((Destructible) object).getHealth() <= 0)
                 {
-                    firstView.root.getChildren().remove(object);
+                    firstView.root.remove(object);
                     ((Destructible) object).destroy();
                     break;
                 }

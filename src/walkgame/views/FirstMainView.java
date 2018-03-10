@@ -27,6 +27,20 @@ public class FirstMainView extends MainView
         playerStatusUI = new PlayerStatus(player);
     }
 
+    @Override
+    public void render()
+    {
+        super.render();
+
+        if(!super.root.contains(player))
+        {
+            super.root.add(player);
+        }
+        else {
+            super.root.remove(player);
+            super.root.add(player);
+        }
+    }
 
 
     private void createFloor()

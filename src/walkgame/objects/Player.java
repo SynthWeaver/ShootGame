@@ -1,5 +1,6 @@
 package walkgame.objects;
 
+import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -133,10 +134,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
             super.setImage(image);
     }
 
-
-
-
-
     @Override
     public void pressButton(KeyCode c) {
         switch (c){
@@ -170,5 +167,11 @@ public class Player extends Character implements Controllable, Nameable, Shootab
             case S: goSouth = false; break;
             case A: goWest = false; break;
         }
+    }
+
+    @Override
+    public void addNodeToList()
+    {
+        GameLoop.doLogicUpdate();
     }
 }

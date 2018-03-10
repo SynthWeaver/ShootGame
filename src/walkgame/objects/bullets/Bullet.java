@@ -38,7 +38,7 @@ public abstract class Bullet extends GameObject implements Moveable, Destructibl
     @Override
     public void destroy()
     {
-        MainView.nodeList.remove(this);
+        MainView.currentMap.remove(this);
         GameLoop.doLogicUpdate();
     }
 

@@ -79,7 +79,7 @@ public class PlayerStatus extends Pane implements ListableNode{
     @Override
     public void addNodeToList()
     {
-        MainView.nodeList.add(this);
+        MainView.currentMap.add(this);
         GameLoop.doLogicUpdate();
     }
 }

@@ -71,7 +71,7 @@ public class Character extends GameObject implements Moveable, Destructible
 
     public void destroy()
     {
-        MainView.nodeList.remove(this);
+        MainView.currentMap.remove(this);
         GameLoop.doLogicUpdate();
     }
 
