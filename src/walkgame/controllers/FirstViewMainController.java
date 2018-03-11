@@ -4,9 +4,9 @@ package walkgame.controllers;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import walkgame.controllers.parentClasses.MainController;
+import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
-import walkgame.objects.Floor;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
@@ -23,19 +23,23 @@ public class FirstViewMainController extends MainController {
 
     public void pressKeyButton(KeyCode k)
     {
-        firstView.player.pressButton(k);//todo: hier een forloop bouwen van root
-        for(Floor f : Floor.floorList)
+        for(Node node : firstView.root)
         {
-            f.pressButton(k);
+            if(node instanceof Controllable)
+            {
+                ((Controllable) node).pressButton(k);
+            }
         }
     }
 
     public void releaseKeyButton(KeyCode k)
     {
-        firstView.player.releaseButton(k);
-        for(Floor f : Floor.floorList)
+        for(Node node : firstView.root)
         {
-            f.releaseButton(k);
+            if(node instanceof Controllable)
+            {
+                ((Controllable) node).releaseButton(k);
+            }
         }
     }
 
@@ -52,7 +56,9 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()
     {
-        for(Node object : MainView.currentMap)
+        MainView.map.move();
+
+        for(Node object : MainView.currentMapList)
         {
             if(object instanceof Moveable)
             {

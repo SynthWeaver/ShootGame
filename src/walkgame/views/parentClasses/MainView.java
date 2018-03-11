@@ -6,16 +6,19 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import walkgame.objects.Player;
+import walkgame.objects.UI.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Map;
 
 public abstract class MainView extends gameloop.View {
 
-    protected static Map currentMapGroup = new Map();
-    public static ObservableList<Node> currentMap = currentMapGroup.getChildren();
+    public static Map map = new Map();
+    public static ObservableList<Node> currentMapList = map.getChildren();
 
-    private Group rootGroup = new Group();
+    public static Group cast = new Group();
+    public static Group hud = new Group();
+
+    private Group rootGroup = new Group(map, cast, hud);
     public ObservableList<Node> root = rootGroup.getChildren();
 
     public Scene scene;
@@ -34,10 +37,7 @@ public abstract class MainView extends gameloop.View {
     @Override
     public void render()
     {
-        if(!root.contains(MainView.currentMapGroup))
-        {
-            root.add(MainView.currentMapGroup);
-        }
+
     }
 
     protected void createScene()

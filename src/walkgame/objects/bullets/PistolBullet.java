@@ -10,4 +10,9 @@ public class PistolBullet extends Bullet {
     public PistolBullet(Coordinates gunCoordinates, Coordinates directionCoordinates) {
         super(IMAGE, gunCoordinates, directionCoordinates);
     }
+
+    @Override
+    public void addNodeToList() {
+        addNodeToCastList();
+    }
 }

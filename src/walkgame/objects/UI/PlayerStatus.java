@@ -8,7 +8,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import walkgame.interfaces.ListableNode;
-import walkgame.objects.Player;
 import walkgame.views.parentClasses.MainView;
 
 public class PlayerStatus extends Pane implements ListableNode{
@@ -79,7 +78,6 @@ public class PlayerStatus extends Pane implements ListableNode{
     @Override
     public void addNodeToList()
     {
-        MainView.currentMap.add(this);
-        GameLoop.doLogicUpdate();
+        //todo: regel iets met een publieke class
     }
 }

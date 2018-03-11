@@ -8,4 +8,9 @@ public class Enemy extends Character
     public Enemy(Coordinates coordinates, Sprites sprites, int health, double speed) {
         super(sprites, coordinates, health, speed);
     }
+
+    @Override
+    public void addNodeToList() {
+        addNodeToCastList();
+    }
 }

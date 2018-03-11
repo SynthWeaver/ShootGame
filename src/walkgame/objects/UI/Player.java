@@ -1,4 +1,4 @@
-package walkgame.objects;
+package walkgame.objects.UI;
 
 import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -172,6 +172,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void addNodeToList()
     {
-        GameLoop.doLogicUpdate();
+        addNodeToHudList();
     }
 }

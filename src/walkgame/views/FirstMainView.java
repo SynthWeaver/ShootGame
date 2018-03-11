@@ -5,7 +5,7 @@ import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import walkgame.controllers.FirstViewMainController;
 import walkgame.objects.Floor;
-import walkgame.objects.Player;
+import walkgame.objects.UI.Player;
 import walkgame.objects.UI.PlayerStatus;
 import walkgame.objects.guns.Pistol;
 import walkgame.objects.microObjects.Coordinates;
@@ -26,22 +26,6 @@ public class FirstMainView extends MainView
         player = new Player(MainView.playerSpawn, "Jack", new Pistol());
         playerStatusUI = new PlayerStatus(player);
     }
-
-    @Override
-    public void render()
-    {
-        super.render();
-
-        if(!super.root.contains(player))
-        {
-            super.root.add(player);
-        }
-        else {
-            super.root.remove(player);
-            super.root.add(player);
-        }
-    }
-
 
     private void createFloor()
     {
