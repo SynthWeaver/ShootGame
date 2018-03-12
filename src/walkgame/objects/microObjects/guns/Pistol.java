@@ -1,6 +1,6 @@
-package walkgame.objects.guns;
+package walkgame.objects.microObjects.guns;
 
-import walkgame.objects.bullets.PistolBullet;
+import walkgame.objects.cast.bullets.PistolBullet;
 import walkgame.objects.microObjects.Coordinates;
 
 public class Pistol extends SemiAutomaticGun {

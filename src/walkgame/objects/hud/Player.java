@@ -1,20 +1,20 @@
-package walkgame.objects.UI;
+package walkgame.objects.hud;
 
-import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
 import walkgame.interfaces.Shootable;
-import walkgame.objects.guns.Gun;
+import walkgame.interfaces.stage.InHud;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.microObjects.Sprites;
+import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.parentClasses.Character;
 import walkgame.views.parentClasses.MainView;
 
-public class Player extends Character implements Controllable, Nameable, Shootable {
+public class Player extends Character implements Controllable, Nameable, Shootable, InHud {
 
     private static final int PLAYER_HEALTH = 100;
     private static final double PLAYER_SPEED = 0;
@@ -169,9 +169,9 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         }
     }
 
-    @Override
+    /*@Override
     public void addNodeToList()
     {
         addNodeToHudList();
-    }
+    }*/
 }

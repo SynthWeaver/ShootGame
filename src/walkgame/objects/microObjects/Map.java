@@ -4,7 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
-import walkgame.objects.microObjects.Coordinates;
 
 import java.util.Collection;
 

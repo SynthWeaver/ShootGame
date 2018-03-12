@@ -79,6 +79,6 @@ public class FirstViewMainController extends MainController {
     @Override
     public void render()
     {
-        firstView.render();
+        return;
     }
 }

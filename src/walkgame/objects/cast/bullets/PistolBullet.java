@@ -1,4 +1,4 @@
-package walkgame.objects.bullets;
+package walkgame.objects.cast.bullets;
 
 import javafx.scene.image.Image;
 import walkgame.objects.microObjects.Coordinates;
@@ -9,10 +9,5 @@ public class PistolBullet extends Bullet {
 
     public PistolBullet(Coordinates gunCoordinates, Coordinates directionCoordinates) {
         super(IMAGE, gunCoordinates, directionCoordinates);
-    }
-
-    @Override
-    public void addNodeToList() {
-        addNodeToCastList();
     }
 }

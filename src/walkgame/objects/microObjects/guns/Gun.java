@@ -1,4 +1,4 @@
-package walkgame.objects.guns;
+package walkgame.objects.microObjects.guns;
 
 import walkgame.objects.microObjects.Coordinates;
 

@@ -4,11 +4,11 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import walkgame.controllers.FirstViewMainController;
-import walkgame.objects.Floor;
-import walkgame.objects.UI.Player;
-import walkgame.objects.UI.PlayerStatus;
-import walkgame.objects.guns.Pistol;
+import walkgame.objects.hud.Player;
+import walkgame.objects.hud.PlayerStatus;
+import walkgame.objects.map.Floor;
 import walkgame.objects.microObjects.Coordinates;
+import walkgame.objects.microObjects.guns.Pistol;
 import walkgame.views.parentClasses.MainView;
 
 public class FirstMainView extends MainView

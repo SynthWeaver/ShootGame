@@ -1,15 +1,16 @@
-package walkgame.objects.bullets;
+package walkgame.objects.cast.bullets;
 
 import gameloop.GameLoop;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.interfaces.stage.InCast;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.parentClasses.GameObject;
 import walkgame.views.parentClasses.MainView;
 
-public abstract class Bullet extends GameObject implements Moveable, Destructible {
+public abstract class Bullet extends GameObject implements Moveable, Destructible, InCast {
 
     private static final int DEFAULT_HEALTH = 1;
     private static final double DEFAULT_SPEED = 4;

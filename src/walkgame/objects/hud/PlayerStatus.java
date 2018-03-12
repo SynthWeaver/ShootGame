@@ -1,16 +1,15 @@
-package walkgame.objects.UI;
+package walkgame.objects.hud;
 
-import gameloop.GameLoop;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import walkgame.interfaces.ListableNode;
+import walkgame.interfaces.stage.InHud;
 import walkgame.views.parentClasses.MainView;
 
-public class PlayerStatus extends Pane implements ListableNode{
+public class PlayerStatus extends Pane implements InHud{
 
     private static final ImageView HEALTH = new ImageView("walkgame/res/ui/hp.png");
     private static final ImageView AMMO_CLIP = new ImageView("walkgame/res/ui/clip.png");
@@ -78,6 +77,6 @@ public class PlayerStatus extends Pane implements ListableNode{
     @Override
     public void addNodeToList()
     {
-        //todo: regel iets met een publieke class
+        MainView.hud.getChildren().add(this);
     }
 }

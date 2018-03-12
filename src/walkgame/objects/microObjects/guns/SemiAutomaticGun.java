@@ -1,7 +1,7 @@
-package walkgame.objects.guns;
+package walkgame.objects.microObjects.guns;
 
 import javafx.scene.Node;
-import walkgame.objects.bullets.Bullet;
+import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.parentClasses.MainView;
 

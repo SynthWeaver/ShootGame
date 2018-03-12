@@ -1,7 +1,7 @@
 package walkgame.interfaces;
 
 
-import walkgame.objects.guns.Gun;
+import walkgame.objects.microObjects.guns.Gun;
 
 public interface Shootable {
     void setCurrentGun(Gun currentGun);

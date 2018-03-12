@@ -1,9 +1,11 @@
 package walkgame.objects.parentClasses;
 
-import gameloop.GameLoop;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import walkgame.interfaces.ListableNode;
+import walkgame.interfaces.stage.InCast;
+import walkgame.interfaces.stage.InHud;
+import walkgame.interfaces.stage.InMap;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.parentClasses.MainView;
 
@@ -32,26 +34,21 @@ public abstract class GameObject extends ImageView implements ListableNode
         return new Coordinates(getX(), getY());
     }
 
-    private void doLogicUpdate()
-    {
-        GameLoop.doLogicUpdate();
-    }
-
     @Override
-    public abstract void addNodeToList();
-
-    protected void addNodeToMapList() {
-        MainView.currentMapList.add(this);
-        doLogicUpdate();
-    }
-
-    protected void addNodeToCastList() {
-        MainView.cast.getChildren().add(this);
-        doLogicUpdate();
-    }
-
-    protected void addNodeToHudList() {
-        MainView.hud.getChildren().add(this);
-        doLogicUpdate();
+    public void addNodeToList()
+    {
+        if(this instanceof InMap)
+        {
+            MainView.map.getChildren().add(this);
+        }
+        else if(this instanceof InCast)
+        {
+            MainView.cast.getChildren().add(this);
+        }
+        else if(this instanceof InHud)
+        {
+            MainView.hud.getChildren().add(this);
+        }
+        //GameLoop.doLogicUpdate();
     }
 }
