@@ -12,14 +12,15 @@ import walkgame.objects.microObjects.Map;
 
 public abstract class MainView extends gameloop.View {
 
+    // todo: moet abstract worden, je wilt niet dat er maar een Scene kan zijn.
     public static Map map = new Map();
     public static ObservableList<Node> currentMapList = map.getChildren();
 
-    public static Group cast = new Group();
+    public static Group cast = new Group();//todo: make this controllable
     public static Group hud = new Group();
 
-    private Group rootGroup = new Group(map, cast, hud);
-    public ObservableList<Node> root = rootGroup.getChildren();
+    private static Group rootGroup = new Group(map, cast, hud);
+    public static Group[] root = {map, cast, hud};
 
     public Scene scene;
     private Stage primaryStage;

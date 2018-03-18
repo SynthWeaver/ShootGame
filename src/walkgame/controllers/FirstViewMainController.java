@@ -1,6 +1,7 @@
 package walkgame.controllers;
 
 
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import walkgame.controllers.parentClasses.MainController;
@@ -10,6 +11,8 @@ import walkgame.interfaces.Moveable;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
+
+import java.util.LinkedList;
 
 public class FirstViewMainController extends MainController {
 
@@ -23,22 +26,38 @@ public class FirstViewMainController extends MainController {
 
     public void pressKeyButton(KeyCode k)
     {
-        for(Node node : firstView.root)
+        for(Group group : firstView.root)
         {
-            if(node instanceof Controllable)
+            if (group instanceof Controllable)
             {
-                ((Controllable) node).pressButton(k);
+                ((Controllable) group).pressButton(k);
+            }
+
+            for(Node node : group.getChildren())
+            {
+                if (node instanceof Controllable)
+                {
+                    ((Controllable) node).pressButton(k);
+                }
             }
         }
     }
 
     public void releaseKeyButton(KeyCode k)
     {
-        for(Node node : firstView.root)
+        for(Group group : firstView.root)
         {
-            if(node instanceof Controllable)
+            if (group instanceof Controllable)
             {
-                ((Controllable) node).releaseButton(k);
+                ((Controllable) group).releaseButton(k);
+            }
+
+            for(Node node : group.getChildren())
+            {
+                if (node instanceof Controllable)
+                {
+                    ((Controllable) node).releaseButton(k);
+                }
             }
         }
     }
@@ -56,22 +75,37 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()
     {
-        MainView.map.move();
-
-        for(Node object : MainView.currentMapList)
+        for(Group group : MainView.root)
         {
-            if(object instanceof Moveable)
+            LinkedList<Destructible> toDestroy = new LinkedList<>();
+
+            if(group instanceof Moveable)
             {
-                ((Moveable) object).move();
+                Moveable moveable = ((Moveable) group);
+                moveable.move();
             }
-            if(object instanceof Destructible)
+
+            for(Node node : group.getChildren())
             {
-                if(((Destructible) object).getHealth() <= 0)
+                if(node instanceof Moveable)
                 {
-                    firstView.root.remove(object);
-                    ((Destructible) object).destroy();
-                    break;
+                    Moveable moveable = ((Moveable) node);
+                    moveable.move();
                 }
+                if(node instanceof Destructible)
+                {
+                    Destructible destructible = (Destructible) node;
+                    if(destructible.getHealth() <= 0)
+                    {
+                        toDestroy.add(destructible);
+                    }
+                }
+            }
+
+            for(Destructible destructible : toDestroy)//after the loop, delete all destructibles
+            {
+                group.getChildren().remove(destructible);
+                destructible.destroy();
             }
         }
     }

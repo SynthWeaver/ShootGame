@@ -22,7 +22,7 @@ public class PlayerStatus extends Pane implements InHud{
     private double currentWidth = 0.00;
 
     public PlayerStatus(Player player) {
-        healthLabel.textProperty().bind(player.healthProperty.asString());
+        healthLabel.textProperty().bind(player.healthProperty.asString());//todo: make the bind working
         ammoClipLabel.textProperty().bind(player.ammoClipProperty.asString());
         ammoLabel.textProperty().bind(player.ammoProperty.asString());
 
@@ -43,7 +43,8 @@ public class PlayerStatus extends Pane implements InHud{
 
     private void placePlayerStatus()
     {
-        //todo add vbox
+        //todo: add vbox
+        //todo: more to the right
         Text[] textArray = new Text[]{healthLabel, ammoClipLabel, ammoLabel};
         ImageView[] imageViewArray = new ImageView[]{HEALTH, AMMO_CLIP, AMMO};
 
