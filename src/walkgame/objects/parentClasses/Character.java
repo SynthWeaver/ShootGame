@@ -8,7 +8,7 @@ import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Sprites;
 import walkgame.views.parentClasses.MainView;
 
-public abstract class Character extends GameObject implements Moveable, Destructible
+public abstract class Character extends ImageViewObject implements Moveable, Destructible
 {
     public Character(Sprites sprites, Coordinates coordinates, int health, double speed) {
         super(coordinates);

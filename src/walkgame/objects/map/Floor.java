@@ -1,18 +1,21 @@
 package walkgame.objects.map;
 
+import javafx.scene.Group;
 import javafx.scene.image.Image;
-import walkgame.interfaces.stage.InMap;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.parentClasses.GameObject;
+import walkgame.objects.parentClasses.ImageViewObject;
 
-import java.util.ArrayList;
-
-public class Floor extends GameObject implements InMap
+public class Floor extends ImageViewObject
 {
-    public static ArrayList<Floor> floorList = new ArrayList<>();
+    public static Group group = new Group();
 
     public Floor(Image image, Coordinates coordinates) {
         super(image, coordinates);
-        Floor.floorList.add(this);
+    }
+
+    @Override
+    public void addNodeToList()
+    {
+        Floor.group.getChildren().add(this);
     }
 }

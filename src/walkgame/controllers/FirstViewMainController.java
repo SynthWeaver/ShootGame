@@ -75,7 +75,7 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()
     {
-        for(Group group : MainView.root)
+        for(Group group : MainView.root)//todo: Schiet aanpassen zodat het weer werkt
         {
             LinkedList<Destructible> toDestroy = new LinkedList<>();
 

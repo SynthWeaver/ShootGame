@@ -6,11 +6,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import walkgame.interfaces.stage.InHud;
 import walkgame.views.parentClasses.MainView;
 
-public class PlayerStatus extends Pane implements InHud{
-
+public class PlayerStatus extends Pane//todo: naar PaneObject zetten
+{
     private static final ImageView HEALTH = new ImageView("walkgame/res/ui/hp.png");
     private static final ImageView AMMO_CLIP = new ImageView("walkgame/res/ui/clip.png");
     private static final ImageView AMMO = new ImageView("walkgame/res/ui/ammo.png");
@@ -75,9 +74,9 @@ public class PlayerStatus extends Pane implements InHud{
         this.ammoLabel.setText(String.valueOf(player.getCurrentGun().getAmmoCount()));
     }
 
-    @Override
+    //@Override
     public void addNodeToList()
     {
-        MainView.hud.getChildren().add(this);
+        Hud.group.getChildren().add(this);
     }
 }

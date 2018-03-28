@@ -6,7 +6,6 @@ import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
 import walkgame.interfaces.Shootable;
-import walkgame.interfaces.stage.InHud;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.microObjects.Sprites;
@@ -14,7 +13,7 @@ import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.parentClasses.Character;
 import walkgame.views.parentClasses.MainView;
 
-public class Player extends Character implements Controllable, Nameable, Shootable, InHud {
+public class Player extends Character implements Controllable, Nameable, Shootable {
 
     private static final int PLAYER_HEALTH = 100;
     private static final double PLAYER_SPEED = 0;
@@ -167,6 +166,12 @@ public class Player extends Character implements Controllable, Nameable, Shootab
             case S: goSouth = false; break;
             case A: goWest = false; break;
         }
+    }
+
+    @Override
+    public void addNodeToList()
+    {
+        Hud.group.getChildren().add(this);
     }
 
     /*@Override

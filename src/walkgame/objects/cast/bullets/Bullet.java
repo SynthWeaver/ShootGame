@@ -1,16 +1,18 @@
 package walkgame.objects.cast.bullets;
 
 import gameloop.GameLoop;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
-import walkgame.interfaces.stage.InCast;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
-import walkgame.objects.parentClasses.GameObject;
+import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
 
-public abstract class Bullet extends GameObject implements Moveable, Destructible, InCast {
+public abstract class Bullet extends ImageViewObject implements Moveable, Destructible {
+
+    public static Group group = new Group();
 
     private static final int DEFAULT_HEALTH = 1;
     private static final double DEFAULT_SPEED = 4;
@@ -34,6 +36,12 @@ public abstract class Bullet extends GameObject implements Moveable, Destructibl
 
         this.velocityX = this.speed * Math.cos((angle/180) * Math.PI);
         this.velocityY = this.speed * Math.sin((angle/180) * Math.PI);
+    }
+
+    @Override
+    public void addNodeToList()
+    {
+        Bullet.group.getChildren().add(this);
     }
 
     @Override

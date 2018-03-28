@@ -35,7 +35,7 @@ public class FirstMainView extends MainView
 
         new Floor(floorImage, new Coordinates(spawnX, spawnY));
 
-        new Floor(floorImage, new Coordinates(Floor.floorList.get(0).getX() + floorImage.getWidth(), spawnY));
+        new Floor(floorImage, new Coordinates(Floor.group.getChildren().get(0).getLayoutX() + floorImage.getWidth(), spawnY));
     }
 
 
