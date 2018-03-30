@@ -94,8 +94,6 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
 
     @Override
     public void move() {
-        System.out.println(super.getX() + "/" + super.getY());
-
         double x = super.getX();
         double y = super.getY();
 
