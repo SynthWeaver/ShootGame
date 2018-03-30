@@ -6,9 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import walkgame.exceptions.CloneException;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
+import walkgame.objects.microObjects.Screen;
 
 import java.util.ArrayList;
 
@@ -53,24 +55,19 @@ public abstract class MainView extends gameloop.View {
         return new Coordinates(MainView.screenSize.getX() / 2f, MainView.screenSize.getY() / 2f);
     }
 
-    public static Coordinates getRelativeScreenCoordinates()
+    public static Screen getRelativeScreen()
     {
-        double screenX = MainView.getMovableGroup().getX() * -1;
-        double screenY = MainView.getMovableGroup().getY() * -1;
-        return new Coordinates(screenX , screenY);
+        Coordinates coordinates = null;
+        try {
+            coordinates = Coordinates.cloneCordinates(MainView.getMovableGroup());
+        } catch (CloneException e) {
+            e.printStackTrace();
+        }
+        coordinates.relativiseCoordinates();
+        return new Screen(coordinates, screenSize);
     }
 
-    public static Coordinates getRelativeScreenCenter()
-    {
-        Coordinates screen = getRelativeScreenCoordinates();
-
-        double screenCenterX = screen.getX() + MainView.getScreenCenter().getX();
-        double screenCenterY = screen.getY() + MainView.getScreenCenter().getY();
-
-        return new Coordinates(screenCenterX, screenCenterY);
-    }
-
-    protected void createScene()//todo: maak een static getAllNodesAsList methode
+    protected void createScene()
     {
         scene = new Scene(root, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.BLACK);
     }

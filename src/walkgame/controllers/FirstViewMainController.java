@@ -4,11 +4,13 @@ package walkgame.controllers;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import walkgame.controllers.parentClasses.MainController;
+import walkgame.exceptions.CloneException;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
+import walkgame.objects.microObjects.Screen;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
 
@@ -51,8 +53,11 @@ public class FirstViewMainController extends MainController {
 
     public void mouseClick(Coordinates mouseCoordinates)
     {
-        Player player = firstView.player;
-        player.getCurrentGun().shoot(MainView.getRelativeScreenCenter(), mouseCoordinates);//todo: is weer stuk
+        Screen relativeScreen = MainView.getRelativeScreen();
+
+        mouseCoordinates.relativiseCoordinates();
+
+        firstView.player.getCurrentGun().shoot(relativeScreen.getScreenCenter(), mouseCoordinates);//todo: is weer stuk mouseCoordinates moet gefixt worden
     }
 
     public void mouseRelease()
