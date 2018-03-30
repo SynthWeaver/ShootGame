@@ -1,7 +1,6 @@
 package walkgame.controllers;
 
 
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import walkgame.controllers.parentClasses.MainController;
@@ -25,38 +24,26 @@ public class FirstViewMainController extends MainController {
 
     public void pressKeyButton(KeyCode k)
     {
-        for(Group group : MainView.getRootArray())
-        {
-            if (group instanceof Controllable)
-            {
-                ((Controllable) group).pressButton(k);
-            }
+        MainView.getMovableGroup().pressButton(k);
 
-            for(Node node : group.getChildren())
+        for(Node node : MainView.getListOfAllNodes())
+        {
+            if (node instanceof Controllable)
             {
-                if (node instanceof Controllable)
-                {
-                    ((Controllable) node).pressButton(k);
-                }
+                ((Controllable) node).pressButton(k);
             }
         }
     }
 
     public void releaseKeyButton(KeyCode k)
     {
-        for(Group group : MainView.getRootArray())
-        {
-            if (group instanceof Controllable)
-            {
-                ((Controllable) group).releaseButton(k);
-            }
+        MainView.getMovableGroup().releaseButton(k);
 
-            for(Node node : group.getChildren())
+        for(Node node : MainView.getListOfAllNodes())
+        {
+            if (node instanceof Controllable)
             {
-                if (node instanceof Controllable)
-                {
-                    ((Controllable) node).releaseButton(k);
-                }
+                ((Controllable) node).releaseButton(k);
             }
         }
     }
@@ -74,15 +61,9 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()
     {
-        for(Group rootItem : MainView.getRootArray())
-        {
-            if(rootItem instanceof Moveable)
-            {
-                ((Moveable) rootItem).move();
-            }
-        }
+        MainView.getMovableGroup().move();
 
-        for(Node node : MainView.getListOfAllNodes())//todo: Schiet aanpassen zodat het weer werkt
+        for(Node node : MainView.getListOfAllNodes())
         {
             LinkedList<Destructible> toDestroy = new LinkedList<>();
             if(node instanceof Moveable)

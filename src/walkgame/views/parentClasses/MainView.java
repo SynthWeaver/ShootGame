@@ -8,16 +8,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.microObjects.Map;
+import walkgame.objects.microObjects.MovableGroup;
 
 import java.util.ArrayList;
 
 public abstract class MainView extends gameloop.View {
 
-    protected Map map = new Map();
+    protected Group map = new Group();
     protected Group cast = new Group();
     protected Group hud = new Group();
 
+    protected MovableGroup movableGroup = new MovableGroup();
     protected Group root = new Group();
 
     public Scene scene;
@@ -62,51 +63,37 @@ public abstract class MainView extends gameloop.View {
         return getCurrentScene().getRoot().getChildrenUnmodifiable();
     }
 
+    public static MovableGroup getMovableGroup(){
+        ObservableList<Node> root = MainView.getRoot();
+        return (MovableGroup) root.get(0);
+    }
+
+    public static Group getMap() {
+        return (Group) MainView.getMovableGroup().getChildren().get(0);
+    }
+
+    public static Group getCast() {
+        return (Group) MainView.getMovableGroup().getChildren().get(1);
+    }
+
+    public static Group getHud() {
+        ObservableList<Node> root = MainView.getRoot();
+        return  (Group) root.get(1);
+    }
+
     public static Group[] getRootArray() {
-        ArrayList<Group> groupList = new ArrayList<>();
-
-        for(Node node : MainView.getRoot())//nodeList to groupList
-        {
-            groupList.add((Group) node);
-        }
-
-        return groupList.toArray(new Group[groupList.size()]);
-    }
-
-    public static ObservableList<Node> getMap() {
-        Group map = getRootArray()[0];
-        return map.getChildren();
-    }
-
-    public static ObservableList<Node> getCast() {
-        Group cast = getRootArray()[1];
-        return cast.getChildren();
-    }
-
-    public static ObservableList<Node> getHud() {
-        Group hud = getRootArray()[2];
-        return hud.getChildren();
+        return new Group[]{getMap(), getCast(), getHud()};
     }
 
     public static ArrayList<Node> getListOfAllNodes(){
         ArrayList<Node> list = new ArrayList<>();
 
-        for(Group root : MainView.getRootArray())
+        for (Group root : MainView.getRootArray())
         {
             for (Node rootNode : root.getChildren())
             {
-                if(rootNode instanceof Group)
-                {
-                    Group rootGroup = (Group) rootNode;
-                    for (Node node : rootGroup.getChildren())
-                    {
-                        list.add(node);
-                    }
-                }
-                else
-                {
-                    list.add(rootNode);
-                }
+                Group rootGroup = (Group) rootNode;
+                list.addAll(rootGroup.getChildren());
             }
         }
 

@@ -5,7 +5,7 @@ import walkgame.objects.microObjects.Coordinates;
 
 public interface Controllable
 {
-    void pressButton(KeyCode c);
-    void releaseButton(KeyCode c);
+    void pressButton(KeyCode k);
+    void releaseButton(KeyCode k);
     void rotateImage(Coordinates mouseCoordinates);
 }

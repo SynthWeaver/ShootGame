@@ -1,6 +1,7 @@
 package walkgame.objects.hud;
 
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -10,6 +11,8 @@ import walkgame.views.parentClasses.MainView;
 
 public class PlayerStatus extends Pane//todo: naar PaneObject zetten
 {
+    public static Group group = new Group();
+
     private static final ImageView HEALTH = new ImageView("walkgame/res/ui/hp.png");
     private static final ImageView AMMO_CLIP = new ImageView("walkgame/res/ui/clip.png");
     private static final ImageView AMMO = new ImageView("walkgame/res/ui/ammo.png");
@@ -77,6 +80,6 @@ public class PlayerStatus extends Pane//todo: naar PaneObject zetten
     //@Override
     public void addNodeToList()
     {
-        Hud.group.getChildren().add(this);
+        PlayerStatus.group.getChildren().add(this);
     }
 }

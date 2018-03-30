@@ -7,12 +7,11 @@ import javafx.stage.Stage;
 import walkgame.controllers.FirstViewMainController;
 import walkgame.objects.cast.Enemy;
 import walkgame.objects.cast.bullets.Bullet;
-import walkgame.objects.hud.Hud;
 import walkgame.objects.hud.Player;
 import walkgame.objects.hud.PlayerStatus;
 import walkgame.objects.map.Floor;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.microObjects.Map;
+import walkgame.objects.microObjects.MovableGroup;
 import walkgame.objects.microObjects.guns.Pistol;
 import walkgame.views.parentClasses.MainView;
 
@@ -26,11 +25,12 @@ public class FirstMainView extends MainView
     {
         super(primaryStage);
 
-        super.map = new Map(Floor.group);
-        super.cast = new Group(Bullet.group, Enemy.group);//todo: make dit lid van controllable interface zodat bullet beweegt met lopen
-        super.hud = Hud.group;
+        super.map = new Group(Floor.group);
+        super.cast = new Group(Bullet.group, Enemy.group);
+        super.hud = new Group(Player.group, PlayerStatus.group);
 
-        super.root = new Group(map, cast, hud);
+        super.movableGroup = new MovableGroup(super.map, super.cast);
+        super.root = new Group(movableGroup, hud);
         this.createScene();
 
         firstViewController = new FirstViewMainController(this);

@@ -2,6 +2,7 @@ package walkgame.objects.hud;
 
 import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
@@ -15,6 +16,8 @@ import walkgame.objects.parentClasses.Character;
 import walkgame.views.parentClasses.MainView;
 
 public class Player extends Character implements Controllable, Nameable, Shootable {
+
+    public static Group group = new Group();
 
     private static final int PLAYER_HEALTH = 100;
     private static final double PLAYER_SPEED = 0;
@@ -135,8 +138,8 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public void pressButton(KeyCode c) {
-        switch (c){
+    public void pressButton(KeyCode k) {
+        switch (k){
             case W:
                 goNorth = true;
                 goSouth = false;
@@ -160,8 +163,8 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public void releaseButton(KeyCode c) {
-        switch (c){
+    public void releaseButton(KeyCode k) {
+        switch (k){
             case W: goNorth = false; break;
             case D: goEast = false; break;
             case S: goSouth = false; break;
@@ -172,13 +175,13 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void addNodeToList()
     {
-        Hud.group.getChildren().add(this);
+        Player.group.getChildren().add(this);
     }
 
 
     @Override
     public void destroy() {
-        Hud.group.getChildren().remove(this);
+        Player.group.getChildren().remove(this);
         GameLoop.doLogicUpdate();
     }
 }

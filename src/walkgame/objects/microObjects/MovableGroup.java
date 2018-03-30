@@ -7,10 +7,9 @@ import walkgame.interfaces.Moveable;
 
 import java.util.Collection;
 
-public class Map extends javafx.scene.Group implements Controllable, Moveable
+public class MovableGroup extends javafx.scene.Group implements Controllable, Moveable
 {
-
-    //todo: de map heeft 4 map propetys + een boolean die checkt of de player er voor het eerst is.
+    //todo: de movableGroup heeft 4 movableGroup propetys + een boolean die checkt of de player er voor het eerst is.
 
     private double speed = 1.5;
     private double velocityX = 0;
@@ -19,18 +18,18 @@ public class Map extends javafx.scene.Group implements Controllable, Moveable
     private boolean goNorth, goSouth, goEast, goWest;
 
 
-    public Map() {
+    public MovableGroup() {
         super.setLayoutX(0);
         super.setLayoutY(0);
     }
 
-    public Map(Node... children) {
+    public MovableGroup(Node... children) {
         super(children);
         super.setLayoutX(0);
         super.setLayoutY(0);
     }
 
-    public Map(Collection<Node> children) {
+    public MovableGroup(Collection<Node> children) {
         super(children);
         super.setLayoutX(0);
         super.setLayoutY(0);
@@ -107,8 +106,8 @@ public class Map extends javafx.scene.Group implements Controllable, Moveable
     }
 
     @Override
-    public void pressButton(KeyCode c) {
-        switch (c){
+    public void pressButton(KeyCode k) {
+        switch (k){
             case W:
                 setVelocityY(getSpeed());
                 goNorth = true;
@@ -133,8 +132,8 @@ public class Map extends javafx.scene.Group implements Controllable, Moveable
     }
 
     @Override
-    public void releaseButton(KeyCode c) {
-        switch (c){
+    public void releaseButton(KeyCode k) {
+        switch (k){
             case W: goNorth = false; break;
             case D: goEast = false; break;
             case S: goSouth = false; break;
