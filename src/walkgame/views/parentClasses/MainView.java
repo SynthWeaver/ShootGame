@@ -30,9 +30,8 @@ public abstract class MainView extends gameloop.View {
 
     //private static SimpleDoubleProperty screenCenterX = new SimpleDoubleProperty();
     //private static SimpleDoubleProperty screenCenterY = new SimpleDoubleProperty();
-    public static Coordinates screenCenter = new Coordinates(screenSize.getX() / 2f, screenSize.getY() / 2f);
 
-    public static Coordinates playerSpawn = new Coordinates(screenCenter.getX() - (Player.PLAYER_SIZE.getX() / 2f) , screenCenter.getY() - (Player.PLAYER_SIZE.getY() / 2f));
+    public static Coordinates playerSpawn = new Coordinates(MainView.getScreenCenter().getX() - (Player.PLAYER_SIZE.getX() / 2f) , MainView.getScreenCenter().getY() - (Player.PLAYER_SIZE.getY() / 2f));
 
     public MainView(Stage primaryStage) {
         MainView.primaryStage = primaryStage;
@@ -47,6 +46,11 @@ public abstract class MainView extends gameloop.View {
     public void render()
     {
         return;
+    }
+
+    public static Coordinates getScreenCenter()
+    {
+        return new Coordinates(screenSize.getX() / 2f, screenSize.getY() / 2f);
     }
 
     protected void createScene()//todo: maak een static getAllNodesAsList methode

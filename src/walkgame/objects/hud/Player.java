@@ -98,7 +98,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void rotateImage(Coordinates mouseCoordinates) {
         Image image = sprites.getSprite(Coordinates.SOUTH);
-        double angle = Functions.getAngle(MainView.screenCenter, mouseCoordinates);
+        double angle = Functions.getAngle(MainView.getScreenCenter(), mouseCoordinates);
 
 
         if(angle > Coordinates.NORTH_NORTH_EAST && angle < Coordinates.NORTH_EAST_EAST)
@@ -178,10 +178,20 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         Player.group.getChildren().add(this);
     }
 
-
     @Override
     public void destroy() {
         Player.group.getChildren().remove(this);
         GameLoop.doLogicUpdate();
+    }
+
+    public Coordinates getRelativePostition()
+    {
+        double screenX = MainView.getMovableGroup().getX() * -1;
+        double screenY = MainView.getMovableGroup().getY() * -1;
+
+        double screenCenterX = screenX + MainView.getScreenCenter().getX();
+        double screenCenterY = screenY + MainView.getScreenCenter().getY();
+
+        return new Coordinates(screenCenterX, screenCenterY);
     }
 }

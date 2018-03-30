@@ -66,6 +66,12 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     }
 
     @Override
+    public Coordinates getCoordinate()
+    {
+        return new Coordinates(getX(), getY());
+    }
+
+    @Override
     public double getX() {
         return super.getLayoutX();
     }

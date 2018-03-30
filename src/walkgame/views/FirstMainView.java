@@ -43,8 +43,8 @@ public class FirstMainView extends MainView
     private void createFloor()
     {
         Image floorImage = new Image("walkgame/res/floor1.png");
-        double spawnX = MainView.screenCenter.getX() - (floorImage.getWidth() / 2f);
-        double spawnY = MainView.screenCenter.getY() - (floorImage.getHeight() / 2f);;
+        double spawnX = MainView.getScreenCenter().getX() - (floorImage.getWidth() / 2f);
+        double spawnY = MainView.getScreenCenter().getY() - (floorImage.getHeight() / 2f);;
 
         new Floor(floorImage, new Coordinates(spawnX, spawnY));
 

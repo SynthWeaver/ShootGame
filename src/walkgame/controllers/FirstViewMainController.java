@@ -7,6 +7,7 @@ import walkgame.controllers.parentClasses.MainController;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
@@ -50,7 +51,8 @@ public class FirstViewMainController extends MainController {
 
     public void mouseClick(Coordinates mouseCoordinates)
     {
-        firstView.player.getCurrentGun().shoot(MainView.screenCenter, mouseCoordinates);
+        Player player = firstView.player;
+        player.getCurrentGun().shoot(player.getRelativePostition(), mouseCoordinates);
     }
 
     public void mouseRelease()
