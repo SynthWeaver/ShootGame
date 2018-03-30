@@ -21,8 +21,8 @@ public abstract class ImageViewObject extends ImageView implements GameInterface
 
     private void innit(Coordinates coordinates)
     {
-        super.setLayoutX(coordinates.getX());
-        super.setLayoutY(coordinates.getY());
+        super.setX(coordinates.getX());
+        super.setY(coordinates.getY());
 
         addNodeToList();
     }

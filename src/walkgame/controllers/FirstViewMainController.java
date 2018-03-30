@@ -106,37 +106,4 @@ public class FirstViewMainController extends MainController {
             }
         }
     }
-
-    /*
-    public static void destroyObjectInStage(Node searchedNode)//todo: delete deze functie en gebruik het in tick
-    {
-        Group root = (Group) MainView.primaryStage.getScene().getRoot().getChildrenUnmodifiable();//get root Group
-
-        for(Node map: root.getChildren())
-        {
-            Group mapgroup = (Group) map;//get map/cast/hud Group
-
-            for (Node objectNode : mapgroup.getChildren())
-            {
-                Group objectGroup = (Group) objectNode;// get NodeGroup
-
-                for (Node node : objectGroup.getChildren())
-                {
-                    if(node.equals(searchedNode))//If node equals SearchedNode, Delete and return
-                    {
-                        objectGroup.getChildren().remove(node);
-                        return;
-                    }
-                }
-            }
-        }
-
-        System.out.println("Error: delete item could not be found");
-    }*/
-
-    @Override
-    public void render()
-    {
-        return;
-    }
 }
