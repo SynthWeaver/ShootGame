@@ -1,25 +1,26 @@
 package walkgame.objects.microObjects.guns;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import walkgame.objects.microObjects.Coordinates;
 
 public abstract class Gun {
 
     private String name;
-    private int ammoCount;
+    private SimpleIntegerProperty ammoCount;
 
     private int clipSize;
-    private int clipAmmo;
+    private SimpleIntegerProperty clipAmmo;
 
     private double reloadTime;
 
     protected boolean shooting;
 
 
-    public Gun(String name, int ammoCount, int clipSize, double reloadTime) {
+    public Gun(String name, SimpleIntegerProperty ammoCount, int clipSize, double reloadTime) {
         this.name = name;
         this.ammoCount = ammoCount;
         this.clipSize = clipSize;
-        this.clipAmmo = clipSize;
+        this.clipAmmo = new SimpleIntegerProperty(clipSize);
         this.reloadTime = reloadTime;
 
         this.shooting = false;
@@ -33,20 +34,24 @@ public abstract class Gun {
 
     protected void removeBulletFromClip()
     {
-        this.clipAmmo --;
+        int tmpClipAmmo = this.clipAmmo.get();
+        this.clipAmmo.set(--tmpClipAmmo);
     }
 
     public void reload()
     {
-        this.clipAmmo = this.clipSize;
-        this.ammoCount -= this.clipSize;
+        this.clipAmmo.set(this.clipSize);
+
+        int tmpAmmoCount = this.ammoCount.get();
+        tmpAmmoCount -= this.clipSize;
+        this.ammoCount.set(tmpAmmoCount);
     }
 
     public String getName() {
         return name;
     }
 
-    public int getAmmoCount() {
+    public SimpleIntegerProperty getAmmoCount() {
         return ammoCount;
     }
 
@@ -54,7 +59,7 @@ public abstract class Gun {
         return clipSize;
     }
 
-    public int getClipAmmo() {
+    public SimpleIntegerProperty getClipAmmo() {
         return clipAmmo;
     }
 
@@ -67,11 +72,11 @@ public abstract class Gun {
     }
 
     protected void setAmmoCount(int ammoCount) {
-        this.ammoCount = ammoCount;
+        this.ammoCount.set(ammoCount);
     }
 
     protected void setClipAmmo(int clipAmmo) {
-        this.clipAmmo = clipAmmo;
+        this.clipAmmo.set(clipAmmo);
     }
 
     protected void setShooting(boolean shooting) {

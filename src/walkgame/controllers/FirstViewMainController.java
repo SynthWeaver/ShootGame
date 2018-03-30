@@ -4,13 +4,10 @@ package walkgame.controllers;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import walkgame.controllers.parentClasses.MainController;
-import walkgame.exceptions.CloneException;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
-import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.microObjects.Screen;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
 
@@ -54,7 +51,7 @@ public class FirstViewMainController extends MainController {
     public void mouseClick(Coordinates mouseCoordinates)
     {
         Coordinates screenCenter = MainView.getScreenCenter().relativiseCoordinates();
-        firstView.player.getCurrentGun().shoot(screenCenter, mouseCoordinates.relativiseCoordinates());//todo: is weer stuk mouseCoordinates moet gefixt worden
+        firstView.player.getCurrentGun().shoot(screenCenter, mouseCoordinates.relativiseCoordinates());
     }
 
     public void mouseRelease()
@@ -78,7 +75,7 @@ public class FirstViewMainController extends MainController {
             if(node instanceof Destructible)
             {
                 Destructible destructible = (Destructible) node;
-                if(destructible.getHealth() <= 0)
+                if(destructible.getHealth().get() <= 0)
                 {
                     toDestroy.add(destructible);
                 }

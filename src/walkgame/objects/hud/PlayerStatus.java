@@ -3,13 +3,14 @@ package walkgame.objects.hud;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import walkgame.objects.microObjects.guns.Gun;
+import walkgame.objects.parentClasses.PaneObject;
 import walkgame.views.parentClasses.MainView;
 
-public class PlayerStatus extends Pane//todo: naar PaneObject zetten
+public class PlayerStatus extends PaneObject//todo: naar PaneObject zetten
 {
     public static Group group = new Group();
 
@@ -23,10 +24,15 @@ public class PlayerStatus extends Pane//todo: naar PaneObject zetten
 
     private double currentWidth = 0.00;
 
-    public PlayerStatus(Player player) {
-        healthLabel.textProperty().bind(player.healthProperty.asString());//todo: make the bind working
-        ammoClipLabel.textProperty().bind(player.ammoClipProperty.asString());
-        ammoLabel.textProperty().bind(player.ammoProperty.asString());
+    public PlayerStatus() {
+        super();
+
+        Player player = (Player) Player.group.getChildren().get(0);
+        Gun curentGun = player.getCurrentGun();
+
+        healthLabel.textProperty().bind(player.getHealth().asString());
+        ammoClipLabel.textProperty().bind(curentGun.getClipAmmo().asString());
+        ammoLabel.textProperty().bind(curentGun.getAmmoCount().asString());
 
         placePlayerStatus();
         setThisPaneLocation(MainView.screenSize.getX() - currentWidth, 0.00);
@@ -46,7 +52,6 @@ public class PlayerStatus extends Pane//todo: naar PaneObject zetten
     private void placePlayerStatus()
     {
         //todo: add vbox
-        //todo: more to the right
         Text[] textArray = new Text[]{healthLabel, ammoClipLabel, ammoLabel};
         ImageView[] imageViewArray = new ImageView[]{HEALTH, AMMO_CLIP, AMMO};
 

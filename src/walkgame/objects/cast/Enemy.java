@@ -1,5 +1,6 @@
 package walkgame.objects.cast;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Group;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Sprites;
@@ -9,7 +10,7 @@ public abstract class Enemy extends Character
 {
     public static Group group = new Group();
 
-    public Enemy(Coordinates coordinates, Sprites sprites, int health, double speed) {
+    public Enemy(Coordinates coordinates, Sprites sprites, SimpleIntegerProperty health, double speed) {
         super(sprites, coordinates, health, speed);
     }
 

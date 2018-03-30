@@ -1,8 +1,10 @@
 package walkgame.interfaces;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 public interface Destructible
 {
     void setHealth(int health);
-    int getHealth();
+    SimpleIntegerProperty getHealth();
     void destroy();
 }

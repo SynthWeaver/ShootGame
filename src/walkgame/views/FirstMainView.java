@@ -37,7 +37,7 @@ public class FirstMainView extends MainView
 
         this.createFloor();
         player = new Player(MainView.playerSpawn, "Jack", new Pistol());
-        playerStatusUI = new PlayerStatus(player);
+        playerStatusUI = new PlayerStatus();
     }
 
     private void createFloor()

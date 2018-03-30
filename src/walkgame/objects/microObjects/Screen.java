@@ -1,7 +1,5 @@
 package walkgame.objects.microObjects;
 
-import walkgame.views.parentClasses.MainView;
-
 public class Screen
 {
     private Double x1;

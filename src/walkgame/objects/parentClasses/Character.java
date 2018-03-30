@@ -1,5 +1,6 @@
 package walkgame.objects.parentClasses;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
@@ -8,15 +9,15 @@ import walkgame.objects.microObjects.Sprites;
 
 public abstract class Character extends ImageViewObject implements Moveable, Destructible
 {
-    public Character(Sprites sprites, Coordinates coordinates, int health, double speed) {
+    public Character(Sprites sprites, Coordinates coordinates, SimpleIntegerProperty health, double speed) {
         super(coordinates);
         this.speed = speed;
         this.sprites = sprites;
         this.health = health;
     }
 
-    private int health = 0;
-    private double speed = 0;
+    private SimpleIntegerProperty health;
+    private double speed;
 
     private double velocityX = 0, velocityY = 0;
     protected boolean goNorth, goSouth, goEast, goWest;
@@ -49,7 +50,7 @@ public abstract class Character extends ImageViewObject implements Moveable, Des
     @Override
     public void setHealth(int health)
     {
-        this.health = health;
+        this.health.set(health);
     }
 
     @Override
@@ -63,7 +64,7 @@ public abstract class Character extends ImageViewObject implements Moveable, Des
     }
 
     @Override
-    public int getHealth() {
+    public SimpleIntegerProperty getHealth() {
         return this.health;
     }
 

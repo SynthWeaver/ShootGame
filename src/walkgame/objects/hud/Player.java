@@ -19,13 +19,9 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     public static Group group = new Group();
 
-    private static final int PLAYER_HEALTH = 100;
+    private static final SimpleIntegerProperty PLAYER_HEALTH = new SimpleIntegerProperty(100);
     private static final double PLAYER_SPEED = 0;
     public static final Coordinates PLAYER_SIZE  = new Coordinates(32,32);
-
-    public SimpleIntegerProperty healthProperty;// = new SimpleIntegerProperty(super.getHealth());
-    public SimpleIntegerProperty ammoClipProperty;// = new SimpleIntegerProperty(this.getCurrentGun().getClipAmmo());
-    public SimpleIntegerProperty ammoProperty;// = new SimpleIntegerProperty(this.getCurrentGun().getAmmoCount());
 
     private static final Sprites PLAYER_SPRITES = new Sprites(
             new Image("walkgame/res/player/none/north.png"),
@@ -45,10 +41,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         this.name = name;
         this.currentGun = currentGun;
         super.setImage(sprites.getSprite(Coordinates.SOUTH));
-
-        healthProperty = new SimpleIntegerProperty(super.getHealth());
-        ammoClipProperty = new SimpleIntegerProperty(this.getCurrentGun().getClipAmmo());
-        ammoProperty = new SimpleIntegerProperty(this.getCurrentGun().getAmmoCount());
     }
 
     public Player(Coordinates playerSpawn, String name, Gun currentGun)

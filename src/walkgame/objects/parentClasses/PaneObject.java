@@ -7,6 +7,11 @@ import walkgame.objects.microObjects.Coordinates;
 
 public abstract class PaneObject extends Pane implements GameInterface
 {
+    public PaneObject()
+    {
+        super();
+    }
+
     public PaneObject(Coordinates coordinates)
     {
         super();
