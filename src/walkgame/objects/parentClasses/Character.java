@@ -71,7 +71,7 @@ public abstract class Character extends ImageViewObject implements Moveable, Des
 
     public void destroy()
     {
-        MainView.currentMapList.remove(this);
+        this.setHealth(0);
         GameLoop.doLogicUpdate();
     }
 

@@ -47,7 +47,7 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
     @Override
     public void destroy()
     {
-        MainView.currentMapList.remove(this);
+        this.setHealth(0);
         GameLoop.doLogicUpdate();
     }
 

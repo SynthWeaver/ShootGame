@@ -2,6 +2,9 @@ package walkgame;
 
 import gameloop.GameLoop;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 import walkgame.views.FirstMainView;
 
