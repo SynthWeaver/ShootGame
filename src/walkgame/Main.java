@@ -17,7 +17,7 @@ public class Main extends Application {
         primaryStage.setTitle("WalkGame");
         primaryStage.setResizable(false);
         primaryStage.show();
-    }
+    }//todo: add class with engine options (van boven of zijkant etc).
 
     public static void main(String[] args) {
         launch(args);
