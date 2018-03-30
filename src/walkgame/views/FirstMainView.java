@@ -26,13 +26,16 @@ public class FirstMainView extends MainView
     {
         super(primaryStage);
 
-        super.map = new Map();
+        super.map = new Map(Floor.group);
         super.cast = new Group(Bullet.group, Enemy.group);//todo: make dit lid van controllable interface zodat bullet beweegt met lopen
         super.hud = Hud.group;
 
+        super.root = new Group(map, cast, hud);
+        this.createScene();
+
         firstViewController = new FirstViewMainController(this);
 
-        createFloor();
+        this.createFloor();
         player = new Player(MainView.playerSpawn, "Jack", new Pistol());
         playerStatusUI = new PlayerStatus(player);
     }
@@ -54,33 +57,33 @@ public class FirstMainView extends MainView
     {
         super.createScene();
 
-        scene.setOnKeyPressed(event -> {
+        super.scene.setOnKeyPressed(event -> {
             firstViewController.pressKeyButton(event.getCode());
         });
 
-        scene.setOnKeyReleased(event -> {
+        super.scene.setOnKeyReleased(event -> {
             firstViewController.releaseKeyButton(event.getCode());
         });
 
-        scene.setOnMousePressed(event -> {
+        super.scene.setOnMousePressed(event -> {
             if(event.getButton() == MouseButton.PRIMARY)
             {
                 firstViewController.mouseClick(new Coordinates(event.getX(), event.getY()));
             }
         });
 
-        scene.setOnMouseReleased(event -> {
+        super.scene.setOnMouseReleased(event -> {
             if(event.getButton() == MouseButton.PRIMARY)
             {
                 firstViewController.mouseRelease();
             }
         });
 
-        scene.setOnMouseMoved(event -> {
+        super.scene.setOnMouseMoved(event -> {
             player.rotateImage(new Coordinates(event.getX(), event.getY()));
         });
-        
-        scene.setOnMouseDragged(event -> {
+
+        super.scene.setOnMouseDragged(event -> {
             player.rotateImage(new Coordinates(event.getX(), event.getY()));
         });
     }

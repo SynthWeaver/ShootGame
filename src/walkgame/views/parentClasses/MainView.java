@@ -18,7 +18,7 @@ public abstract class MainView extends gameloop.View {
     protected Group cast = new Group();
     protected Group hud = new Group();
 
-    protected Group root = new Group(map, cast, hud);
+    protected Group root = new Group();
 
     public Scene scene;
 
@@ -34,8 +34,8 @@ public abstract class MainView extends gameloop.View {
     public static Coordinates playerSpawn = new Coordinates(screenCenter.getX() - (Player.PLAYER_SIZE.getX() / 2f) , screenCenter.getY() - (Player.PLAYER_SIZE.getY() / 2f));
 
     public MainView(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        createScene();
+        MainView.primaryStage = primaryStage;
+        //createScene();
 
         //screenCenterX.bind(this.scene.widthProperty());
         //screenCenterY.bind(this.scene.heightProperty());

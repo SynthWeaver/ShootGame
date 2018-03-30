@@ -16,8 +16,7 @@ import java.util.LinkedList;
 
 public class FirstViewMainController extends MainController {
 
-    FirstMainView firstView;
-
+    public FirstMainView firstView;
     public FirstViewMainController(FirstMainView firstView) {
         this.firstView = firstView;
     }
