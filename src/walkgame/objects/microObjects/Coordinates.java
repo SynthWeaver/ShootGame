@@ -25,21 +25,20 @@ public class Coordinates {
         this(DEFAULT_COORDINATES);
     }
 
-    public void relativiseCoordinates()
+    public Coordinates relativiseCoordinates()
     {
         Coordinates movableGroup;
         try {
-            movableGroup = Coordinates.cloneCordinates(MainView.getMovableGroup());
+            movableGroup = Coordinates.cloneFromObject(MainView.getMovableGroup());
         } catch (CloneException e) {
             e.printStackTrace();
-            return;
+            return null;
         }
 
         movableGroup.x *= -1;
         movableGroup.y *= -1;
 
-        this.x += movableGroup.getX();
-        this.y += movableGroup.getY();
+        return new Coordinates(getX() + movableGroup.getX(), getY() + movableGroup.getY());
     }
 
     public double getY() {
@@ -58,7 +57,7 @@ public class Coordinates {
         this.x = x;
     }
 
-    public static Coordinates cloneCordinates(Object object) throws CloneException
+    public static Coordinates cloneFromObject(Object object) throws CloneException
     {
         if(object instanceof Moveable)
         {

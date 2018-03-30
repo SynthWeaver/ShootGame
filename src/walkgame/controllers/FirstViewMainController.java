@@ -53,11 +53,8 @@ public class FirstViewMainController extends MainController {
 
     public void mouseClick(Coordinates mouseCoordinates)
     {
-        Screen relativeScreen = MainView.getRelativeScreen();
-
-        mouseCoordinates.relativiseCoordinates();
-
-        firstView.player.getCurrentGun().shoot(relativeScreen.getScreenCenter(), mouseCoordinates);//todo: is weer stuk mouseCoordinates moet gefixt worden
+        Coordinates screenCenter = MainView.getScreenCenter().relativiseCoordinates();
+        firstView.player.getCurrentGun().shoot(screenCenter, mouseCoordinates.relativiseCoordinates());//todo: is weer stuk mouseCoordinates moet gefixt worden
     }
 
     public void mouseRelease()

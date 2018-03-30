@@ -59,7 +59,7 @@ public abstract class MainView extends gameloop.View {
     {
         Coordinates coordinates = null;
         try {
-            coordinates = Coordinates.cloneCordinates(MainView.getMovableGroup());
+            coordinates = Coordinates.cloneFromObject(MainView.getMovableGroup());
         } catch (CloneException e) {
             e.printStackTrace();
         }

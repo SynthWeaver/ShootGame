@@ -97,12 +97,14 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
         double x = super.getX();
         double y = super.getY();
 
-        Screen relativeScreen = MainView.getRelativeScreen();
-        if(x > relativeScreen.getX2() + 20 || x < relativeScreen.getX1() - 20)//todo: fix dit met screensize
+        Coordinates screen = new Coordinates(0,0).relativiseCoordinates();
+        Coordinates screenSize = MainView.screenSize.relativiseCoordinates();
+
+        if(x > screenSize.getX() + 20 || x < screen.getX() - 20)//todo: fix dit met screensize
         {
             this.setHealth(0);
         }
-        else if(y > relativeScreen.getY2() + 20 || y < relativeScreen.getY1() - 20)
+        else if(y > screenSize.getY() + 20 || y < screen.getY() - 20)
         {
             this.setHealth(0);
         }
