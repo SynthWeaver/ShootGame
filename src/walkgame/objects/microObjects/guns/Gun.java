@@ -34,17 +34,27 @@ public abstract class Gun {
 
     protected void removeBulletFromClip()
     {
-        int tmpClipAmmo = this.clipAmmo.get();
-        this.clipAmmo.set(--tmpClipAmmo);
+        if(this.clipAmmo.get() >= 1)
+        {
+            int tmpClipAmmo = this.clipAmmo.get();
+            this.clipAmmo.set(--tmpClipAmmo);
+        }
     }
 
     public void reload()
     {
-        this.clipAmmo.set(this.clipSize);
+        if(this.ammoCount.get() >= this.clipSize && this.clipAmmo.get() < this.clipSize) {
+            this.clipAmmo.set(this.clipSize);
 
-        int tmpAmmoCount = this.ammoCount.get();
-        tmpAmmoCount -= this.clipSize;
-        this.ammoCount.set(tmpAmmoCount);
+            int tmpAmmoCount = this.ammoCount.get();
+            tmpAmmoCount -= this.clipSize;
+            this.ammoCount.set(tmpAmmoCount);
+        }
+        else if (this.ammoCount.get() >= 1 && this.clipAmmo.get() < this.clipSize)
+        {
+            this.clipAmmo.set(this.ammoCount.get());
+            this.ammoCount.set(0);
+        }
     }
 
     public String getName() {

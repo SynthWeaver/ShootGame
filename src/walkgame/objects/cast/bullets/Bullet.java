@@ -15,16 +15,16 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
 
     public static Group group = new Group();
 
-    private static final SimpleIntegerProperty DEFAULT_HEALTH = new SimpleIntegerProperty(1);
+    private static final int DEFAULT_HEALTH = 1;
     private static final double DEFAULT_SPEED = 4;
 
-    private SimpleIntegerProperty health;
+    private SimpleIntegerProperty health = new SimpleIntegerProperty();
     private double speed;
     private double velocityX = 0, velocityY = 0;
 
     public Bullet(Image image, Coordinates startingCoordinates, Coordinates directionCoordinates) {
         super(image, startingCoordinates);
-        this.health = DEFAULT_HEALTH;
+        this.health.set(DEFAULT_HEALTH);
         this.speed = DEFAULT_SPEED;
 
         shoot(directionCoordinates);
@@ -94,6 +94,8 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
 
     @Override
     public void move() {
+        System.out.println(super.getX() + "/" + super.getY());
+
         double x = super.getX();
         double y = super.getY();
 
