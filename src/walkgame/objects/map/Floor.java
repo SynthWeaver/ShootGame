@@ -7,7 +7,7 @@ import walkgame.objects.parentClasses.ImageViewObject;
 
 public class Floor extends ImageViewObject
 {
-    public static Group group = new Group();
+    public static Group group = new Group();//todo: map fixen
 
     public Floor(Image image, Coordinates coordinates) {
         super(image, coordinates);

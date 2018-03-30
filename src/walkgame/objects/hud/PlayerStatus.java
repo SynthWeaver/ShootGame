@@ -14,7 +14,7 @@ public class PlayerStatus extends PaneObject//todo: naar PaneObject zetten
 {
     public static Group group = new Group();
 
-    private static final ImageView HEALTH = new ImageView("walkgame/res/ui/hp.png");
+    private static final ImageView HEALTH = new ImageView("walkgame/res/ui/hp.png");//todo: images mooier maken
     private static final ImageView AMMO_CLIP = new ImageView("walkgame/res/ui/clip.png");
     private static final ImageView AMMO = new ImageView("walkgame/res/ui/ammo.png");
 
@@ -65,7 +65,6 @@ public class PlayerStatus extends PaneObject//todo: naar PaneObject zetten
             stackPane.setLayoutX(currentWidth);
 
             currentWidth += imageViewArray[i].getImage().getWidth();
-
 
             super.getChildren().add(stackPane);
         }

@@ -3,7 +3,7 @@ package walkgame.objects.microObjects.guns;
 import javafx.beans.property.SimpleIntegerProperty;
 import walkgame.objects.microObjects.Coordinates;
 
-public abstract class Gun {
+public abstract class Gun {//todo: meer guns en ammo
 
     private String name;
     private SimpleIntegerProperty ammoCount;
