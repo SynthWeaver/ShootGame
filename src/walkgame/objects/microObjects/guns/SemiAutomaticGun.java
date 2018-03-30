@@ -15,7 +15,7 @@ abstract class SemiAutomaticGun extends Gun {
     public void shoot(Coordinates gunCoordinates, Coordinates directionCoordinates) {
         if(super.getClipAmmo() >= 1) {
             boolean containsBullet = false;
-            for (Node object : MainView.cast.getChildren()) {
+            for (Node object : MainView.getCast()) {
                 if (object instanceof Bullet) {
                     containsBullet = true;
                 }

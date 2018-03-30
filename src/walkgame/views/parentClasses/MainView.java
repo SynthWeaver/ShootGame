@@ -6,28 +6,23 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import walkgame.objects.cast.Enemy;
-import walkgame.objects.cast.bullets.Bullet;
-import walkgame.objects.hud.Hud;
 import walkgame.objects.hud.Player;
-import walkgame.objects.map.Floor;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Map;
 
+import java.util.ArrayList;
+
 public abstract class MainView extends gameloop.View {
 
-    // todo: moet abstract worden, je wilt niet dat er maar een Scene kan zijn.
-    public static Map map = new Map(Floor.group);
-    public static ObservableList<Node> currentMapList = map.getChildren();
+    protected Map map = new Map();
+    protected Group cast = new Group();
+    protected Group hud = new Group();
 
-    public static Group cast = new Group(Bullet.group, Enemy.group);//todo: make this controllable
-    public static Group hud = Hud.group;
-
-    private static Group rootGroup = new Group(map, cast, hud);
-    public static Group[] root = {map, cast, hud};
+    protected Group root = new Group(map, cast, hud);
 
     public Scene scene;
-    private Stage primaryStage;
+
+    private static Stage primaryStage;
 
     public static Coordinates screenSize = new Coordinates(300, 300);
     //public Coordinates gameSize = new Coordinates(400, 400);
@@ -55,6 +50,43 @@ public abstract class MainView extends gameloop.View {
 
     protected void createScene()
     {
-        scene = new Scene(rootGroup, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.BLACK);
+        scene = new Scene(root, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.BLACK);
+    }
+
+    public static Scene getCurrentScene()
+    {
+        return MainView.primaryStage.getScene();
+    }
+
+    public static Group[] getRootArray() {
+        ObservableList<Node> nodeList = getCurrentScene().getRoot().getChildrenUnmodifiable();
+        ArrayList<Group> groupList = new ArrayList<>();
+
+        for(Node node : nodeList)//nodeList to groupList
+        {
+            groupList.add((Group) node);
+        }
+
+        return groupList.toArray(new Group[groupList.size()]);
+    }
+
+    public static ObservableList<Node> getMap() {
+        Group map = getRootArray()[0];
+        return map.getChildren();
+    }
+
+    public static ObservableList<Node> getCast() {
+        Group cast = getRootArray()[1];
+        return cast.getChildren();
+    }
+
+    public static ObservableList<Node> getHud() {
+        Group hud = getRootArray()[2];
+        return hud.getChildren();
+    }
+
+    public static void setCurrentScene(Scene scene)
+    {
+        MainView.primaryStage.setScene(scene);
     }
 }
