@@ -74,36 +74,34 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()
     {
-        for(Group group : MainView.getRootArray())//todo: Schiet aanpassen zodat het weer werkt
+        for(Group rootItem : MainView.getRootArray())
+        {
+            if(rootItem instanceof Moveable)
+            {
+                ((Moveable) rootItem).move();
+            }
+        }
+
+        for(Node node : MainView.getListOfAllNodes())//todo: Schiet aanpassen zodat het weer werkt
         {
             LinkedList<Destructible> toDestroy = new LinkedList<>();
-
-            if(group instanceof Moveable)
+            if(node instanceof Moveable)
             {
-                Moveable moveable = ((Moveable) group);
+                Moveable moveable = ((Moveable) node);
                 moveable.move();
             }
-
-            for(Node node : group.getChildren())
+            if(node instanceof Destructible)
             {
-                if(node instanceof Moveable)
+                Destructible destructible = (Destructible) node;
+                if(destructible.getHealth() <= 0)
                 {
-                    Moveable moveable = ((Moveable) node);
-                    moveable.move();
-                }
-                if(node instanceof Destructible)
-                {
-                    Destructible destructible = (Destructible) node;
-                    if(destructible.getHealth() <= 0)
-                    {
-                        toDestroy.add(destructible);
-                    }
+                    toDestroy.add(destructible);
                 }
             }
 
             for(Destructible destructible : toDestroy)//after the loop, delete all destructibles
             {
-                group.getChildren().remove(destructible);
+                MainView.getRoot().remove(destructible);
                 destructible.destroy();
             }
         }

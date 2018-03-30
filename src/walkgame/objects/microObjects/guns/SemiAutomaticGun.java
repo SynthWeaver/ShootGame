@@ -3,7 +3,6 @@ package walkgame.objects.microObjects.guns;
 import javafx.scene.Node;
 import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.views.parentClasses.MainView;
 
 abstract class SemiAutomaticGun extends Gun {
 
@@ -15,7 +14,7 @@ abstract class SemiAutomaticGun extends Gun {
     public void shoot(Coordinates gunCoordinates, Coordinates directionCoordinates) {
         if(super.getClipAmmo() >= 1) {
             boolean containsBullet = false;
-            for (Node object : MainView.getCast()) {
+            for (Node object : Bullet.group.getChildren()) {
                 if (object instanceof Bullet) {
                     containsBullet = true;
                 }

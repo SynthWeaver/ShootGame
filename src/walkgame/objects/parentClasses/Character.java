@@ -1,6 +1,5 @@
 package walkgame.objects.parentClasses;
 
-import gameloop.GameLoop;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
@@ -68,11 +67,7 @@ public abstract class Character extends ImageViewObject implements Moveable, Des
         return this.health;
     }
 
-    public void destroy()
-    {
-        this.setHealth(0);
-        GameLoop.doLogicUpdate();
-    }
+    public abstract void destroy();
 
     @Override
     public void move()

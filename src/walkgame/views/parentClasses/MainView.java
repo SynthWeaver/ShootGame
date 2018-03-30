@@ -48,7 +48,7 @@ public abstract class MainView extends gameloop.View {
         return;
     }
 
-    protected void createScene()
+    protected void createScene()//todo: maak een static getAllNodesAsList methode
     {
         scene = new Scene(root, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.BLACK);
     }
@@ -58,11 +58,14 @@ public abstract class MainView extends gameloop.View {
         return MainView.primaryStage.getScene();
     }
 
+    public static ObservableList<Node> getRoot() {
+        return getCurrentScene().getRoot().getChildrenUnmodifiable();
+    }
+
     public static Group[] getRootArray() {
-        ObservableList<Node> nodeList = getCurrentScene().getRoot().getChildrenUnmodifiable();
         ArrayList<Group> groupList = new ArrayList<>();
 
-        for(Node node : nodeList)//nodeList to groupList
+        for(Node node : MainView.getRoot())//nodeList to groupList
         {
             groupList.add((Group) node);
         }
@@ -83,6 +86,31 @@ public abstract class MainView extends gameloop.View {
     public static ObservableList<Node> getHud() {
         Group hud = getRootArray()[2];
         return hud.getChildren();
+    }
+
+    public static ArrayList<Node> getListOfAllNodes(){
+        ArrayList<Node> list = new ArrayList<>();
+
+        for(Group root : MainView.getRootArray())
+        {
+            for (Node rootNode : root.getChildren())
+            {
+                if(rootNode instanceof Group)
+                {
+                    Group rootGroup = (Group) rootNode;
+                    for (Node node : rootGroup.getChildren())
+                    {
+                        list.add(node);
+                    }
+                }
+                else
+                {
+                    list.add(rootNode);
+                }
+            }
+        }
+
+        return list;
     }
 
     public static void setCurrentScene(Scene scene)

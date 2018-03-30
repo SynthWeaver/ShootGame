@@ -1,5 +1,6 @@
 package walkgame.objects.hud;
 
+import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -174,9 +175,10 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         Hud.group.getChildren().add(this);
     }
 
-    /*@Override
-    public void addNodeToList()
-    {
-        addNodeToHudList();
-    }*/
+
+    @Override
+    public void destroy() {
+        Hud.group.getChildren().remove(this);
+        GameLoop.doLogicUpdate();
+    }
 }
