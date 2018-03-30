@@ -7,6 +7,7 @@ import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
+import walkgame.objects.microObjects.Screen;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
 
@@ -96,7 +97,8 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
         double x = super.getX();
         double y = super.getY();
 
-        if(x > MainView.screenSize.getX() + 20 || x < 0 - 20)
+
+        if(x > MainView.screenSize.getX() + 20 || x < 0 - 20)//todo: fix dit met screensize
         {
             this.setHealth(0);
         }

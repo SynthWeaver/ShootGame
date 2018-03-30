@@ -52,7 +52,7 @@ public class FirstViewMainController extends MainController {
     public void mouseClick(Coordinates mouseCoordinates)
     {
         Player player = firstView.player;
-        player.getCurrentGun().shoot(player.getRelativePostition(), mouseCoordinates);
+        player.getCurrentGun().shoot(MainView.getRelativeScreenCenter(), mouseCoordinates);//todo: is weer stuk
     }
 
     public void mouseRelease()

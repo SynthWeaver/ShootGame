@@ -183,15 +183,4 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         Player.group.getChildren().remove(this);
         GameLoop.doLogicUpdate();
     }
-
-    public Coordinates getRelativePostition()
-    {
-        double screenX = MainView.getMovableGroup().getX() * -1;
-        double screenY = MainView.getMovableGroup().getY() * -1;
-
-        double screenCenterX = screenX + MainView.getScreenCenter().getX();
-        double screenCenterY = screenY + MainView.getScreenCenter().getY();
-
-        return new Coordinates(screenCenterX, screenCenterY);
-    }
 }

@@ -31,7 +31,7 @@ public abstract class MainView extends gameloop.View {
     //private static SimpleDoubleProperty screenCenterX = new SimpleDoubleProperty();
     //private static SimpleDoubleProperty screenCenterY = new SimpleDoubleProperty();
 
-    public static Coordinates playerSpawn = new Coordinates(MainView.getScreenCenter().getX() - (Player.PLAYER_SIZE.getX() / 2f) , MainView.getScreenCenter().getY() - (Player.PLAYER_SIZE.getY() / 2f));
+    public static Coordinates playerSpawn = new Coordinates(MainView.getScreenCenter().getX() - (Player.PLAYER_SIZE.getX() / 2f) , MainView.getScreenCenter().getY() - (Player.PLAYER_SIZE.getY() / 2f));//todo: moet anders
 
     public MainView(Stage primaryStage) {
         MainView.primaryStage = primaryStage;
@@ -50,7 +50,24 @@ public abstract class MainView extends gameloop.View {
 
     public static Coordinates getScreenCenter()
     {
-        return new Coordinates(screenSize.getX() / 2f, screenSize.getY() / 2f);
+        return new Coordinates(MainView.screenSize.getX() / 2f, MainView.screenSize.getY() / 2f);
+    }
+
+    public static Coordinates getRelativeScreenCoordinates()
+    {
+        double screenX = MainView.getMovableGroup().getX() * -1;
+        double screenY = MainView.getMovableGroup().getY() * -1;
+        return new Coordinates(screenX , screenY);
+    }
+
+    public static Coordinates getRelativeScreenCenter()
+    {
+        Coordinates screen = getRelativeScreenCoordinates();
+
+        double screenCenterX = screen.getX() + MainView.getScreenCenter().getX();
+        double screenCenterY = screen.getY() + MainView.getScreenCenter().getY();
+
+        return new Coordinates(screenCenterX, screenCenterY);
     }
 
     protected void createScene()//todo: maak een static getAllNodesAsList methode
