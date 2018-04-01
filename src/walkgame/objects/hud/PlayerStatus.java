@@ -10,7 +10,7 @@ import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.parentClasses.PaneObject;
 import walkgame.views.parentClasses.MainView;
 
-public class PlayerStatus extends PaneObject//todo: naar PaneObject zetten
+public class PlayerStatus extends PaneObject
 {
     public static Group group = new Group();
 
@@ -51,7 +51,6 @@ public class PlayerStatus extends PaneObject//todo: naar PaneObject zetten
 
     private void placePlayerStatus()
     {
-        //todo: add vbox
         Text[] textArray = new Text[]{healthLabel, ammoClipLabel, ammoLabel};
         ImageView[] imageViewArray = new ImageView[]{HEALTH, AMMO_CLIP, AMMO};
 

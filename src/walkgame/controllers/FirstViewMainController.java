@@ -7,10 +7,13 @@ import walkgame.controllers.parentClasses.MainController;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.objects.map.Room;
 import walkgame.objects.microObjects.Coordinates;
+import walkgame.objects.microObjects.TwoDimensionalObject;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class FirstViewMainController extends MainController {
@@ -50,8 +53,8 @@ public class FirstViewMainController extends MainController {
 
     public void mouseClick(Coordinates mouseCoordinates)
     {
-        Coordinates screenCenter = MainView.getScreenCenter().relativiseCoordinates();
-        firstView.player.getCurrentGun().shoot(screenCenter, mouseCoordinates.relativiseCoordinates());
+        Coordinates screenCenter = MainView.getScreenCenter().getRelativisedHudCoordinate();
+        firstView.player.getCurrentGun().shoot(screenCenter, mouseCoordinates.getRelativisedHudCoordinate());
     }
 
     public void mouseRelease()
@@ -85,6 +88,19 @@ public class FirstViewMainController extends MainController {
             {
                 MainView.getRoot().remove(destructible);
                 destructible.destroy();
+            }
+        }
+
+        ArrayList<Node> floorList = new ArrayList<>(Room.group.getChildren());
+        for(Node node : floorList)
+        {
+            Room room = (Room) node;
+            TwoDimensionalObject floorObject = room.get2dObject();
+            TwoDimensionalObject playerObject = firstView.player.get2dObject();
+
+            if(playerObject.checkCollision(floorObject))
+            {
+                room.enterRoom();
             }
         }
     }

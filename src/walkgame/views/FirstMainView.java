@@ -6,10 +6,11 @@ import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import walkgame.controllers.FirstViewMainController;
 import walkgame.objects.cast.Enemy;
+import walkgame.objects.cast.Fog;
 import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.hud.Player;
 import walkgame.objects.hud.PlayerStatus;
-import walkgame.objects.map.Floor;
+import walkgame.objects.map.Room;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
 import walkgame.objects.microObjects.guns.Pistol;
@@ -25,11 +26,12 @@ public class FirstMainView extends MainView
     {
         super(primaryStage);
 
-        super.map = new Group(Floor.group);
+        super.map = new Group(Room.group);
         super.cast = new Group(Bullet.group, Enemy.group);
+        super.fog = new Group(Fog.group);
         super.hud = new Group(Player.group, PlayerStatus.group);
 
-        super.movableGroup = new MovableGroup(super.map, super.cast);
+        super.movableGroup = new MovableGroup(super.map, super.cast, super.fog);
         super.root = new Group(movableGroup, hud);
         this.createScene();
 
@@ -45,12 +47,8 @@ public class FirstMainView extends MainView
         Image floorImage = new Image("walkgame/res/floor1.png");
         double spawnX = MainView.getScreenCenter().getX() - (floorImage.getWidth() / 2f);
         double spawnY = MainView.getScreenCenter().getY() - (floorImage.getHeight() / 2f);;
-
-        new Floor(floorImage, new Coordinates(spawnX, spawnY));
-
-        new Floor(floorImage, new Coordinates(Floor.group.getChildren().get(0).getLayoutX() + floorImage.getWidth(), spawnY));
+        new Room(floorImage, new Coordinates(spawnX, spawnY));
     }
-
 
     @Override
     protected void createScene()

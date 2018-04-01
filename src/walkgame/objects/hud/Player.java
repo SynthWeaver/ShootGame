@@ -11,6 +11,7 @@ import walkgame.interfaces.Shootable;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.microObjects.Sprites;
+import walkgame.objects.microObjects.TwoDimensionalObject;
 import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.parentClasses.Character;
 import walkgame.views.parentClasses.MainView;
@@ -165,14 +166,20 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public void addNodeToList()
-    {
-        Player.group.getChildren().add(this);
-    }
-
-    @Override
     public void destroy() {
         Player.group.getChildren().remove(this);
         GameLoop.doLogicUpdate();
+    }
+
+    @Override
+    public TwoDimensionalObject get2dObject()
+    {
+        return new TwoDimensionalObject(this.getCoordinate().getRelativisedHudCoordinate(), new Coordinates(super.getX() + super.getImage().getWidth(), super.getY() + super.getImage().getHeight()).getRelativisedHudCoordinate());
+    }
+
+    @Override
+    public void addNodeToList()
+    {
+        Player.group.getChildren().add(this);
     }
 }

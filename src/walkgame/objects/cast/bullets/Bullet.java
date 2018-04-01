@@ -40,12 +40,6 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
     }
 
     @Override
-    public void addNodeToList()
-    {
-        Bullet.group.getChildren().add(this);
-    }
-
-    @Override
     public void destroy()
     {
         Bullet.group.getChildren().remove(this);
@@ -97,8 +91,8 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
         double x = super.getX();
         double y = super.getY();
 
-        Coordinates screen = new Coordinates(0,0).relativiseCoordinates();
-        Coordinates screenSize = MainView.screenSize.relativiseCoordinates();
+        Coordinates screen = new Coordinates(0,0).getRelativisedHudCoordinate();
+        Coordinates screenSize = MainView.screenSize.getRelativisedHudCoordinate();
 
         if(x > screenSize.getX() + 20 || x < screen.getX() - 20)
         {
@@ -118,5 +112,11 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
     @Override
     public void rotateImage() {
 
+    }
+
+    @Override
+    public void addNodeToList()
+    {
+        Bullet.group.getChildren().add(this);
     }
 }

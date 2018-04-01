@@ -25,20 +25,12 @@ public class Coordinates {
         this(DEFAULT_COORDINATES);
     }
 
-    public Coordinates relativiseCoordinates()
+    /**
+      * @return Coordinate from hud in movableGroup format
+     */
+    public Coordinates getRelativisedHudCoordinate()
     {
-        Coordinates movableGroup;
-        try {
-            movableGroup = Coordinates.cloneFromObject(MainView.getMovableGroup());
-        } catch (CloneException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        movableGroup.x *= -1;
-        movableGroup.y *= -1;
-
-        return new Coordinates(getX() + movableGroup.getX(), getY() + movableGroup.getY());
+        return new Coordinates(getX() - MainView.getMovableGroup().getX(), getY() - MainView.getMovableGroup().getY());
     }
 
     public double getY() {

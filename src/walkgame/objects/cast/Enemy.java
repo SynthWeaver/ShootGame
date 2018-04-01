@@ -8,7 +8,7 @@ import walkgame.objects.parentClasses.Character;
 
 public abstract class Enemy extends Character
 {
-    public static Group group = new Group();//todo: enemies fixen
+    public static Group group = new Group();// todo: enemies fixen
 
     public Enemy(Coordinates coordinates, Sprites sprites, SimpleIntegerProperty health, double speed) {
         super(sprites, coordinates, health, speed);

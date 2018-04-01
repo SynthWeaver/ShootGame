@@ -10,7 +10,7 @@ import walkgame.exceptions.CloneException;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
-import walkgame.objects.microObjects.Screen;
+import walkgame.objects.microObjects.TwoDimensionalObject;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,7 @@ public abstract class MainView extends gameloop.View {
 
     protected Group map = new Group();
     protected Group cast = new Group();
+    protected Group fog = new Group();
     protected Group hud = new Group();
 
     protected MovableGroup movableGroup = new MovableGroup();
@@ -55,7 +56,7 @@ public abstract class MainView extends gameloop.View {
         return new Coordinates(MainView.screenSize.getX() / 2f, MainView.screenSize.getY() / 2f);
     }
 
-    public static Screen getRelativeScreen()
+    public static TwoDimensionalObject getRelativeScreen()
     {
         Coordinates coordinates = null;
         try {
@@ -63,8 +64,8 @@ public abstract class MainView extends gameloop.View {
         } catch (CloneException e) {
             e.printStackTrace();
         }
-        coordinates.relativiseCoordinates();
-        return new Screen(coordinates, screenSize);
+        coordinates.getRelativisedHudCoordinate();
+        return new TwoDimensionalObject(coordinates, screenSize);
     }
 
     protected void createScene()

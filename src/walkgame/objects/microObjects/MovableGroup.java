@@ -9,8 +9,6 @@ import java.util.Collection;
 
 public class MovableGroup extends javafx.scene.Group implements Controllable, Moveable
 {
-    //todo: de movableGroup heeft 4 movableGroup propetys + een boolean die checkt of de player er voor het eerst is.
-
     private double speed = 1.5;
     private double velocityX = 0;
     private double velocityY = 0;
