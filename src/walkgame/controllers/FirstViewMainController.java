@@ -9,7 +9,6 @@ import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.map.Room;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.microObjects.TwoDimensionalObject;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
 
@@ -95,10 +94,8 @@ public class FirstViewMainController extends MainController {
         for(Node node : floorList)
         {
             Room room = (Room) node;
-            TwoDimensionalObject floorObject = room.get2dObject();
-            TwoDimensionalObject playerObject = firstView.player.get2dObject();
 
-            if(playerObject.checkCollision(floorObject))
+            if(firstView.player.hasCollision(room))
             {
                 room.enterRoom();
             }

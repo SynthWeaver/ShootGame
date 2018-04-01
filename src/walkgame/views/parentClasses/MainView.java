@@ -6,11 +6,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import walkgame.exceptions.CloneException;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
-import walkgame.objects.microObjects.TwoDimensionalObject;
 
 import java.util.ArrayList;
 
@@ -54,18 +52,6 @@ public abstract class MainView extends gameloop.View {
     public static Coordinates getScreenCenter()
     {
         return new Coordinates(MainView.screenSize.getX() / 2f, MainView.screenSize.getY() / 2f);
-    }
-
-    public static TwoDimensionalObject getRelativeScreen()
-    {
-        Coordinates coordinates = null;
-        try {
-            coordinates = Coordinates.cloneFromObject(MainView.getMovableGroup());
-        } catch (CloneException e) {
-            e.printStackTrace();
-        }
-        coordinates.getRelativisedHudCoordinate();
-        return new TwoDimensionalObject(coordinates, screenSize);
     }
 
     protected void createScene()

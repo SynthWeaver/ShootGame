@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import walkgame.objects.microObjects.guns.Gun;
+import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentClasses.PaneObject;
 import walkgame.views.parentClasses.MainView;
 
@@ -14,46 +14,38 @@ public class PlayerStatus extends PaneObject
 {
     public static Group group = new Group();
 
+    private static final String BACKGROUND_COLOUR = "-fx-background-color: white;";
+
     private static final ImageView HEALTH = new ImageView("walkgame/res/ui/hp.png");//todo: images mooier maken
     private static final ImageView AMMO_CLIP = new ImageView("walkgame/res/ui/clip.png");
     private static final ImageView AMMO = new ImageView("walkgame/res/ui/ammo.png");
 
-    private Text healthLabel = new Text();
-    private Text ammoClipLabel = new Text();
-    private Text ammoLabel = new Text();
-
-    private double currentWidth = 0.00;
-
+    private double width = 0.00;
     public PlayerStatus() {
-        super();
+        super(new Coordinates(MainView.screenSize.getX(), 0));
 
+        generateHud(loadText());
+
+        super.setX(super.getX() - width);
+        super.setStyle(BACKGROUND_COLOUR);
+    }
+
+    private Text[] loadText()
+    {
         Player player = (Player) Player.group.getChildren().get(0);
-        Gun curentGun = player.getCurrentGun();
 
-        healthLabel.textProperty().bind(player.getHealth().asString());
-        ammoClipLabel.textProperty().bind(curentGun.getClipAmmo().asString());
-        ammoLabel.textProperty().bind(curentGun.getAmmoCount().asString());
+        Text[] textArray = new Text[]{new Text("0"), new Text("0"), new Text("0")};
+        textArray[0].textProperty().bind(player.getHealth().asString());
+        textArray[1].textProperty().bind(player.getCurrentGun().getClipAmmo().asString());
+        textArray[2].textProperty().bind(player.getCurrentGun().getAmmoCount().asString());
 
-        placePlayerStatus();
-        setThisPaneLocation(MainView.screenSize.getX() - currentWidth, 0.00);
-        //updatePlayerStatus(player);
-        super.setStyle("-fx-background-color: white;");
-
-
-        addNodeToList();
+        return textArray;
     }
 
-    private void setThisPaneLocation(Double x, Double y)
+    private double generateHud(Text[] textArray)
     {
-        super.setLayoutX(x);
-        super.setLayoutY(y);
-    }
-
-    private void placePlayerStatus()
-    {
-        Text[] textArray = new Text[]{healthLabel, ammoClipLabel, ammoLabel};
         ImageView[] imageViewArray = new ImageView[]{HEALTH, AMMO_CLIP, AMMO};
-
+        
         for (int i = 0; i < textArray.length ; i++) {
             StackPane stackPane = new StackPane();
             stackPane.getChildren().add(imageViewArray[i]);
@@ -61,23 +53,19 @@ public class PlayerStatus extends PaneObject
             stackPane.getChildren().add(textArray[i]);
             stackPane.setAlignment(Pos.CENTER);
 
-            stackPane.setLayoutX(currentWidth);
-
-            currentWidth += imageViewArray[i].getImage().getWidth();
+            stackPane.setLayoutX(width);
+            width += imageViewArray[i].getImage().getWidth();
 
             super.getChildren().add(stackPane);
         }
+
+        return width;
     }
 
-    public void updatePlayerStatus(Player player)
+    @Override
+    public double getTotalWidth()
     {
-        player.getHealth();
-
-        this.healthLabel.textProperty();
-
-        this.healthLabel.setText(String.valueOf(player.getHealth()));
-        this.ammoClipLabel.setText(String.valueOf(player.getCurrentGun().getClipAmmo()));
-        this.ammoLabel.setText(String.valueOf(player.getCurrentGun().getAmmoCount()));
+        return this.getX() + width;
     }
 
     //@Override

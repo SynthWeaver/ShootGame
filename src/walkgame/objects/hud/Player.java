@@ -171,12 +171,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public TwoDimensionalObject get2dObject()
-    {
-        return new TwoDimensionalObject(this.getCoordinate().getRelativisedHudCoordinate(), new Coordinates(super.getX() + super.getImage().getWidth(), super.getY() + super.getImage().getHeight()).getRelativisedHudCoordinate());
-    }
-
-    @Override
     public void addNodeToList()
     {
         Player.group.getChildren().add(this);
