@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.objects.microObjects.Angle;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Sprites;
 
@@ -99,45 +100,45 @@ public abstract class Character extends ImageViewObject implements Moveable, Des
 
     @Override
     public void rotateImage() {
-        Image image = sprites.getSprite(Coordinates.SOUTH);
+        Image image = sprites.getSprite(Angle.SOUTH);
 
         if(goEast)
         {
-            image = sprites.getSprite(Coordinates.EAST);
+            image = sprites.getSprite(Angle.EAST);
         }
         else if(goWest)
         {
-            image = sprites.getSprite(Coordinates.WEST);
+            image = sprites.getSprite(Angle.WEST);
         }
 
         if(goNorth)
         {
             if(goEast)
             {
-                image = sprites.getSprite(Coordinates.NORTH_EAST);
+                image = sprites.getSprite(Angle.NORTH_EAST);
             }
             else if(goWest)
             {
-                image = sprites.getSprite(Coordinates.NORTH_WEST);
+                image = sprites.getSprite(Angle.NORTH_WEST);
             }
             else
             {
-                image = sprites.getSprite(Coordinates.NORTH);
+                image = sprites.getSprite(Angle.NORTH);
             }
         }
         else if(goSouth)
         {
             if(goEast)
             {
-                image = sprites.getSprite(Coordinates.SOUTH_EAST);
+                image = sprites.getSprite(Angle.SOUTH_EAST);
             }
             else if(goWest)
             {
-                image = sprites.getSprite(Coordinates.SOUTH_WEST);
+                image = sprites.getSprite(Angle.SOUTH_WEST);
             }
             else
             {
-                image = sprites.getSprite(Coordinates.SOUTH);
+                image = sprites.getSprite(Angle.SOUTH);
             }
         }
 

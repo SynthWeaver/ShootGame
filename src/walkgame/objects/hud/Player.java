@@ -8,10 +8,10 @@ import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
 import walkgame.interfaces.Shootable;
+import walkgame.objects.microObjects.Angle;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.microObjects.Sprites;
-import walkgame.objects.microObjects.TwoDimensionalObject;
 import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.parentClasses.Character;
 import walkgame.views.parentClasses.MainView;
@@ -23,6 +23,9 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     private static final SimpleIntegerProperty PLAYER_HEALTH = new SimpleIntegerProperty(100);
     private static final double PLAYER_SPEED = 0;
     public static final Coordinates PLAYER_SIZE  = new Coordinates(32,32);
+
+    private String name;
+    private Gun currentGun;
 
     private static final Sprites PLAYER_SPRITES = new Sprites(
             new Image("walkgame/res/player/none/north.png"),
@@ -41,17 +44,13 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         super(sprites, playerSpawn, PLAYER_HEALTH, PLAYER_SPEED);
         this.name = name;
         this.currentGun = currentGun;
-        super.setImage(sprites.getSprite(Coordinates.SOUTH));
+        super.setImage(sprites.getSprite(Angle.SOUTH));
     }
 
     public Player(Coordinates playerSpawn, String name, Gun currentGun)
     {
         this(PLAYER_SPRITES, playerSpawn, name, currentGun);
     }
-
-    private String name;
-    private Gun currentGun;
-
 
     @Override
     public void setName(String name)
@@ -90,41 +89,41 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     @Override
     public void rotateImage(Coordinates mouseCoordinates) {
-        Image image = sprites.getSprite(Coordinates.SOUTH);
+        Image image = sprites.getSprite(Angle.SOUTH);
         double angle = Functions.getAngle(MainView.getScreenCenter(), mouseCoordinates);
 
 
-        if(angle > Coordinates.NORTH_NORTH_EAST && angle < Coordinates.NORTH_EAST_EAST)
+        if(angle > Angle.NORTH_NORTH_EAST && angle < Angle.NORTH_EAST_EAST)
         {
-            image = sprites.getSprite(Coordinates.NORTH_EAST);
+            image = sprites.getSprite(Angle.NORTH_EAST);
         }
-        else if(angle > Coordinates.NORTH_NORTH_EAST && angle < Coordinates.SOUTH_EAST_EAST)
+        else if(angle > Angle.NORTH_NORTH_EAST && angle < Angle.SOUTH_EAST_EAST)
         {
-            image = sprites.getSprite(Coordinates.EAST);
+            image = sprites.getSprite(Angle.EAST);
         }
-        else if(angle > Coordinates.SOUTH_EAST_EAST && angle < Coordinates.SOUTH_SOUTH_EAST)
+        else if(angle > Angle.SOUTH_EAST_EAST && angle < Angle.SOUTH_SOUTH_EAST)
         {
-            image = sprites.getSprite(Coordinates.SOUTH_EAST);
+            image = sprites.getSprite(Angle.SOUTH_EAST);
         }
-        else if(angle > Coordinates.SOUTH_SOUTH_EAST && angle < Coordinates.SOUTH_SOUTH_WEST)
+        else if(angle > Angle.SOUTH_SOUTH_EAST && angle < Angle.SOUTH_SOUTH_WEST)
         {
-            image = sprites.getSprite(Coordinates.SOUTH);
+            image = sprites.getSprite(Angle.SOUTH);
         }
-        else if(angle > Coordinates.SOUTH_SOUTH_WEST && angle < Coordinates.SOUTH_WEST_WEST)
+        else if(angle > Angle.SOUTH_SOUTH_WEST && angle < Angle.SOUTH_WEST_WEST)
         {
-            image = sprites.getSprite(Coordinates.SOUTH_WEST);
+            image = sprites.getSprite(Angle.SOUTH_WEST);
         }
-        else if(angle > Coordinates.SOUTH_WEST_WEST && angle < Coordinates.NORTH_WEST_WEST)
+        else if(angle > Angle.SOUTH_WEST_WEST && angle < Angle.NORTH_WEST_WEST)
         {
-            image = sprites.getSprite(Coordinates.WEST);
+            image = sprites.getSprite(Angle.WEST);
         }
-        else if(angle > Coordinates.NORTH_WEST_WEST && angle < Coordinates.NORTH_NORTH_WEST)
+        else if(angle > Angle.NORTH_WEST_WEST && angle < Angle.NORTH_NORTH_WEST)
         {
-            image = sprites.getSprite(Coordinates.NORTH_WEST);
+            image = sprites.getSprite(Angle.NORTH_WEST);
         }
-        else if(angle > Coordinates.NORTH_NORTH_WEST || angle < Coordinates.NORTH_NORTH_EAST)
+        else if(angle > Angle.NORTH_NORTH_WEST || angle < Angle.NORTH_NORTH_EAST)
         {
-            image = sprites.getSprite(Coordinates.NORTH);
+            image = sprites.getSprite(Angle.NORTH);
         }
 
             super.setImage(image);

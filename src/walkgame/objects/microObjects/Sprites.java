@@ -19,14 +19,14 @@ public class Sprites {
     public Image getSprite(int direction) {
         switch (direction)
         {
-            case Coordinates.NORTH: return spriteNorth;
-            case Coordinates.NORTH_EAST: return spriteNorthEast;
-            case Coordinates.EAST: return spriteEast;
-            case Coordinates.SOUTH_EAST: return spriteSouthEast;
-            case Coordinates.SOUTH: return spriteSouth;
-            case Coordinates.SOUTH_WEST: return spriteSouthWest;
-            case Coordinates.WEST: return spriteWest;
-            case Coordinates.NORTH_WEST: return spriteNorthWest;
+            case Angle.NORTH: return spriteNorth;
+            case Angle.NORTH_EAST: return spriteNorthEast;
+            case Angle.EAST: return spriteEast;
+            case Angle.SOUTH_EAST: return spriteSouthEast;
+            case Angle.SOUTH: return spriteSouth;
+            case Angle.SOUTH_WEST: return spriteSouthWest;
+            case Angle.WEST: return spriteWest;
+            case Angle.NORTH_WEST: return spriteNorthWest;
             default: return spriteSouth;
         }
     }
