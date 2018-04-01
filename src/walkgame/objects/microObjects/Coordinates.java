@@ -33,6 +33,18 @@ public class Coordinates {
         return new Coordinates(getX() - MainView.getMovableGroup().getX(), getY() - MainView.getMovableGroup().getY());
     }
 
+    public void add(Coordinates coordinates)
+    {
+        this.x += coordinates.x;
+        this.y += coordinates.y;
+    }
+
+    public void minus(Coordinates coordinates)
+    {
+        this.x -= coordinates.x;
+        this.y -= coordinates.y;
+    }
+
     public double getY() {
         return y;
     }
@@ -63,9 +75,9 @@ public class Coordinates {
     /*private int compare(Coordinates c)
     {
         double myX = getX();
-        double myY = getY();
+        double myY = getPositionY();
         double theirX = c.getX();
-        double theirY = c.getY();
+        double theirY = c.getPositionY();
 
         //if(myY > FirstMainView.screenCenter.getX() && )
     }*/

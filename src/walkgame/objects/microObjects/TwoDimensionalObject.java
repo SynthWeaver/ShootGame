@@ -1,21 +1,32 @@
 package walkgame.objects.microObjects;
 
+import javafx.scene.image.Image;
 import walkgame.objects.parentClasses.ImageViewObject;
 
 public class TwoDimensionalObject//todo omzetten naar point2d + contains
 {
-    private Double x1;
-    private Double y1;
+    private Double positionX;
+    private Double positionY;
 
-    private Double x2;
-    private Double y2;
+    private Double width;
+    private Double height;
 
-    public TwoDimensionalObject(Coordinates first, Coordinates second)
+    public TwoDimensionalObject(Coordinates first, Coordinates width)
     {
-        this.x1 = first.getX();
-        this.y1 = first.getY();
-        this.x2 = second.getX();
-        this.y2 = second.getY();
+        this.positionX = first.getX();
+        this.positionY = first.getY();
+        this.width = positionX + width.getX();
+        this.height = positionY + width.getY();
+    }
+
+    public TwoDimensionalObject(Coordinates first, Image image)
+    {
+        this(first, new Coordinates(image.getWidth(), image.getHeight()));
+    }
+
+    public TwoDimensionalObject(Coordinates first, double width, double height)
+    {
+        this(first, new Coordinates(width, height));
     }
 
     public TwoDimensionalObject(ImageViewObject object)
@@ -23,63 +34,70 @@ public class TwoDimensionalObject//todo omzetten naar point2d + contains
         this(object.getCoordinate().getRelativisedHudCoordinate(), new Coordinates(object.getX() + object.getImage().getWidth(), object.getY() + object.getImage().getHeight()).getRelativisedHudCoordinate());
     }
 
-    public Coordinates getScreenCenter()
+    public Coordinates getCenter()
     {
-        double diffX = x2 - x1;
-        double diffY = y2 - y1;
-
-        double screenCenterX = x1 + (diffX / 2f);
-        double screenCenterY = y1 + (diffY / 2f);
+        double screenCenterX = positionX + (width / 2f);
+        double screenCenterY = positionY + (height / 2f);
 
         return new Coordinates(screenCenterX, screenCenterY);
     }
     
     public boolean checkCollision(TwoDimensionalObject other2dObject)
     {
-        if (this.y1 <= other2dObject.y2 && this.y1 >= other2dObject.y1 && this.x1 >= other2dObject.x1 && this.x2 <= other2dObject.x2) return true;//north collision
-        if (this.x2 >= other2dObject.x1 && this.x2 <= other2dObject.x2 && this.y1 >= other2dObject.y1 && this.y2 <= other2dObject.y2) return true;//east collision
-        if (this.y2 >= other2dObject.y1 && this.y2 <= other2dObject.y2 && this.x1 >= other2dObject.x1 && this.x2 <= other2dObject.x2) return true;//south collision
-        if (this.x1 <= other2dObject.x2 && this.x1 >= other2dObject.x1 && this.y1 >= other2dObject.y1 && this.y2 <= other2dObject.y2) return true;//west collision
+        if (this.positionY <= other2dObject.getTotalHeight() && this.positionY >= other2dObject.positionY && this.positionX >= other2dObject.positionX && this.getTotalWidth() <= other2dObject.getTotalWidth()) return true;//north collision
+        if (this.getTotalWidth() >= other2dObject.positionX && this.getTotalWidth() <= other2dObject.getTotalWidth() && this.positionY >= other2dObject.positionY && this.getTotalHeight() <= other2dObject.getTotalHeight()) return true;//east collision
+        if (this.getTotalHeight() >= other2dObject.positionY && this.getTotalHeight() <= other2dObject.getTotalHeight() && this.positionX >= other2dObject.positionX && this.getTotalWidth() <= other2dObject.getTotalWidth()) return true;//south collision
+        if (this.positionX <= other2dObject.getTotalWidth() && this.positionX >= other2dObject.positionX && this.positionY >= other2dObject.positionY && this.getTotalHeight() <= other2dObject.getTotalHeight()) return true;//west collision
         return false;
     }
 
-    public Double getX1()
+    public double getTotalWidth()
     {
-        return x1;
+        return positionX + width;
     }
 
-    public void setX1(Double x1)
+    public double getTotalHeight()
     {
-        this.x1 = x1;
+        return positionY + height;
     }
 
-    public Double getY1()
+    public Double getPositionX()
     {
-        return y1;
+        return positionX;
     }
 
-    public void setY1(Double y1)
+    public void setPositionX(Double positionX)
     {
-        this.y1 = y1;
+        this.positionX = positionX;
     }
 
-    public Double getX2()
+    public Double getPositionY()
     {
-        return x2;
+        return positionY;
     }
 
-    public void setX2(Double x2)
+    public void setPositionY(Double positionY)
     {
-        this.x2 = x2;
+        this.positionY = positionY;
     }
 
-    public Double getY2()
+    public Double getWidth()
     {
-        return y2;
+        return width;
     }
 
-    public void setY2(Double y2)
+    public void setWidth(Double width)
     {
-        this.y2 = y2;
+        this.width = width;
+    }
+
+    public Double getHeight()
+    {
+        return height;
+    }
+
+    public void setHeight(Double height)
+    {
+        this.height = height;
     }
 }
