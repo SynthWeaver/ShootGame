@@ -45,7 +45,7 @@ public class PlayerStatus extends PaneObject
     private double generateHud(Text[] textArray)
     {
         ImageView[] imageViewArray = new ImageView[]{HEALTH, AMMO_CLIP, AMMO};
-        
+
         for (int i = 0; i < textArray.length ; i++) {
             StackPane stackPane = new StackPane();
             stackPane.getChildren().add(imageViewArray[i]);

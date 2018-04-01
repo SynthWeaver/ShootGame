@@ -37,10 +37,10 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     @Override
     public char getCollisionDirection(NodeInterface otherObject)
     {
-        if (super.getY() <= otherObject.getTotalHeight() && super.getY() >= otherObject.getY() && super.getX() >= otherObject.getX() && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.NORTH;
-        if (this.getTotalWidth() >= otherObject.getX() && this.getTotalWidth() <= otherObject.getTotalWidth() && super.getY() >= otherObject.getY() && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.EAST;
-        if (this.getTotalHeight() >= otherObject.getY() && this.getTotalHeight() <= otherObject.getTotalHeight() && super.getX() >= otherObject.getX() && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.SOUTH;
-        if (super.getX() <= otherObject.getTotalWidth() && super.getX() >= otherObject.getX() && super.getY() >= otherObject.getY() && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.WEST;
+        if (this.getCoordinate().getY() <= otherObject.getTotalHeight() &&  this.getCoordinate().getY() >= otherObject.getCoordinate().getY() &&  this.getCoordinate().getX() >= otherObject.getCoordinate().getX() && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.NORTH;
+        if (this.getTotalWidth() >= otherObject.getCoordinate().getX() && this.getTotalWidth() <= otherObject.getTotalWidth() &&  this.getCoordinate().getY() >= otherObject.getCoordinate().getY() && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.EAST;
+        if (this.getTotalHeight() >= otherObject.getCoordinate().getY() && this.getTotalHeight() <= otherObject.getTotalHeight() &&  this.getCoordinate().getX() >= otherObject.getCoordinate().getX() && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.SOUTH;
+        if (this.getCoordinate().getX() <= otherObject.getTotalWidth() &&  this.getCoordinate().getX() >= otherObject.getCoordinate().getX() &&  this.getCoordinate().getY() >= otherObject.getCoordinate().getY() && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.WEST;
         return 0;
     }
 

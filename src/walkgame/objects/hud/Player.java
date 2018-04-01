@@ -87,6 +87,16 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         }
     }
 
+    /**
+     * Only use from movableGroup childs. use getX when calling from hud.
+     * @return RELATIVISED coordinate of player location
+     */
+    @Override
+    public Coordinates getCoordinate()
+    {
+        return super.getCoordinate().getRelativisedHudCoordinate();
+    }
+
     @Override
     public void rotateImage(Coordinates mouseCoordinates) {
         Image image = sprites.getSprite(Angle.SOUTH);
