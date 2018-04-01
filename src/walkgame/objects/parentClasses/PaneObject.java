@@ -37,10 +37,10 @@ public abstract class PaneObject extends Pane implements NodeInterface
     @Override
     public char getCollisionDirection(NodeInterface otherObject)
     {
-        if (this.getY() <= otherObject.getTotalHeight() && this.getY() >= otherObject.getY() && this.getX() >= otherObject.getX() && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.NORTH;
-        if (this.getTotalWidth() >= otherObject.getX() && this.getTotalWidth() <= otherObject.getTotalWidth() && this.getY() >= otherObject.getY() && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.EAST;
-        if (this.getTotalHeight() >= otherObject.getY() && this.getTotalHeight() <= otherObject.getTotalHeight() && this.getX() >= otherObject.getX() && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.SOUTH;
-        if (this.getX() <= otherObject.getTotalWidth() && this.getX() >= otherObject.getX() && this.getY() >= otherObject.getY() && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.WEST;
+        if (this.getY() < otherObject.getTotalHeight() && this.getY() > otherObject.getY() && this.getX() > otherObject.getX() && this.getTotalWidth() < otherObject.getTotalWidth()) return Compass.NORTH;
+        if (this.getTotalWidth() > otherObject.getX() && this.getTotalWidth() < otherObject.getTotalWidth() && this.getY() > otherObject.getY() && this.getTotalHeight() < otherObject.getTotalHeight()) return Compass.EAST;
+        if (this.getTotalHeight() > otherObject.getY() && this.getTotalHeight() < otherObject.getTotalHeight() && this.getX() > otherObject.getX() && this.getTotalWidth() < otherObject.getTotalWidth()) return Compass.SOUTH;
+        if (this.getX() < otherObject.getTotalWidth() && this.getX() > otherObject.getX() && this.getY() > otherObject.getY() && this.getTotalHeight() < otherObject.getTotalHeight()) return Compass.WEST;
         return 0;
     }
 

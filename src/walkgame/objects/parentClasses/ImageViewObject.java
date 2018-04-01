@@ -35,12 +35,12 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     }
 
     @Override
-    public char getCollisionDirection(NodeInterface otherObject)
+    public char getCollisionDirection(NodeInterface otherObject)//todo: n en z of w en e gaan beiden af als je door een deur loopt (tick struggle 60x ps)
     {
-        if (this.getCoordinate().getY() <= otherObject.getTotalHeight() &&  this.getCoordinate().getY() >= otherObject.getCoordinate().getY() &&  this.getCoordinate().getX() >= otherObject.getCoordinate().getX() && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.NORTH;
-        if (this.getTotalWidth() >= otherObject.getCoordinate().getX() && this.getTotalWidth() <= otherObject.getTotalWidth() &&  this.getCoordinate().getY() >= otherObject.getCoordinate().getY() && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.EAST;
-        if (this.getTotalHeight() >= otherObject.getCoordinate().getY() && this.getTotalHeight() <= otherObject.getTotalHeight() &&  this.getCoordinate().getX() >= otherObject.getCoordinate().getX() && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.SOUTH;
-        if (this.getCoordinate().getX() <= otherObject.getTotalWidth() &&  this.getCoordinate().getX() >= otherObject.getCoordinate().getX() &&  this.getCoordinate().getY() >= otherObject.getCoordinate().getY() && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.WEST;
+        if (this.getCoordinate().getY() < otherObject.getTotalHeight() &&  this.getCoordinate().getY() > otherObject.getCoordinate().getY() &&  this.getCoordinate().getX() > otherObject.getCoordinate().getX() && this.getTotalWidth() < otherObject.getTotalWidth()) return Compass.NORTH;
+        if (this.getTotalWidth() > otherObject.getCoordinate().getX() && this.getTotalWidth() < otherObject.getTotalWidth() &&  this.getCoordinate().getY() > otherObject.getCoordinate().getY() && this.getTotalHeight() < otherObject.getTotalHeight()) return Compass.EAST;
+        if (this.getTotalHeight() > otherObject.getCoordinate().getY() && this.getTotalHeight() < otherObject.getTotalHeight() &&  this.getCoordinate().getX() > otherObject.getCoordinate().getX() && this.getTotalWidth() < otherObject.getTotalWidth()) return Compass.SOUTH;
+        if (this.getCoordinate().getX() < otherObject.getTotalWidth() &&  this.getCoordinate().getX() > otherObject.getCoordinate().getX() &&  this.getCoordinate().getY() > otherObject.getCoordinate().getY() && this.getTotalHeight() < otherObject.getTotalHeight()) return Compass.WEST;
         return 0;
     }
 
@@ -56,8 +56,8 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     @Override
     public Coordinates getCenter()
     {
-        double screenCenterX = super.getX() + (getWidth() / 2f);
-        double screenCenterY = super.getY() + (getHeight() / 2f);
+        double screenCenterX = this.getCoordinate().getX() + (getWidth() / 2f);
+        double screenCenterY = this.getCoordinate().getY() + (getHeight() / 2f);
         return new Coordinates(screenCenterX, screenCenterY);
     }
 
@@ -76,13 +76,13 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     @Override
     public double getTotalWidth()
     {
-        return super.getX() + getWidth();
+        return this.getCoordinate().getX() + getWidth();
     }
 
     @Override
     public double getTotalHeight()
     {
-        return super.getY() + getHeight();
+        return this.getCoordinate().getY() + getHeight();
     }
 
     @Override

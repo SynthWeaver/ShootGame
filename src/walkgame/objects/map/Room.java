@@ -8,16 +8,20 @@ import walkgame.objects.microObjects.Compass;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentClasses.ImageViewObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Room extends ImageViewObject
 {
     public static Group group = new Group();//todo: de floor heeft 4 floor propetys + een boolean die checkt of de player er voor het eerst is.
-    private static Room lastVisitedRoom;
+    public static Room lastVisitedRoom = null;//todo: kamer springt heen en weer na dat ik van kamer switch
     private Fog fog;
 
     public Room roomNorth;
     public Room roomEast;
     public Room roomSouth;
     public Room roomWest;
+    public ArrayList<Room> nextRooms;
 
     public Coordinates NORTH_ROOM_COORDINATES;
     public Coordinates EAST_ROOM_COORDINATES;
@@ -27,53 +31,36 @@ public class Room extends ImageViewObject
 
     public boolean visited;
 
-    public Room(Image image, Coordinates coordinates) {//first room
+    public Room(Image image, Coordinates coordinates) {
         super(image, coordinates);
         innit(image);
-        lastVisitedRoom = this;
-    }
-
-    private Room(Image image, Coordinates coordinates, Room room, char floortype) {//all other rooms
-        super(image, coordinates);
-        innit(image);
-
-        switch (floortype)
+        if(lastVisitedRoom == null)
         {
-            case 'N':
-                this.roomNorth = room; break;
-            case 'E':
-                this.roomEast = room; break;
-            case 'S':
-                this.roomSouth = room; break;
-            case 'W':
-                this.roomWest = room; break;
+            enterRoom();
         }
     }
 
     private void innit(Image image)
     {
-        fog = new Fog(this);
         visited = false;
         ROOM_SIZE = new Coordinates(image.getWidth(), image.getHeight());
         NORTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getY() - super.getImage().getHeight());
         EAST_ROOM_COORDINATES = new Coordinates(super.getX() + super.getImage().getWidth(), super.getY());
         SOUTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getY() + super.getImage().getHeight());
         WEST_ROOM_COORDINATES =  new Coordinates(super.getX() - super.getImage().getWidth(), super.getY());
+
+        fog = new Fog(this);
     }
 
     public void enterRoom()
     {
+        Room.lastVisitedRoom = this;
         renderRooms();
 
-        Room.lastVisitedRoom.leaveRoom(this);
-        Room.lastVisitedRoom = this;
+        nextRooms = new ArrayList<>(Arrays.asList(roomNorth, roomEast, roomSouth, roomWest));
 
-        removeFog();
-    }
-
-    private void leaveRoom(Room newRoom)
-    {
-        addFog(newRoom);
+        addFog();
+        scoutFog();
     }
 
     private void renderRooms()
@@ -87,7 +74,7 @@ public class Room extends ImageViewObject
                 Room room = (Room) node;
                 if(!room.equals(this))
                 {
-                    switch (this.getCollisionDirection(room))
+                    switch (this.getCollisionDirection(room))//todo:werkt raar
                     {
                         case Compass.NORTH: if(this.roomNorth == null){this.roomNorth = room;} break;
                         case Compass.EAST:  if(this.roomEast == null){this.roomEast = room;} break;
@@ -98,38 +85,37 @@ public class Room extends ImageViewObject
             }
 
             if(this.roomNorth == null){
-                this.roomNorth = new Room(new Image("walkgame/res/floor1.png"), NORTH_ROOM_COORDINATES, this, Compass.SOUTH); }
+                this.roomNorth = new Room(new Image("walkgame/res/floor1.png"), NORTH_ROOM_COORDINATES);}
             if(this.roomEast == null){
-                this.roomEast = new Room(new Image("walkgame/res/floor1.png"), EAST_ROOM_COORDINATES, this, Compass.WEST);}
+                this.roomEast = new Room(new Image("walkgame/res/floor1.png"), EAST_ROOM_COORDINATES);}
             if(this.roomSouth == null){
-                this.roomSouth = new Room(new Image("walkgame/res/floor1.png"), SOUTH_ROOM_COORDINATES, this, Compass.NORTH);}
+                this.roomSouth = new Room(new Image("walkgame/res/floor1.png"), SOUTH_ROOM_COORDINATES);}
             if(this.roomWest == null){
-                this.roomWest = new Room(new Image("walkgame/res/floor1.png"), WEST_ROOM_COORDINATES, this, Compass.EAST);}
+                this.roomWest = new Room(new Image("walkgame/res/floor1.png"), WEST_ROOM_COORDINATES);}
+        }
+
+    }
+
+    private void scoutFog()
+    {
+        this.fog.setToFogToKnown();
+        for(Room room : nextRooms)
+        {
+            room.fog.setToFogToKnown();
+            room.fog.hideFog();
         }
     }
 
-    private void addFog(Room newRoom)
+    private void addFog()
     {
-        for (Room room : getNextDoorArray())
+        for (Node node : Room.group.getChildren())
         {
-            if(!room.equals(newRoom))
+            Room room = (Room) node;
+            if(!this.equals(room) && !nextRooms.contains(room) && !room.fog.hasFog())
             {
-                room.fog.setVisible(true);
+                room.fog.showFog();
             }
         }
-    }
-
-    private void removeFog()
-    {
-        for(Room room : getNextDoorArray())
-        {
-            room.fog.setVisible(false);
-        }
-    }
-
-    public Room[] getNextDoorArray()
-    {
-        return new Room[]{roomNorth, roomEast, roomSouth, roomWest};
     }
 
     @Override

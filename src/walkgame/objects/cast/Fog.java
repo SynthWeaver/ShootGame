@@ -10,17 +10,40 @@ public class Fog extends ImageViewObject
     public static Group group = new Group();
     public Room room;
 
-    public Fog(Room room)
+    private static final ColorAdjust UNKNOWN_FOG = new ColorAdjust(0,0, -1,0);
+    private static final ColorAdjust KNOWN_FOG = new ColorAdjust(0,0, -0.4,0);
+
+    public Fog(Room room)//todo: isue, kan niet schieten door fog
     {
         super(room.getImage(), room.getCoordinate());
-
-        super.setVisible(false);
-
-        ColorAdjust colorAdjust = new ColorAdjust();
-        colorAdjust.setBrightness(-0.4);
-        super.setEffect(colorAdjust);
-
+        hideFog();
         this.room = room;
+        setToFogToUnknown();
+    }
+
+    public void setToFogToUnknown()
+    {
+        super.setEffect(UNKNOWN_FOG);
+    }
+
+    public void setToFogToKnown()
+    {
+        super.setEffect(KNOWN_FOG);
+    }
+
+    public boolean hasFog()
+    {
+        return super.isVisible();
+    }
+
+    public void hideFog()
+    {
+        super.setVisible(false);
+    }
+
+    public void showFog()
+    {
+        super.setVisible(true);
     }
 
     @Override

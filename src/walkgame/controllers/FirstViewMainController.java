@@ -95,7 +95,7 @@ public class FirstViewMainController extends MainController {
         {
             Room room = (Room) node;
 
-            if(firstView.player.hasCollision(room))
+            if(firstView.player.hasCollision(room) && !room.equals(Room.lastVisitedRoom))
             {
                 room.enterRoom();
             }

@@ -56,7 +56,7 @@ public abstract class MainView extends gameloop.View {
 
     protected void createScene()
     {
-        scene = new Scene(root, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.WHITE);
+        scene = new Scene(root, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.BLACK);
     }
 
     public static Scene getCurrentScene()
