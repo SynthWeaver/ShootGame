@@ -7,6 +7,7 @@ public interface NodeInterface
 {
     char getCollisionDirection(NodeInterface otherObject);
     boolean hasCollision(NodeInterface other2dObject);
+    boolean containsObject(NodeInterface nodeInterface);
     void addNodeToList();
 
     Coordinates getCoordinate();

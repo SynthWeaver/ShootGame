@@ -51,6 +51,16 @@ public abstract class PaneObject extends Pane implements NodeInterface
     }
 
     @Override
+    public boolean containsObject(NodeInterface nodeInterface)
+    {
+        Coordinates other = nodeInterface.getCenter();
+        double thisX = this.getCoordinate().getX();
+        double thisY = this.getCoordinate().getY();
+
+        return other.getX() > thisX && other.getX() < this.getTotalWidth() && other.getY() > thisY && other.getY() < this.getTotalHeight();
+    }
+
+    @Override
     public abstract void addNodeToList();
 
     @Override

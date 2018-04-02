@@ -37,10 +37,15 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     @Override
     public char getCollisionDirection(NodeInterface otherObject)//todo: n en z of w en e gaan beiden af als je door een deur loopt (tick struggle 60x ps)
     {
-        if (this.getCoordinate().getY() < otherObject.getTotalHeight() &&  this.getCoordinate().getY() > otherObject.getCoordinate().getY() &&  this.getCoordinate().getX() > otherObject.getCoordinate().getX() && this.getTotalWidth() < otherObject.getTotalWidth()) return Compass.NORTH;
-        if (this.getTotalWidth() > otherObject.getCoordinate().getX() && this.getTotalWidth() < otherObject.getTotalWidth() &&  this.getCoordinate().getY() > otherObject.getCoordinate().getY() && this.getTotalHeight() < otherObject.getTotalHeight()) return Compass.EAST;
-        if (this.getTotalHeight() > otherObject.getCoordinate().getY() && this.getTotalHeight() < otherObject.getTotalHeight() &&  this.getCoordinate().getX() > otherObject.getCoordinate().getX() && this.getTotalWidth() < otherObject.getTotalWidth()) return Compass.SOUTH;
-        if (this.getCoordinate().getX() < otherObject.getTotalWidth() &&  this.getCoordinate().getX() > otherObject.getCoordinate().getX() &&  this.getCoordinate().getY() > otherObject.getCoordinate().getY() && this.getTotalHeight() < otherObject.getTotalHeight()) return Compass.WEST;
+        double thisX = this.getCoordinate().getX();
+        double thisY = this.getCoordinate().getY();
+        double otherX = otherObject.getCoordinate().getX();
+        double otherY = otherObject.getCoordinate().getY();
+
+        if (thisY <= otherObject.getTotalHeight() &&  thisY >= otherY &&  thisX >= otherX && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.NORTH;
+        if (this.getTotalWidth() >= otherX && this.getTotalWidth() <= otherObject.getTotalWidth() &&  thisY >= otherY && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.EAST;
+        if (this.getTotalHeight() >= otherY && this.getTotalHeight() <= otherObject.getTotalHeight() &&  thisX >= otherX && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.SOUTH;
+        if (thisX <= otherObject.getTotalWidth() &&  thisX >= otherX &&  thisY >= otherY && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.WEST;
         return 0;
     }
 
@@ -48,6 +53,16 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     public boolean hasCollision(NodeInterface other2dObject)
     {
         return getCollisionDirection(other2dObject) != 0;
+    }
+
+    /*** @return true if parameter object is overlaps this object */
+    public boolean containsObject(NodeInterface nodeInterface)
+    {
+        Coordinates other = nodeInterface.getCenter();
+        double thisX = this.getCoordinate().getX();
+        double thisY = this.getCoordinate().getY();
+
+        return other.getX() > thisX && other.getX() < this.getTotalWidth() && other.getY() > thisY && other.getY() < this.getTotalHeight();
     }
 
     @Override
