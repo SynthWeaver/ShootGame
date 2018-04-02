@@ -71,6 +71,7 @@ public class PlayerStatus extends PaneObject
     //@Override
     public void addNodeToList()
     {
-        PlayerStatus.group.getChildren().add(this);
+        PlayerStatus.group.getChildren().clear();
+        PlayerStatus.group.getChildren().add(0, this);
     }
 }

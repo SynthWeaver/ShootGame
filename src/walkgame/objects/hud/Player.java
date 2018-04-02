@@ -136,7 +136,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
             image = sprites.getSprite(Angle.NORTH);
         }
 
-            super.setImage(image);
+        super.setImage(image);
     }
 
     @Override
@@ -183,6 +183,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void addNodeToList()
     {
-        Player.group.getChildren().add(this);
+        Player.group.getChildren().clear();
+        Player.group.getChildren().add(0,this);
     }
 }

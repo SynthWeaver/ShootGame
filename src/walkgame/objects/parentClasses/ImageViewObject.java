@@ -106,4 +106,11 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
         this.setX(coordinate.getX());
         this.setY(coordinate.getY());
     }
+
+    @Override
+    public void setCoordinate(double x, double y)
+    {
+        this.setX(x);
+        this.setY(y);
+    }
 }

@@ -1,76 +1,69 @@
 package test.objects.hud;
 
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import test.TestClasses;
 import walkgame.objects.hud.Player;
-import walkgame.objects.map.Room;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.microObjects.guns.Pistol;
-import walkgame.views.FirstMainView;
-import walkgame.views.parentClasses.MainView;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-class PlayerTest {
-
-    Player player;
-    Room room;
+class PlayerTest extends TestClasses {
 
     @BeforeEach
     void setUp() {
-        new JFXPanel();
-
-        player = new Player(MainView.playerSpawn, "Jack", new Pistol());
-        room = new Room(new Image("walkgame/res/floor1.png"), new Coordinates(0,0));
+        super.innit();
     }
 
     @Test
     void move() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                Coordinates firstCoordinates = player.getCoordinate();
+        Coordinates firstCoordinates = player.getCoordinate();
 
-                FirstMainView firstMainView = new FirstMainView(new Stage());
-                firstMainView.firstViewController.pressKeyButton(KeyCode.W);
-                firstMainView.firstViewController.tick();
+        boolean expected = true;
+        boolean actual = firstCoordinates.equals(player.getCoordinate());
 
-                boolean expected = false;
-                boolean actual = firstCoordinates.equals(player.getCoordinate());
+        assertEquals(expected, actual);
 
-                assertEquals(expected, actual);
-            }
-        });
+        player.setVelocityX(100);
+        player.setVelocityY(100);
+        player.pressButton(KeyCode.W);
+        player.pressButton(KeyCode.D);
+        player.move();
 
+        expected = false;
+        actual = firstCoordinates.equals(player.getCoordinate());
 
-    }
-
-    @Test
-    void getCoordinate() {//niet gelijk aan super getX!
+        assertEquals(expected, actual);
     }
 
     @Test
     void rotateImage() {
-    }
+        Image image = player.getImage();
 
-    @Test
-    void pressButton() {
-    }
+        Image expected = image;
+        Image actual = player.getImage();
+        assertEquals(expected, actual);
 
-    @Test
-    void releaseButton() {
+        player.rotateImage(new Coordinates(100, 100));
+
+        expected = image;
+        actual = player.getImage();
+        assertNotEquals(expected, actual);
     }
 
     @Test
     void destroy() {
-    }
+        Player expected = (Player) Player.group.getChildren().get(0);
+        Player actual = player;
+        assertEquals(expected, actual);
 
-    @Test
-    void addNodeToList() {
+        player.destroy();
+
+        boolean expected2 = true;
+        boolean actual2 = Player.group.getChildren().isEmpty();
+        assertEquals(expected2, actual2);
     }
 }

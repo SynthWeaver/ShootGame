@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage){
-        firstView = new FirstMainView(primaryStage);
+        firstView = new FirstMainView();
         new GameLoop(firstView.firstViewController).start();
 
         primaryStage.setScene(firstView.scene);

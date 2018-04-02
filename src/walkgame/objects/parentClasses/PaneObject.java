@@ -103,6 +103,12 @@ public abstract class PaneObject extends Pane implements NodeInterface
     }
 
     @Override
+    public void setCoordinate(double x, double y) {
+        this.setX(x);
+        this.setY(y);
+    }
+
+    @Override
     public void setX(double x)
     {
         super.setLayoutX(x);

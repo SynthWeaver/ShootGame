@@ -3,7 +3,6 @@ package walkgame.views;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
-import javafx.stage.Stage;
 import walkgame.controllers.FirstViewMainController;
 import walkgame.objects.cast.Enemy;
 import walkgame.objects.cast.Fog;
@@ -22,9 +21,9 @@ public class FirstMainView extends MainView
     public Player player;
     public PlayerStatus playerStatusUI;
 
-    public FirstMainView(Stage primaryStage)
+    public FirstMainView()
     {
-        super(primaryStage);
+        super();
 
         super.map = new Group(Room.group);
         super.cast = new Group(Bullet.group, Enemy.group);

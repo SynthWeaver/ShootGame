@@ -1,31 +1,29 @@
 package test.objects.map;
 
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.image.Image;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import test.TestClasses;
 import walkgame.objects.map.Room;
-import walkgame.objects.microObjects.Coordinates;
 
-class RoomTest{
-
-    Room room;
+class RoomTest extends TestClasses {
 
     @BeforeEach
     void setUp() {
-        new JFXPanel();
-        room = new Room(new Image("walkgame/res/floor1.png"), new Coordinates(0,0));
+        super.innit();
     }
 
     @Test
     void enterRoom() {
-        room.enterRoom();
+        Room roomEast = room.roomEast;
 
-        System.out.println("check next rooms are filled");
         boolean expected = true;
-        boolean actual = !room.nextRooms.isEmpty();
+        boolean actual = roomEast.nextRooms == null;
+        Assertions.assertEquals(expected, actual);
 
+        roomEast.enterRoom();
+        expected = false;
+        actual = room.nextRooms.isEmpty();
         Assertions.assertEquals(expected, actual);
     }
 }

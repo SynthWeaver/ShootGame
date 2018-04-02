@@ -21,8 +21,7 @@ public interface NodeInterface
     double getTotalHeight();
 
     void setCoordinate(Coordinates coordinate);
+    void setCoordinate(double x, double y);
     void setX(double x);
     void setY(double y);
-
-
 }

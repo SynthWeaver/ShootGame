@@ -9,7 +9,6 @@ import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.map.Room;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.microObjects.MovableGroup;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
 
@@ -63,7 +62,7 @@ public class FirstViewMainController extends MainController {
     }
 
     @Override
-    public void tick()
+    public void tick()//todo: set content to render method for performance boost
     {
         MainView.getMovableGroup().move();
 

@@ -1,41 +1,24 @@
 package test.objects.parentClasses;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import walkgame.Main;
-import walkgame.objects.hud.Player;
+import test.TestClasses;
 import walkgame.objects.map.Room;
 import walkgame.objects.microObjects.Compass;
 import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.microObjects.MovableGroup;
-import walkgame.objects.microObjects.guns.Pistol;
 import walkgame.objects.parentClasses.ImageViewObject;
-import walkgame.views.FirstMainView;
-import walkgame.views.parentClasses.MainView;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ImageViewObjectTest{
+class ImageViewObjectTest extends TestClasses {
 
-    FirstMainView firstMainView;
     ImageViewObject imageViewObject;
-    Player player;
-    Room room;
 
     @BeforeEach
     void setUp() {
-        new JFXPanel();
-
+        super.innit();
         imageViewObject = new Room(new Image("walkgame/res/floor1.png"), new Coordinates(0,0));
-        player = new Player(MainView.playerSpawn, "Jack", new Pistol());
-        room = new Room(new Image("walkgame/res/floor1.png"), new Coordinates(0,0));
     }
 
     @Test
@@ -47,16 +30,26 @@ class ImageViewObjectTest{
 
     @Test
     void getCollisionDirection() {
-        room.setX(300);
-        char expected = Compass.EAST;
-        char actual = imageViewObject.getCollisionDirection(room);
-        assertEquals(expected, actual);
+        Coordinates[] coordinatesList = {new Coordinates(0,-300), new Coordinates(300,0), new Coordinates(0,300), new Coordinates(-300,0)};
+        char[] compass = {Compass.NORTH, Compass.EAST, Compass.SOUTH, Compass.WEST};
+
+        for (int i = 0; i < coordinatesList.length; i++) {
+            System.out.println("test: " + compass[i]);
+            room = new Room(room.getImage(), coordinatesList[i]);
+            char expected = compass[i];
+            char actual = imageViewObject.getCollisionDirection(room);
+            assertEquals(expected, actual);
+        }
     }
 
     @Test
-    void containsObject() {//todo:fix deze
+    void containsObject() {
         boolean expected = true;
         boolean actual = imageViewObject.containsObject(player);
+        assertEquals(expected, actual);
+
+        expected = false;
+        actual = player.containsObject(new Room(room.getImage(), new Coordinates(300, 300)));
         assertEquals(expected, actual);
     }
 
@@ -67,6 +60,12 @@ class ImageViewObjectTest{
 
         boolean expected = true;
         boolean actual = a.equals(b);
+        assertEquals(expected, actual);
+
+        b = new Coordinates(100,100);
+
+        expected = false;
+         actual = a.equals(b);
         assertEquals(expected, actual);
     }
 }

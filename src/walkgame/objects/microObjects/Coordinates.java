@@ -1,11 +1,8 @@
 package walkgame.objects.microObjects;
 
 import javafx.scene.image.Image;
-import walkgame.exceptions.CloneException;
-import walkgame.interfaces.Moveable;
+import walkgame.interfaces.NodeInterface;
 import walkgame.views.parentClasses.MainView;
-
-import java.util.HashMap;
 
 public class Coordinates {
     private static final Coordinates DEFAULT_COORDINATES = new Coordinates(0,0);
@@ -72,15 +69,9 @@ public class Coordinates {
         this.x = x;
     }
 
-    public static Coordinates cloneFromObject(Object object) throws CloneException
+    public static Coordinates cloneFromObject(NodeInterface object)
     {
-        if(object instanceof Moveable)
-        {
-            return new Coordinates(((Moveable) object).getCoordinate());
-        }
-        else {
-            throw new CloneException("parameter object is not Moveable");
-        }
+        return new Coordinates(object.getCoordinate());
     }
 
     /*private int compare(Coordinates c)

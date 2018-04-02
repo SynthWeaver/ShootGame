@@ -5,10 +5,10 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
+import walkgame.objects.microObjects.SceneBundle;
 
 import java.util.ArrayList;
 
@@ -23,8 +23,7 @@ public abstract class MainView extends gameloop.View {
     protected Group root = new Group();
 
     public Scene scene;
-
-    public static Stage primaryStage;
+    protected static SceneBundle sceneBundle = new SceneBundle();
 
     public static Coordinates screenSize = new Coordinates(300, 300);
     //public Coordinates gameSize = new Coordinates(400, 400);
@@ -34,13 +33,8 @@ public abstract class MainView extends gameloop.View {
 
     public static Coordinates playerSpawn = new Coordinates(MainView.getScreenCenter().getX() - (Player.PLAYER_SIZE.getX() / 2f) , MainView.getScreenCenter().getY() - (Player.PLAYER_SIZE.getY() / 2f));//todo: moet anders
 
-    public MainView(Stage primaryStage) {
-        MainView.primaryStage = primaryStage;
-        //createScene();
-
-        //screenCenterX.bind(this.scene.widthProperty());
-        //screenCenterY.bind(this.scene.heightProperty());
-        //screenCenter = new Coordinates(screenCenterX.get() / 2f, screenCenterY.get() / 2f);
+    public MainView() {
+        //scenes are build in childsViews
     }
 
     @Override
@@ -57,11 +51,12 @@ public abstract class MainView extends gameloop.View {
     protected void createScene()
     {
         scene = new Scene(root, MainView.screenSize.getX(), MainView.screenSize.getY(), Color.BLACK);
+        MainView.addScene(scene);
     }
 
     public static Scene getCurrentScene()
     {
-        return MainView.primaryStage.getScene();
+        return sceneBundle.getLastScene();
     }
 
     public static ObservableList<Node> getRoot() {
@@ -105,8 +100,13 @@ public abstract class MainView extends gameloop.View {
         return list;
     }
 
-    public static void setCurrentScene(Scene scene)
+    public static void addScene(Scene scene)
     {
-        MainView.primaryStage.setScene(scene);
+        sceneBundle.addScene(scene);
+    }
+
+    public static void changeScene(int index)
+    {
+        sceneBundle.changeScene(index);
     }
 }
