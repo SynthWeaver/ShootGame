@@ -7,9 +7,11 @@ import walkgame.views.FirstMainView;
 
 public class Main extends Application {
 
+    public FirstMainView firstView;
+
     @Override
     public void start(Stage primaryStage){
-        FirstMainView firstView = new FirstMainView(primaryStage);
+        firstView = new FirstMainView(primaryStage);
         new GameLoop(firstView.firstViewController).start();
 
         primaryStage.setScene(firstView.scene);

@@ -24,7 +24,7 @@ public abstract class MainView extends gameloop.View {
 
     public Scene scene;
 
-    private static Stage primaryStage;
+    public static Stage primaryStage;
 
     public static Coordinates screenSize = new Coordinates(300, 300);
     //public Coordinates gameSize = new Coordinates(400, 400);

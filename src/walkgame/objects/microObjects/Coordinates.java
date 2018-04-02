@@ -5,6 +5,8 @@ import walkgame.exceptions.CloneException;
 import walkgame.interfaces.Moveable;
 import walkgame.views.parentClasses.MainView;
 
+import java.util.HashMap;
+
 public class Coordinates {
     private static final Coordinates DEFAULT_COORDINATES = new Coordinates(0,0);
 
@@ -33,7 +35,7 @@ public class Coordinates {
     /**
       * @return Coordinate from hud in movableGroup format
      */
-    public Coordinates getRelativisedHudCoordinate()
+    public Coordinates getRelativisedHudCoordinate()//todo: niet afhankelijk maken van Stage
     {
         return new Coordinates(getX() - MainView.getMovableGroup().getX(), getY() - MainView.getMovableGroup().getY());
     }
@@ -48,6 +50,10 @@ public class Coordinates {
     {
         this.x -= coordinates.x;
         this.y -= coordinates.y;
+    }
+
+    public boolean equals(Coordinates other) {
+        return this.x == other.x && this.y == other.y;
     }
 
     public double getY() {

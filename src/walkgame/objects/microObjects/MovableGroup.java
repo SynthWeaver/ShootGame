@@ -17,18 +17,21 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
 
 
     public MovableGroup() {
-        super.setLayoutX(0);
-        super.setLayoutY(0);
+        innit();
     }
 
     public MovableGroup(Node... children) {
         super(children);
-        super.setLayoutX(0);
-        super.setLayoutY(0);
+        innit();
     }
 
     public MovableGroup(Collection<Node> children) {
         super(children);
+        innit();
+    }
+
+    private void innit()
+    {
         super.setLayoutX(0);
         super.setLayoutY(0);
     }
