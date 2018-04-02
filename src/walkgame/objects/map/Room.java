@@ -13,8 +13,8 @@ import java.util.Arrays;
 
 public class Room extends ImageViewObject
 {
-    public static Group group = new Group();//todo: de floor heeft 4 floor propetys + een boolean die checkt of de player er voor het eerst is.
-    public static Room lastVisitedRoom = null;//todo: kamer springt heen en weer na dat ik van kamer switch
+    public static Group group = new Group();
+    public static Room lastVisitedRoom = null;
     private Fog fog;
 
     public Room roomNorth;
@@ -74,7 +74,7 @@ public class Room extends ImageViewObject
                 Room room = (Room) node;
                 if(!room.equals(this))
                 {
-                    switch (this.getCollisionDirection(room))//todo:werkt raar
+                    switch (this.getCollisionDirection(room))
                     {
                         case Compass.NORTH: if(this.roomNorth == null){this.roomNorth = room;} break;
                         case Compass.EAST:  if(this.roomEast == null){this.roomEast = room;} break;

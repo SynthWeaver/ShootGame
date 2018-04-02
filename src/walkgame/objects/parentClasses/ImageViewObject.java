@@ -35,7 +35,7 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     }
 
     @Override
-    public char getCollisionDirection(NodeInterface otherObject)//todo: n en z of w en e gaan beiden af als je door een deur loopt (tick struggle 60x ps)
+    public char getCollisionDirection(NodeInterface otherObject)
     {
         double thisX = this.getCoordinate().getX();
         double thisY = this.getCoordinate().getY();
