@@ -9,7 +9,7 @@ import walkgame.objects.microObjects.Compass;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentClasses.ImageViewObject;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ImageViewObjectTest extends TestClasses {
 
@@ -44,13 +44,9 @@ class ImageViewObjectTest extends TestClasses {
 
     @Test
     void containsObject() {
-        boolean expected = true;
-        boolean actual = imageViewObject.containsObject(player);
-        assertEquals(expected, actual);
+        assertTrue(imageViewObject.containsObject(player));
 
-        expected = false;
-        actual = player.containsObject(new Room(room.getImage(), new Coordinates(300, 300)));
-        assertEquals(expected, actual);
+        assertFalse(player.containsObject(new Room(room.getImage(), new Coordinates(300, 300))));
     }
 
     @Test
@@ -58,14 +54,10 @@ class ImageViewObjectTest extends TestClasses {
         Coordinates a = room.getCenter();
         Coordinates b = new Coordinates(150,150);
 
-        boolean expected = true;
-        boolean actual = a.equals(b);
-        assertEquals(expected, actual);
+        assertTrue(a.equals(b));
 
         b = new Coordinates(100,100);
-
-        expected = false;
-         actual = a.equals(b);
-        assertEquals(expected, actual);
+        
+        assertFalse(a.equals(b));
     }
 }

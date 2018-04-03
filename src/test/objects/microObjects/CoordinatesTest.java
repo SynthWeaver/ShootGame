@@ -7,7 +7,8 @@ import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
 import walkgame.views.parentClasses.MainView;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CoordinatesTest extends TestClasses {
 
