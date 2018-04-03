@@ -8,8 +8,6 @@ import test.TestClasses;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 
-import java.util.Collection;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest extends TestClasses {
@@ -56,7 +54,7 @@ class PlayerTest extends TestClasses {
         assertEquals(expected, actual);
 
         player.destroy();
-        
+
         assertTrue(Player.group.getChildren().isEmpty());
     }
 }

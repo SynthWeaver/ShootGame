@@ -7,7 +7,7 @@ import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
 import walkgame.views.parentClasses.MainView;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CoordinatesTest extends TestClasses {
 
@@ -23,16 +23,12 @@ class CoordinatesTest extends TestClasses {
     void equals() {
         Coordinates b = new Coordinates(0,0);
 
-        boolean expected = false;
-        boolean actual = coordinates.equals(b);
-        assertEquals(expected,actual);
+        assertFalse(coordinates.equals(b));
 
         b.setX(100);
         b.setY(100);
 
-        expected = true;
-        actual = coordinates.equals(b);
-        assertEquals(expected,actual);
+        assertTrue(coordinates.equals(b));
 
     }
 
@@ -40,67 +36,49 @@ class CoordinatesTest extends TestClasses {
     void getRelativisedHudCoordinate() {
         MovableGroup movableGroup = MainView.getMovableGroup();
 
-        boolean expected = true;
-        boolean actual = coordinates.getRelativisedHudCoordinate().equals(new Coordinates(100,100));
-        assertEquals(expected,actual);
+        assertTrue(coordinates.getRelativisedHudCoordinate().equals(new Coordinates(100,100)));
 
         movableGroup.setX(100);
         movableGroup.setY(100);
 
-        expected = false;
-        actual = coordinates.getRelativisedHudCoordinate().equals(new Coordinates(100,100));
-        assertEquals(expected,actual);
+        assertFalse(coordinates.getRelativisedHudCoordinate().equals(new Coordinates(100,100)));
 
         movableGroup.setX(200);
         movableGroup.setY(200);
 
-        expected = true;
-        actual = coordinates.getRelativisedHudCoordinate().equals(new Coordinates(-100,-100));
-        assertEquals(expected,actual);
+        assertTrue(coordinates.getRelativisedHudCoordinate().equals(new Coordinates(-100,-100)));
     }
 
     @Test
     void add() {
         coordinates.add(new Coordinates(200, 200));
 
-        boolean expected = true;
-        boolean actual = coordinates.equals(new Coordinates(300, 300)) ;
-        assertEquals(expected,actual);
+        assertTrue(coordinates.equals(new Coordinates(300, 300)));
 
         coordinates.add(new Coordinates(100, 100));
 
-        expected = false;
-        actual = coordinates.equals(new Coordinates(300, 300));
-        assertEquals(expected,actual);
+        assertFalse(coordinates.equals(new Coordinates(300, 300)));
     }
 
     @Test
     void minus() {
         coordinates.minus(new Coordinates(200, 200));
 
-        boolean expected = true;
-        boolean actual = coordinates.equals(new Coordinates(-100, -100)) ;
-        assertEquals(expected,actual);
+        assertTrue(coordinates.equals(new Coordinates(-100, -100)));
 
         coordinates.minus(new Coordinates(100, 100));
 
-        expected = false;
-        actual = coordinates.equals(new Coordinates(300, 300));
-        assertEquals(expected,actual);
+        assertFalse(coordinates.equals(new Coordinates(300, 300)));
     }
 
     @Test
     void cloneFromObject() {
         player.setCoordinate(Coordinates.cloneFromObject(room));
 
-        boolean expected = true;
-        boolean actual = player.getCoordinate().equals(room.getCoordinate());
-        assertEquals(expected,actual);
+        assertTrue(player.getCoordinate().equals(room.getCoordinate()));
 
         player.setCoordinate(100, 100);
 
-        expected = false;
-        actual = player.getCoordinate().equals(room.getCoordinate());
-        assertEquals(expected,actual);
+        assertFalse(player.getCoordinate().equals(room.getCoordinate()));
     }
 }
