@@ -7,7 +7,8 @@ import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.cast.bullets.PistolBullet;
 import walkgame.objects.microObjects.Coordinates;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class BulletTest extends TestClasses {
 

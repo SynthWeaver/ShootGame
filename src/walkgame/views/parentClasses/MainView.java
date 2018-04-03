@@ -5,7 +5,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import walkgame.exceptions.ObjectNotInListException;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;

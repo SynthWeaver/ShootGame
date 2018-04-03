@@ -13,7 +13,7 @@ public class Fog extends ImageViewObject
     private static final ColorAdjust UNKNOWN_FOG = new ColorAdjust(0,0, -1,0);
     private static final ColorAdjust KNOWN_FOG = new ColorAdjust(0,0, -0.4,0);
 
-    public Fog(Room room)//todo: isue, kan niet schieten door fog
+    public Fog(Room room)
     {
         super(room.getImage(), room.getCoordinate());
         hideFog();

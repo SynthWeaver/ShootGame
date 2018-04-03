@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
-import walkgame.Main;
-import walkgame.exceptions.ObjectNotInListException;
 import walkgame.objects.microObjects.MovableGroup;
 import walkgame.views.parentClasses.MainView;
 

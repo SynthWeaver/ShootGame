@@ -8,7 +8,8 @@ import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.guns.Pistol;
 import walkgame.objects.microObjects.guns.SemiAutomaticGun;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SemiAutomaticGunTest extends TestClasses {//todo: maak
 

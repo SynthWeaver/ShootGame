@@ -7,7 +7,7 @@ import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.microObjects.guns.Pistol;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class GunTest extends TestClasses {
 

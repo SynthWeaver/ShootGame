@@ -1,7 +1,6 @@
 package walkgame.objects.microObjects;
 
 import javafx.scene.Scene;
-import walkgame.exceptions.ObjectNotInListException;
 
 import java.util.ArrayList;
 
