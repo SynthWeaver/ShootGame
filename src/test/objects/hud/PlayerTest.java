@@ -8,6 +8,8 @@ import test.TestClasses;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 
+import java.util.Collection;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest extends TestClasses {
@@ -21,10 +23,7 @@ class PlayerTest extends TestClasses {
     void move() {
         Coordinates firstCoordinates = player.getCoordinate();
 
-        boolean expected = true;
-        boolean actual = firstCoordinates.equals(player.getCoordinate());
-
-        assertEquals(expected, actual);
+        assertTrue(firstCoordinates.equals(player.getCoordinate()));
 
         player.setVelocityX(100);
         player.setVelocityY(100);
@@ -32,10 +31,7 @@ class PlayerTest extends TestClasses {
         player.pressButton(KeyCode.D);
         player.move();
 
-        expected = false;
-        actual = firstCoordinates.equals(player.getCoordinate());
-
-        assertEquals(expected, actual);
+        assertFalse(firstCoordinates.equals(player.getCoordinate()));
     }
 
     @Test
@@ -60,9 +56,7 @@ class PlayerTest extends TestClasses {
         assertEquals(expected, actual);
 
         player.destroy();
-
-        boolean expected2 = true;
-        boolean actual2 = Player.group.getChildren().isEmpty();
-        assertEquals(expected2, actual2);
+        
+        assertTrue(Player.group.getChildren().isEmpty());
     }
 }
