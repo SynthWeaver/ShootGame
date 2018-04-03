@@ -3,7 +3,7 @@ package walkgame.objects.microObjects.guns;
 import javafx.beans.property.SimpleIntegerProperty;
 import walkgame.objects.microObjects.Coordinates;
 
-abstract class AutomaticGun extends Gun {
+public abstract class AutomaticGun extends Gun {
 
     private double rateOfFire;
 

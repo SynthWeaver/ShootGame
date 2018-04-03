@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.microObjects.Coordinates;
 
-abstract class SemiAutomaticGun extends Gun {
+public abstract class SemiAutomaticGun extends Gun {
 
     SemiAutomaticGun(String name, SimpleIntegerProperty ammoCount, int clipSize, double reloadTime) {
         super(name, ammoCount, clipSize, reloadTime);

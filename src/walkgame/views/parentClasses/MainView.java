@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import walkgame.exceptions.ObjectNotInListException;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
@@ -76,13 +77,17 @@ public abstract class MainView extends gameloop.View {
         return (Group) MainView.getMovableGroup().getChildren().get(1);
     }
 
+    public static Group getFog() {
+        return (Group) MainView.getMovableGroup().getChildren().get(2);
+    }
+
     public static Group getHud() {
         ObservableList<Node> root = MainView.getRoot();
         return  (Group) root.get(1);
     }
 
     public static Group[] getRootArray() {
-        return new Group[]{getMap(), getCast(), getHud()};
+        return new Group[]{getMap(), getCast(), getFog(), getHud()};
     }
 
     public static ArrayList<Node> getListOfAllNodes(){
@@ -108,5 +113,9 @@ public abstract class MainView extends gameloop.View {
     public static void changeScene(int index)
     {
         sceneBundle.changeScene(index);
+    }
+
+    public static void clearScenes() {
+        sceneBundle = new SceneBundle();
     }
 }
