@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 import test.TestClasses;
 import walkgame.objects.microObjects.SceneBundle;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class SceneBundleTest extends TestClasses {
 

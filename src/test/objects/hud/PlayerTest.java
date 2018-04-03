@@ -8,8 +8,7 @@ import test.TestClasses;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest extends TestClasses {
 

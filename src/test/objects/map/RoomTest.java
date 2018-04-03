@@ -1,10 +1,10 @@
 package test.objects.map;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
-import walkgame.objects.map.Room;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class RoomTest extends TestClasses {
 
@@ -15,15 +15,18 @@ class RoomTest extends TestClasses {
 
     @Test
     void enterRoom() {
-        Room roomEast = room.roomEast;
+        assertNull(room.roomEast.nextRooms);
 
-        boolean expected = true;
-        boolean actual = roomEast.nextRooms == null;
-        Assertions.assertEquals(expected, actual);
+        room.roomEast.enterRoom();
+        assertNotNull(room.roomEast.nextRooms);
+    }
 
-        roomEast.enterRoom();
-        expected = false;
-        actual = room.nextRooms.isEmpty();
-        Assertions.assertEquals(expected, actual);
+    @Test
+    void roomPlacement() {
+        room.roomEast.enterRoom();
+        room.roomEast.roomNorth.enterRoom();
+        assertNotNull(room.roomEast.roomNorth.roomNorth);
+
+        assertEquals(room.roomEast.roomNorth.roomWest, room.roomNorth);
     }
 }

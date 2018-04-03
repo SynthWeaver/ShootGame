@@ -52,7 +52,6 @@ public class Room extends ImageViewObject
         fog = new Fog(this);
     }
 
-    /**  */
     public void enterRoom()
     {
         Room.lastVisitedRoom = this;
