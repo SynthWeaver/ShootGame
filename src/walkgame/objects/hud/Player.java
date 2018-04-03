@@ -69,22 +69,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void move()
     {
-        if(!goNorth && !goSouth)
-        {
-            super.setVelocityY(0);
-        }
-        if(!goEast && !goWest)
-        {
-            super.setVelocityX(0);
-        }
-
-        if(getVelocityX() != 0 && getVelocityY() != 0 ) {
-            double x = getX();
-            double y = getY();
-
-            super.setX(x + getVelocityX());
-            super.setY(y + getVelocityY());
-        }
+        return;
     }
 
     /**

@@ -6,6 +6,9 @@ import walkgame.interfaces.NodeInterface;
 import walkgame.objects.microObjects.Compass;
 import walkgame.objects.microObjects.Coordinates;
 
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
+
 public abstract class ImageViewObject extends ImageView implements NodeInterface
 {
     public ImageViewObject(Coordinates coordinates)
@@ -35,17 +38,33 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     }
 
     @Override
-    public char getCollisionDirection(NodeInterface otherObject)
+    public char getCollisionDirection(NodeInterface other)
     {
         double thisX = this.getCoordinate().getX();
         double thisY = this.getCoordinate().getY();
-        double otherX = otherObject.getCoordinate().getX();
-        double otherY = otherObject.getCoordinate().getY();
+        double otherX = other.getCoordinate().getX();
+        double otherY = other.getCoordinate().getY();
 
-        if (thisY <= otherObject.getTotalHeight() &&  thisY >= otherY &&  thisX >= otherX && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.NORTH;
-        if (this.getTotalWidth() >= otherX && this.getTotalWidth() <= otherObject.getTotalWidth() &&  thisY >= otherY && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.EAST;
-        if (this.getTotalHeight() >= otherY && this.getTotalHeight() <= otherObject.getTotalHeight() &&  thisX >= otherX && this.getTotalWidth() <= otherObject.getTotalWidth()) return Compass.SOUTH;
-        if (thisX <= otherObject.getTotalWidth() &&  thisX >= otherX &&  thisY >= otherY && this.getTotalHeight() <= otherObject.getTotalHeight()) return Compass.WEST;
+        if(thisY == other.getTotalHeight() +1){
+            if(thisX > otherX && thisX < other.getTotalWidth() || this.getTotalWidth() > otherX && this.getTotalWidth() < other.getTotalWidth() ) {
+                return Compass.NORTH;
+            }
+        }
+        if(this.getTotalWidth() == otherX - 1){
+            if(thisY > otherY && thisY < other.getTotalHeight() || this.getTotalHeight() > otherY && this.getTotalHeight() < other.getTotalHeight() ) {
+                return Compass.EAST;
+            }
+        }
+        if(this.getTotalHeight() == otherY -1){
+            if(thisX > otherX && thisX < other.getTotalWidth() || this.getTotalWidth() > otherX && this.getTotalWidth() < other.getTotalWidth() ) {
+                return Compass.SOUTH;
+            }
+        }
+        if(thisX == other.getTotalWidth() + 1){
+            if(thisY > otherY && thisY < other.getTotalHeight() || this.getTotalHeight() > otherY && this.getTotalHeight() < other.getTotalHeight() ) {
+                return Compass.WEST;
+            }
+        }
         return 0;
     }
 

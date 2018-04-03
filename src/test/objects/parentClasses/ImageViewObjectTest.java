@@ -18,7 +18,7 @@ class ImageViewObjectTest extends TestClasses {
     @BeforeEach
     void setUp() {
         super.innit();
-        imageViewObject = new Room(new Image("walkgame/res/floor1.png"), new Coordinates(0,0));
+        imageViewObject = new Room(new Image("walkgame/res/map/floor1.png"), new Coordinates(0,0));
     }
 
     @Test
@@ -29,7 +29,7 @@ class ImageViewObjectTest extends TestClasses {
     }
 
     @Test
-    void getCollisionDirection() {
+    void getCollisionDirection() {//todo: update test naar arraylistChar
         Coordinates[] coordinatesList = {new Coordinates(0,-300), new Coordinates(300,0), new Coordinates(0,300), new Coordinates(-300,0)};
         char[] compass = {Compass.NORTH, Compass.EAST, Compass.SOUTH, Compass.WEST};
 

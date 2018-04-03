@@ -90,6 +90,7 @@ public class FirstViewMainController extends MainController {
             }
         }
 
+        //check if player is in room
         ArrayList<Node> floorList = new ArrayList<>(Room.group.getChildren());
         for(Node node : floorList)
         {

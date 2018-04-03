@@ -9,7 +9,9 @@ import walkgame.objects.cast.Fog;
 import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.hud.Player;
 import walkgame.objects.hud.PlayerStatus;
+import walkgame.objects.map.Door;
 import walkgame.objects.map.Room;
+import walkgame.objects.map.Wall;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
 import walkgame.objects.microObjects.guns.Pistol;
@@ -25,7 +27,7 @@ public class FirstMainView extends MainView
     {
         super();
 
-        super.map = new Group(Room.group);
+        super.map = new Group(Room.group, Wall.group, Door.group);
         super.cast = new Group(Bullet.group, Enemy.group);
         super.fog = new Group(Fog.group);
         super.hud = new Group(Player.group, PlayerStatus.group);
@@ -43,7 +45,7 @@ public class FirstMainView extends MainView
 
     private void createFloor()
     {
-        Image floorImage = new Image("walkgame/res/floor1.png");
+        Image floorImage = new Image("walkgame/res/map/floor1.png");
         double spawnX = MainView.getScreenCenter().getX() - (floorImage.getWidth() / 2f);
         double spawnY = MainView.getScreenCenter().getY() - (floorImage.getHeight() / 2f);;
         new Room(floorImage, new Coordinates(spawnX, spawnY));

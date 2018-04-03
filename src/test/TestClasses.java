@@ -6,7 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.hud.Player;
+import walkgame.objects.map.Door;
 import walkgame.objects.map.Room;
+import walkgame.objects.map.Wall;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
 import walkgame.objects.microObjects.guns.Pistol;
@@ -21,10 +23,14 @@ public class TestClasses {
     public void innit() {
         new JFXPanel();
 
-        Bullet.group.getChildren().clear();
-        Player.group.getChildren().clear();
         Room.group.getChildren().clear();
         Room.lastVisitedRoom = null;
+        Wall.group.getChildren().clear();
+        Door.group.getChildren().clear();
+
+        Bullet.group.getChildren().clear();
+
+        Player.group.getChildren().clear();
 
         MainView.clearScenes();
 
@@ -33,6 +39,6 @@ public class TestClasses {
         MainView.addScene(scene);
 
         player = new Player(MainView.playerSpawn, "Jack", new Pistol());
-        room = new Room(new Image("walkgame/res/floor1.png"), new Coordinates(0,0));
+        room = new Room(new Image("walkgame/res/map/floor1.png"), new Coordinates(0,0));
     }
 }

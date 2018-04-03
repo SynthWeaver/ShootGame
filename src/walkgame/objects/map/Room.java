@@ -43,6 +43,7 @@ public class Room extends ImageViewObject
     private void innit(Image image)
     {
         visited = false;
+        renderWalls();
         ROOM_SIZE = new Coordinates(image.getWidth(), image.getHeight());
         NORTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getY() - super.getImage().getHeight());
         EAST_ROOM_COORDINATES = new Coordinates(super.getX() + super.getImage().getWidth(), super.getY());
@@ -85,15 +86,32 @@ public class Room extends ImageViewObject
             }
 
             if(this.roomNorth == null){
-                this.roomNorth = new Room(new Image("walkgame/res/floor1.png"), NORTH_ROOM_COORDINATES);}
+                this.roomNorth = new Room(new Image("walkgame/res/map/floor1.png"), NORTH_ROOM_COORDINATES);}
             if(this.roomEast == null){
-                this.roomEast = new Room(new Image("walkgame/res/floor1.png"), EAST_ROOM_COORDINATES);}
+                this.roomEast = new Room(new Image("walkgame/res/map/floor1.png"), EAST_ROOM_COORDINATES);}
             if(this.roomSouth == null){
-                this.roomSouth = new Room(new Image("walkgame/res/floor1.png"), SOUTH_ROOM_COORDINATES);}
+                this.roomSouth = new Room(new Image("walkgame/res/map/floor1.png"), SOUTH_ROOM_COORDINATES);}
             if(this.roomWest == null){
-                this.roomWest = new Room(new Image("walkgame/res/floor1.png"), WEST_ROOM_COORDINATES);}
+                this.roomWest = new Room(new Image("walkgame/res/map/floor1.png"), WEST_ROOM_COORDINATES);}
         }
 
+    }
+
+    private void renderWalls() {
+        double wallSize = Wall.STANDARD_IMAGE.getWidth();
+
+        for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
+            new Wall(new Coordinates(getX(), getY() + i), this);
+        }
+        for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
+            new Wall(new Coordinates(getTotalWidth() - wallSize, getY() + i), this);
+        }
+        for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
+            new Wall(new Coordinates(getX() + i, getY()), this);
+        }
+        for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
+            new Wall(new Coordinates(getX() + i, getTotalHeight() - wallSize), this);
+        }
     }
 
     private void scoutFog()
