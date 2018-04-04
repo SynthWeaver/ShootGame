@@ -64,11 +64,13 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
                 ImageViewObject object = (ImageViewObject) node;
                 if(object.isSolid())
                 {
-                    if(dummyPlayer.contains(object.getPoint2D(0, velocityY)))
+                    //North + South
+                    if(dummyPlayer.contains(object.getX() , object.getTotalHeight() + velocityY) || dummyPlayer.contains(object.getX() , object.getY() + velocityY))
                     {
                         velocityY = 0;
                     }
-                    if(dummyPlayer.contains(object.getPoint2D(velocityX, 0)))
+                    //East + West
+                    if(dummyPlayer.contains(object.getX() + velocityX, object.getY()) || dummyPlayer.contains(object.getTotalWidth() + velocityX, object.getTotalHeight()))
                     {
                         velocityX = 0;
                     }

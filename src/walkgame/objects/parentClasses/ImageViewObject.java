@@ -41,10 +41,10 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     }
 
     @Override
-    public Point2D getPoint2D(double x, double y)//todo: werkt nog niet 100%, overlapt nog een beetje
+    public Point2D getPoint2D(double x, double y)
     {
         Point2D point2D = new Point2D(this.getX() + x, this.getY() + y);
-        point2D.add(this.getTotalWidth() + x, this.getTotalHeight() + y);
+        point2D.add(this.getTotalWidth() + x, this.getTotalHeight() + y);//todo: werkt nog niet 100%, overlapt nog een beetje
         return point2D;
     }
 
