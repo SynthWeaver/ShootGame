@@ -4,6 +4,7 @@ import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
@@ -23,6 +24,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     private static final SimpleIntegerProperty PLAYER_HEALTH = new SimpleIntegerProperty(100);
     private static final double PLAYER_SPEED = 0;
     public static final Coordinates PLAYER_SIZE  = new Coordinates(32,32);
+    private static final boolean isSolid = true;
 
     private String name;
     private Gun currentGun;
@@ -70,16 +72,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     public void move()
     {
         return;
-    }
-
-    /**
-     * Only use from movableGroup childs. use getX when calling from hud.
-     * @return RELATIVISED coordinate of player location
-     */
-    @Override
-    public Coordinates getCoordinate()
-    {
-        return super.getCoordinate().getRelativisedHudCoordinate();
     }
 
     @Override
@@ -163,6 +155,30 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     public void destroy() {
         Player.group.getChildren().remove(this);
         GameLoop.doLogicUpdate();
+    }
+
+    @Override
+    public boolean isSolid() {
+        return isSolid;
+    }
+
+    public double getRelativeX()
+    {
+        return getX() - MainView.getMovableGroup().getX();
+    }
+
+    public double getRelativeY()
+    {
+        return getY() - MainView.getMovableGroup().getY();
+    }
+
+    public ImageView getRelativePlayer()
+    {
+        ImageView dummyPlayer = new ImageView();
+        dummyPlayer.setX(this.getRelativeX());
+        dummyPlayer.setY(this.getRelativeY());
+        dummyPlayer.setImage(this.getImage());
+        return dummyPlayer;
     }
 
     @Override

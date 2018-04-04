@@ -4,7 +4,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import walkgame.objects.cast.Fog;
-import walkgame.objects.microObjects.Compass;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentClasses.ImageViewObject;
 
@@ -29,11 +28,14 @@ public class Room extends ImageViewObject
     public Coordinates WEST_ROOM_COORDINATES;
     public Coordinates ROOM_SIZE;
 
+    private static final boolean isSolid = false;
+    public static final Image STANDARD_IMAGE = new Image("walkgame/res/map/room.png");
+
     public boolean visited;
 
-    public Room(Image image, Coordinates coordinates) {
-        super(image, coordinates);
-        innit(image);
+    public Room(Coordinates coordinates) {
+        super(STANDARD_IMAGE, coordinates);
+        innit(STANDARD_IMAGE);
         if(lastVisitedRoom == null)
         {
             enterRoom();
@@ -75,24 +77,24 @@ public class Room extends ImageViewObject
                 Room room = (Room) node;
                 if(!room.equals(this))
                 {
-                    switch (this.getCollisionDirection(room))
+                    /*switch (this.contains(room.getX() - 1, room.getY() - 1))
                     {
                         case Compass.NORTH: if(this.roomNorth == null){this.roomNorth = room;} break;
                         case Compass.EAST:  if(this.roomEast == null){this.roomEast = room;} break;
                         case Compass.SOUTH: if(this.roomSouth == null){this.roomSouth = room;}break;
                         case Compass.WEST:  if(this.roomWest == null){this.roomWest = room;} break;
-                    }
+                    }*/
                 }
             }
 
             if(this.roomNorth == null){
-                this.roomNorth = new Room(new Image("walkgame/res/map/floor1.png"), NORTH_ROOM_COORDINATES);}
+                this.roomNorth = new Room(NORTH_ROOM_COORDINATES);}
             if(this.roomEast == null){
-                this.roomEast = new Room(new Image("walkgame/res/map/floor1.png"), EAST_ROOM_COORDINATES);}
+                this.roomEast = new Room(EAST_ROOM_COORDINATES);}
             if(this.roomSouth == null){
-                this.roomSouth = new Room(new Image("walkgame/res/map/floor1.png"), SOUTH_ROOM_COORDINATES);}
+                this.roomSouth = new Room(SOUTH_ROOM_COORDINATES);}
             if(this.roomWest == null){
-                this.roomWest = new Room(new Image("walkgame/res/map/floor1.png"), WEST_ROOM_COORDINATES);}
+                this.roomWest = new Room(WEST_ROOM_COORDINATES);}
         }
 
     }
@@ -134,6 +136,11 @@ public class Room extends ImageViewObject
                 room.fog.showFog();
             }
         }
+    }
+
+    @Override
+    public boolean isSolid() {
+        return isSolid;
     }
 
     @Override

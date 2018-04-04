@@ -1,13 +1,14 @@
 package walkgame.objects.microObjects;
 
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.hud.Player;
-import walkgame.objects.map.Wall;
+import walkgame.objects.parentClasses.ImageViewObject;
+import walkgame.views.parentClasses.MainView;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class MovableGroup extends javafx.scene.Group implements Controllable, Moveable
@@ -41,40 +42,6 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
 
     @Override
     public void move() {
-        Player player = (Player) Player.group.getChildren().get(0);
-        ArrayList<Character> collisionList = new ArrayList<>();
-        for (Node wall : Wall.group.getChildren())//todo:
-        {
-            char direction = player.getCollisionDirection((Wall) wall);
-            if(direction != 0) {
-                collisionList.add(direction);
-            }
-        }
-
-        for(char direction : collisionList)
-        {
-            if (direction == Compass.NORTH) {
-                if (velocityY > 0) {
-                    velocityY = 0;
-                }
-            }
-            else if (direction == Compass.SOUTH) {
-                if (velocityY < 0) {
-                    velocityY = 0;
-                }
-            }
-            else if (direction == Compass.EAST) {
-                if (velocityX < 0) {
-                    velocityX = 0;
-                }
-            }
-            else if (direction == Compass.WEST) {
-                if (velocityX > 0) {
-                    velocityX = 0;
-                }
-            }
-        }
-
         if(!goNorth && !goSouth)
         {
             velocityY = 0;
@@ -82,6 +49,32 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         if(!goEast && !goWest)
         {
             velocityX = 0;
+        }
+
+        if(velocityX == 0 && velocityY == 0 ) {
+            return;
+        }
+
+        Player player = (Player) Player.group.getChildren().get(0);
+        ImageView dummyPlayer = player.getRelativePlayer();
+        for (Node node : MainView.getListOfAllNodes())
+        {
+            if(node instanceof ImageViewObject && !node.equals(player))
+            {
+                ImageViewObject object = (ImageViewObject) node;
+                if(object.isSolid())
+                {
+                    if(dummyPlayer.contains(object.getPoint2D(0, velocityY)))
+                    {
+                        velocityY = 0;
+                    }
+                    if(dummyPlayer.contains(object.getPoint2D(velocityX, 0)))
+                    {
+                        velocityX = 0;
+                    }
+                    if(velocityX == 0 && velocityY == 0){return;}
+                }
+            }
         }
 
         if(velocityX != 0 || velocityY != 0 ) {

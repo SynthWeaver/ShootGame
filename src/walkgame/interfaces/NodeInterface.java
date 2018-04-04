@@ -1,13 +1,14 @@
 package walkgame.interfaces;
 
 
+import javafx.geometry.Point2D;
 import walkgame.objects.microObjects.Coordinates;
 
 public interface NodeInterface
 {
-    char getCollisionDirection(NodeInterface otherObject);
-    boolean hasCollision(NodeInterface other2dObject);
-    boolean containsObject(NodeInterface nodeInterface);
+    Point2D getPoint2D();
+    Point2D getPoint2D(double x, double y);
+    boolean isSolid();
     void addNodeToList();
 
     Coordinates getCoordinate();

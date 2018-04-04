@@ -1,6 +1,5 @@
 package test.objects.parentClasses;
 
-import javafx.scene.image.Image;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
@@ -18,7 +17,7 @@ class ImageViewObjectTest extends TestClasses {
     @BeforeEach
     void setUp() {
         super.innit();
-        imageViewObject = new Room(new Image("walkgame/res/map/floor1.png"), new Coordinates(0,0));
+        imageViewObject = new Room(new Coordinates(0,0));
     }
 
     @Test
@@ -35,18 +34,18 @@ class ImageViewObjectTest extends TestClasses {
 
         for (int i = 0; i < coordinatesList.length; i++) {
             System.out.println("test: " + compass[i]);
-            room = new Room(room.getImage(), coordinatesList[i]);
+            room = new Room(coordinatesList[i]);
             char expected = compass[i];
-            char actual = imageViewObject.getCollisionDirection(room);
+            char actual = 0;//imageViewObject.getCollisionDirection(room);
             assertEquals(expected, actual);
         }
     }
 
     @Test
     void containsObject() {
-        assertTrue(imageViewObject.containsObject(player));
+        assertTrue(imageViewObject.contains(player.getPoint2D()));
 
-        assertFalse(player.containsObject(new Room(room.getImage(), new Coordinates(300, 300))));
+        assertFalse(player.contains((new Room(new Coordinates(300, 300))).getPoint2D()));
     }
 
     @Test

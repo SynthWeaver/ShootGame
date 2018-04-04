@@ -15,6 +15,7 @@ public class PlayerStatus extends PaneObject
     public static Group group = new Group();
 
     private static final String BACKGROUND_COLOUR = "-fx-background-color: white;";
+    private static final boolean isSolid = false;
 
     private static final ImageView HEALTH = new ImageView("walkgame/res/ui/hp.png");//todo: images mooier maken
     private static final ImageView AMMO_CLIP = new ImageView("walkgame/res/ui/clip.png");
@@ -68,7 +69,12 @@ public class PlayerStatus extends PaneObject
         return this.getX() + width;
     }
 
-    //@Override
+    @Override
+    public boolean isSolid() {
+        return isSolid;
+    }
+
+    @Override
     public void addNodeToList()
     {
         PlayerStatus.group.getChildren().clear();

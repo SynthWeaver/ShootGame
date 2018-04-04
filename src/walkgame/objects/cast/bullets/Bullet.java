@@ -17,6 +17,7 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
 
     private static final int DEFAULT_HEALTH = 1;
     private static final double DEFAULT_SPEED = 4;
+    private static final boolean isSolid = true;
 
     private SimpleIntegerProperty health = new SimpleIntegerProperty();
     private double speed;
@@ -112,6 +113,11 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
     @Override
     public void rotateImage() {
 
+    }
+
+    @Override
+    public boolean isSolid() {
+        return isSolid;
     }
 
     @Override

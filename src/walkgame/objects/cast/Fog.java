@@ -13,6 +13,8 @@ public class Fog extends ImageViewObject
     private static final ColorAdjust UNKNOWN_FOG = new ColorAdjust(0,0, -1,0);
     private static final ColorAdjust KNOWN_FOG = new ColorAdjust(0,0, -0.4,0);
 
+    private static final boolean isSolid = false;
+
     public Fog(Room room)
     {
         super(room.getImage(), room.getCoordinate());
@@ -44,6 +46,11 @@ public class Fog extends ImageViewObject
     public void showFog()
     {
         super.setVisible(true);
+    }
+
+    @Override
+    public boolean isSolid() {
+        return isSolid;
     }
 
     @Override

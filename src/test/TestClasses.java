@@ -3,7 +3,6 @@ package test;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.hud.Player;
 import walkgame.objects.map.Door;
@@ -39,6 +38,6 @@ public class TestClasses {
         MainView.addScene(scene);
 
         player = new Player(MainView.playerSpawn, "Jack", new Pistol());
-        room = new Room(new Image("walkgame/res/map/floor1.png"), new Coordinates(0,0));
+        room = new Room(new Coordinates(0,0));
     }
 }

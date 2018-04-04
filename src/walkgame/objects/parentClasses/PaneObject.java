@@ -1,13 +1,10 @@
 package walkgame.objects.parentClasses;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import walkgame.interfaces.NodeInterface;
-import walkgame.objects.microObjects.Compass;
 import walkgame.objects.microObjects.Coordinates;
-
-import java.security.InvalidParameterException;
-import java.util.ArrayList;
 
 public abstract class PaneObject extends Pane implements NodeInterface
 {
@@ -38,50 +35,17 @@ public abstract class PaneObject extends Pane implements NodeInterface
     }
 
     @Override
-    public char getCollisionDirection(NodeInterface other)
+    public Point2D getPoint2D()
     {
-        double thisX = this.getCoordinate().getX();
-        double thisY = this.getCoordinate().getY();
-        double otherX = other.getCoordinate().getX();
-        double otherY = other.getCoordinate().getY();
-
-        if(thisY == other.getTotalHeight() +1){
-            if(thisX > otherX && thisX < other.getTotalWidth() || this.getTotalWidth() > otherX && this.getTotalWidth() < other.getTotalWidth() ) {
-                return Compass.NORTH;
-            }
-        }
-        if(this.getTotalWidth() == otherX - 1){
-            if(thisY > otherY && thisY < other.getTotalHeight() || this.getTotalHeight() > otherY && this.getTotalHeight() < other.getTotalHeight() ) {
-                return Compass.EAST;
-            }
-        }
-        if(this.getTotalHeight() == otherY -1){
-            if(thisX > otherX && thisX < other.getTotalWidth() || this.getTotalWidth() > otherX && this.getTotalWidth() < other.getTotalWidth() ) {
-                return Compass.SOUTH;
-            }
-        }
-        if(thisX == other.getTotalWidth() + 1){
-            if(thisY > otherY && thisY < other.getTotalHeight() || this.getTotalHeight() > otherY && this.getTotalHeight() < other.getTotalHeight() ) {
-                return Compass.WEST;
-            }
-        }
-        return 0;
+        return getPoint2D(0, 0);
     }
 
     @Override
-    public boolean hasCollision(NodeInterface other2dObject)
+    public Point2D getPoint2D(double x, double y)
     {
-        return getCollisionDirection(other2dObject) != 0;
-    }
-
-    @Override
-    public boolean containsObject(NodeInterface nodeInterface)
-    {
-        Coordinates other = nodeInterface.getCenter();
-        double thisX = this.getCoordinate().getX();
-        double thisY = this.getCoordinate().getY();
-
-        return other.getX() > thisX && other.getX() < this.getTotalWidth() && other.getY() > thisY && other.getY() < this.getTotalHeight();
+        Point2D point2D = new  Point2D(this.getX() + x, this.getY() + y);
+        point2D.add(this.getTotalWidth() + x, this.getTotalHeight() + y);
+        return point2D;
     }
 
     @Override
