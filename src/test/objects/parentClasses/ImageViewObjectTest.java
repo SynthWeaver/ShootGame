@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
 import walkgame.objects.map.Room;
-import walkgame.objects.microObjects.Compass;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentClasses.ImageViewObject;
 
@@ -23,22 +22,8 @@ class ImageViewObjectTest extends TestClasses {
     @Test
     void getCoordinate() {
         String expected = "0.00.0";
-        String actual = String.format("%S%S", imageViewObject.getCoordinate().getX(), imageViewObject.getCoordinate().getY());
+        String actual = String.format("%S%S", imageViewObject.getX(), imageViewObject.getY());
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void getCollisionDirection() {//todo: update test naar arraylistChar
-        Coordinates[] coordinatesList = {new Coordinates(0,-300), new Coordinates(300,0), new Coordinates(0,300), new Coordinates(-300,0)};
-        char[] compass = {Compass.NORTH, Compass.EAST, Compass.SOUTH, Compass.WEST};
-
-        for (int i = 0; i < coordinatesList.length; i++) {
-            System.out.println("test: " + compass[i]);
-            room = new Room(coordinatesList[i]);
-            char expected = compass[i];
-            char actual = 0;//imageViewObject.getCollisionDirection(room);
-            assertEquals(expected, actual);
-        }
     }
 
     @Test

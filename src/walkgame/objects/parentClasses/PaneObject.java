@@ -37,14 +37,8 @@ public abstract class PaneObject extends Pane implements NodeInterface
     @Override
     public Point2D getPoint2D()
     {
-        return getPoint2D(0, 0);
-    }
-
-    @Override
-    public Point2D getPoint2D(double x, double y)
-    {
-        Point2D point2D = new  Point2D(this.getX() + x, this.getY() + y);
-        point2D.add(this.getTotalWidth() + x, this.getTotalHeight() + y);
+        Point2D point2D = new  Point2D(this.getX(), this.getY());
+        point2D.add(this.getTotalWidth(), this.getTotalHeight());
         return point2D;
     }
 
@@ -81,6 +75,18 @@ public abstract class PaneObject extends Pane implements NodeInterface
     public double getTotalHeight()
     {
         return this.getY() + getHeight();
+    }
+
+    @Override
+    public double getHorizontalCenter()
+    {
+        return getX() + (getWidth() / 2f);
+    }
+
+    @Override
+    public double getVerticalCenter()
+    {
+        return getY() + (getHeight() / 2f);
     }
 
     @Override

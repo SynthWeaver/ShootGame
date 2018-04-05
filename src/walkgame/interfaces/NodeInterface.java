@@ -7,7 +7,6 @@ import walkgame.objects.microObjects.Coordinates;
 public interface NodeInterface
 {
     Point2D getPoint2D();
-    Point2D getPoint2D(double x, double y);
     boolean isSolid();
     void addNodeToList();
 
@@ -20,6 +19,8 @@ public interface NodeInterface
     double getHeight();
     double getTotalWidth();
     double getTotalHeight();
+    double getHorizontalCenter();
+    double getVerticalCenter();
 
     void setCoordinate(Coordinates coordinate);
     void setCoordinate(double x, double y);

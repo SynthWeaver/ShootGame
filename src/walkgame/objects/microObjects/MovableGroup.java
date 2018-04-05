@@ -155,8 +155,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         }
     }
 
-    @Override
-    public void pressButton(Key k) {
+    private void pressButton(Key k) {
         if(k == Controlls.up) {
             setVelocityY(getSpeed());
             goNorth = true;
@@ -179,8 +178,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         }
     }
 
-    @Override
-    public void releaseButton(Key k) {
+    private void releaseButton(Key k) {
         if(k == Controlls.up) {
             goNorth = false;
         }

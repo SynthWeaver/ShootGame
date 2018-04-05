@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import walkgame.interfaces.NodeInterface;
 import walkgame.views.parentClasses.MainView;
 
-public class Coordinates {
+public class Coordinates {//todo verander naar pont2D :)
     private static final Coordinates DEFAULT_COORDINATES = new Coordinates(0,0);
 
     private double y;

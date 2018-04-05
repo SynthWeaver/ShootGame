@@ -33,7 +33,7 @@ public class TestClasses {
 
         MainView.clearScenes();
 
-        Group root = new Group(new MovableGroup(), new Group());
+        Group root = new Group(new MovableGroup(new Group(), new Group(), new Group(), new Group()), new Group());
         scene = new Scene(root);
         MainView.addScene(scene);
 

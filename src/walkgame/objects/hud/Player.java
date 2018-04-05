@@ -124,8 +124,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         }
     }
 
-    @Override
-    public void pressButton(Key k) {
+    private void pressButton(Key k) {
         if(k == Controlls.up) {
             goNorth = true;
             goSouth = false;
@@ -148,8 +147,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         }
     }
 
-    @Override
-    public void releaseButton(Key k) {
+    private void releaseButton(Key k) {
         if(k == Controlls.up) {
             goNorth = false;
         }
@@ -183,6 +181,28 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     public double getRelativeY()
     {
         return getY() - MainView.getMovableGroup().getY();
+    }
+
+    @Override
+    public double getTotalWidth() {
+        return this.getRelativeX() + getWidth();
+    }
+
+    @Override
+    public double getTotalHeight() {
+        return this.getRelativeY() + getHeight();
+    }
+
+    @Override
+    public double getHorizontalCenter()
+    {
+        return getRelativeX() + (getWidth() / 2f);
+    }
+
+    @Override
+    public double getVerticalCenter()
+    {
+        return getRelativeY() + (getHeight() / 2f);
     }
 
     public ImageView getRelativePlayer()

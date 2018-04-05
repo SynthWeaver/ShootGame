@@ -77,13 +77,22 @@ public class Room extends ImageViewObject
                 Room room = (Room) node;
                 if(!room.equals(this))
                 {
-                    /*switch (this.contains(room.getX() - 1, room.getY() - 1))
+                    if(this.contains(room.getHorizontalCenter(), room.getTotalHeight() + 1))
                     {
-                        case Compass.NORTH: if(this.roomNorth == null){this.roomNorth = room;} break;
-                        case Compass.EAST:  if(this.roomEast == null){this.roomEast = room;} break;
-                        case Compass.SOUTH: if(this.roomSouth == null){this.roomSouth = room;}break;
-                        case Compass.WEST:  if(this.roomWest == null){this.roomWest = room;} break;
-                    }*/
+                        if(this.roomNorth == null){this.roomNorth = room;}
+                    }
+                    else if(this.contains(room.getX() - 1, room.getVerticalCenter()))
+                    {
+                        if(this.roomEast == null){this.roomEast = room;}
+                    }
+                    else if(this.contains(room.getHorizontalCenter(), room.getY() - 1))
+                    {
+                        if(this.roomSouth == null){this.roomSouth = room;}
+                    }
+                    else if(this.contains(room.getTotalWidth() + 1, room.getVerticalCenter()))
+                    {
+                        if(this.roomWest == null){this.roomWest = room;}
+                    }
                 }
             }
 

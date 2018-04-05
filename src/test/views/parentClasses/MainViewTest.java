@@ -163,6 +163,8 @@ class MainViewTest extends TestClasses {
             }
         }
 
+        list.add(movableGroup);
+
         ArrayList<Node> expected = list;
         ArrayList<Node> actual = MainView.getListOfAllNodes();
         assertEquals(expected, actual);

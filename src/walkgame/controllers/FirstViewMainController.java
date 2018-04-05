@@ -7,6 +7,7 @@ import walkgame.controllers.parentClasses.MainController;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.objects.hud.Player;
 import walkgame.objects.map.Room;
 import walkgame.objects.microObjects.Controlls;
 import walkgame.objects.microObjects.Coordinates;
@@ -91,9 +92,12 @@ public class FirstViewMainController extends MainController {
     private void playerEnterRoom(Node node) {
         if(node instanceof Room) {
             Room room = (Room) node;
+            Player player = firstView.player;
 
-            if (room.contains(firstView.player.getPoint2D()) && !Room.lastVisitedRoom.equals(room)) {
-                room.enterRoom();
+            if (room.contains(player.getRelativeX(), player.getRelativeY()) || room.contains(player.getTotalWidth(), player.getTotalHeight())){
+                if(!Room.lastVisitedRoom.equals(room)) {
+                    room.enterRoom();
+                }
             }
         }
     }
