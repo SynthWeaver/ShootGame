@@ -93,6 +93,7 @@ public abstract class MainView extends gameloop.View {
         return new Group[]{getMap(), getCast(), getFog(), getHud()};
     }
 
+    @Deprecated
     public static ArrayList<Node> getListOfAllNodes(){
         ArrayList<Node> list = new ArrayList<>();
 
