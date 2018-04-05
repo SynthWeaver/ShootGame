@@ -27,7 +27,7 @@ public class FirstMainView extends MainView
     {
         super();
 
-        super.map = new Group(Room.group, Wall.group, Door.group);
+        super.map = new Group(Room.group, Door.group, Wall.group);
         super.cast = new Group(Bullet.group, Enemy.group);
         super.fog = new Group(Fog.group);
         super.hud = new Group(Player.group, PlayerStatus.group);

@@ -9,9 +9,8 @@ public class Wall extends ImageViewObject {
     public static Group group = new Group();
     private Room room;
 
-    private static final boolean isSolid = true;
-
     public static final Image STANDARD_IMAGE = new Image("walkgame/res/map/wall.png");
+    private static final boolean isSolid = true;
 
     public Wall(Coordinates coordinates, Room room) {
         super(STANDARD_IMAGE, coordinates);

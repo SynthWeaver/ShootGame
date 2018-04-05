@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import walkgame.objects.cast.Fog;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentClasses.ImageViewObject;
+import walkgame.views.parentClasses.MainView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +27,6 @@ public class Room extends ImageViewObject
     public Coordinates EAST_ROOM_COORDINATES;
     public Coordinates SOUTH_ROOM_COORDINATES;
     public Coordinates WEST_ROOM_COORDINATES;
-    public Coordinates ROOM_SIZE;
 
     private static final boolean isSolid = false;
     public static final Image STANDARD_IMAGE = new Image("walkgame/res/map/room.png");
@@ -36,7 +36,7 @@ public class Room extends ImageViewObject
     public Room(Coordinates coordinates) {
         super(STANDARD_IMAGE, coordinates);
         innit(STANDARD_IMAGE);
-        if(lastVisitedRoom == null)
+        if(lastVisitedRoom == null)//firstRoom
         {
             enterRoom();
         }
@@ -46,7 +46,7 @@ public class Room extends ImageViewObject
     {
         visited = false;
         renderWalls();
-        ROOM_SIZE = new Coordinates(image.getWidth(), image.getHeight());
+
         NORTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getY() - super.getImage().getHeight());
         EAST_ROOM_COORDINATES = new Coordinates(super.getX() + super.getImage().getWidth(), super.getY());
         SOUTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getY() + super.getImage().getHeight());
@@ -100,19 +100,46 @@ public class Room extends ImageViewObject
     }
 
     private void renderWalls() {
-        double wallSize = Wall.STANDARD_IMAGE.getWidth();
 
+        double screenCenter = MainView.getScreenCenter().getX();
+        double wallSize = Wall.STANDARD_IMAGE.getWidth();
         for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
-            new Wall(new Coordinates(getX(), getY() + i), this);
+            if(i >= screenCenter - 30 && i <= screenCenter + 30)
+            {
+                new Door(new Coordinates(getX(), getY() + i), this);
+            }
+            else
+            {
+                new Wall(new Coordinates(getX(), getY() + i), this);
+            }
         }
         for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
-            new Wall(new Coordinates(getTotalWidth() - wallSize, getY() + i), this);
+            if(i >= screenCenter - 30 && i <= screenCenter + 30)
+            {
+                new Door(new Coordinates(getTotalWidth() - wallSize, getY() + i), this);
+            }
+            else
+            {
+                new Wall(new Coordinates(getTotalWidth() - wallSize, getY() + i), this);
+            }
         }
         for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
-            new Wall(new Coordinates(getX() + i, getY()), this);
+            if(i >= screenCenter - 30 && i <= screenCenter + 30)
+            {
+                new Door(new Coordinates(getX() + i, getY()), this);
+            }
+            else{
+                new Wall(new Coordinates(getX() + i, getY()), this);
+            }
         }
         for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
-            new Wall(new Coordinates(getX() + i, getTotalHeight() - wallSize), this);
+            if(i >= screenCenter - 30 && i <= screenCenter + 30)
+            {
+                new Door(new Coordinates(getX() + i, getTotalHeight() - wallSize), this);
+            }
+            else{
+                new Wall(new Coordinates(getX() + i, getTotalHeight() - wallSize), this);
+            }
         }
     }
 
