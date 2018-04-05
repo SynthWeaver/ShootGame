@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Sprites;
 import walkgame.objects.parentClasses.Character;
+import walkgame.views.parentClasses.MainView;
 
 public abstract class Enemy extends Character
 {
@@ -18,5 +19,8 @@ public abstract class Enemy extends Character
     public void addNodeToList()
     {
         Enemy.group.getChildren().add(this);
+
+        MainView.DESTRUCTIBLE_LIST.add(this);
+        MainView.MOVEABLE_LIST.add(this);
     }
 }

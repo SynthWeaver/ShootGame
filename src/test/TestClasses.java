@@ -3,8 +3,11 @@ package test;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import walkgame.objects.cast.Enemy;
+import walkgame.objects.cast.Fog;
 import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.hud.Player;
+import walkgame.objects.hud.PlayerStatus;
 import walkgame.objects.map.Door;
 import walkgame.objects.map.Room;
 import walkgame.objects.map.Wall;
@@ -33,11 +36,19 @@ public class TestClasses {
 
         MainView.clearScenes();
 
-        Group root = new Group(new MovableGroup(new Group(), new Group(), new Group(), new Group()), new Group());
+        Group map = new Group(Room.group, Door.group, Wall.group);
+        Group cast = new Group(Bullet.group, Enemy.group);
+        Group fog = new Group(Fog.group);
+        Group hud = new Group(Player.group, PlayerStatus.group);
+
+        Group movableGroup = new MovableGroup(map, cast, fog);
+        Group root = new Group(movableGroup, hud);
+
         scene = new Scene(root);
         MainView.addScene(scene);
 
-        player = new Player(MainView.playerSpawn, "Jack", new Pistol());
         room = new Room(new Coordinates(0,0));
+        player = new Player(MainView.playerSpawn, "Jack", new Pistol());
+
     }
 }

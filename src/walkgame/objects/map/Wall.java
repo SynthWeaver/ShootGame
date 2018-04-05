@@ -15,6 +15,7 @@ public class Wall extends ImageViewObject {
     public Wall(Coordinates coordinates, Room room) {
         super(STANDARD_IMAGE, coordinates);
         this.room = room;
+        room.sollidObjects.add(this);
     }
 
     @Override

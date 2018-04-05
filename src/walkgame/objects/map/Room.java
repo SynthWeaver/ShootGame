@@ -22,6 +22,7 @@ public class Room extends ImageViewObject
     public Room roomSouth;
     public Room roomWest;
     public ArrayList<Room> nextRooms;
+    public ArrayList<Node> sollidObjects = new ArrayList<>();
 
     public Coordinates NORTH_ROOM_COORDINATES;
     public Coordinates EAST_ROOM_COORDINATES;

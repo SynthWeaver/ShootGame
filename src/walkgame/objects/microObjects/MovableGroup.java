@@ -36,6 +36,9 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     {
         super.setLayoutX(0);
         super.setLayoutY(0);
+
+        MainView.CONTROLLABLE_LIST.add(this);
+        MainView.MOVEABLE_LIST.add(this);
     }
 
     @Override
@@ -54,8 +57,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         }
 
         Player player = (Player) Player.group.getChildren().get(0);
-        //ImageView dummyPlayer = player.getRelativePlayer();
-        for (Node node : MainView.getListOfAllNodes())
+        for (Node node : player.currentRoom.sollidObjects)
         {
             if(node instanceof ImageViewObject && !node.equals(player))
             {
@@ -72,7 +74,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
                     {
                         velocityX = 0;
                     }
-                    //if(velocityX == 0 && velocityY == 0){return;}
+                    if(velocityX == 0 && velocityY == 0){return;}
                 }
             }
         }

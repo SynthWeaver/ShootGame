@@ -5,6 +5,10 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import walkgame.interfaces.Controllable;
+import walkgame.interfaces.Destructible;
+import walkgame.interfaces.Moveable;
+import walkgame.interfaces.Shootable;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
@@ -26,15 +30,15 @@ public abstract class MainView extends gameloop.View {
     protected static SceneBundle sceneBundle = new SceneBundle();
 
     public static Coordinates screenSize = new Coordinates(300, 300);
-    //public Coordinates gameSize = new Coordinates(400, 400);
-
-    //private static SimpleDoubleProperty screenCenterX = new SimpleDoubleProperty();
-    //private static SimpleDoubleProperty screenCenterY = new SimpleDoubleProperty();
-
     public static Coordinates playerSpawn = new Coordinates(MainView.getScreenCenter().getX() - (Player.PLAYER_SIZE.getX() / 2f) , MainView.getScreenCenter().getY() - (Player.PLAYER_SIZE.getY() / 2f));//todo: moet anders
 
+    public static final ArrayList<Controllable> CONTROLLABLE_LIST = new ArrayList<>();
+    public static final ArrayList<Destructible> DESTRUCTIBLE_LIST = new ArrayList<>();
+    public static final ArrayList<Moveable> MOVEABLE_LIST = new ArrayList<>();
+    public static final ArrayList<Shootable> SHOOTABLE_LIST = new ArrayList<>();
+
     public MainView() {
-        //scenes are build in childsViews
+        //scenes are now build in childsViews
     }
 
     @Override

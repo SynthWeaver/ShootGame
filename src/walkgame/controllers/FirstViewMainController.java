@@ -24,8 +24,6 @@ public class FirstViewMainController extends MainController {
         this.firstView = firstView;
     }
 
-
-
     public void pressKeyButton(KeyCode k)
     {
         controlls.pressButton((char) k.getCode());
@@ -50,22 +48,10 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()//todo: set content to render method for performance boost
     {
-        LinkedList<Destructible> toDestroy = new LinkedList<>();
-        for(Node node : MainView.getListOfAllNodes())
-        {
-            checkButtons(node);
-            moveNotes(node);
-
-            destroyNodes(node, toDestroy);
-        }
-
+        checkButtons();
+        moveNotes();
         playerEnterRoom();
-
-        for(Destructible destructible : toDestroy)//after the loop, delete all destructibles
-        {
-            MainView.getRoot().remove(destructible);
-            destructible.destroy();
-        }
+        destroyNodes();
     }
 
     @Override
@@ -73,17 +59,16 @@ public class FirstViewMainController extends MainController {
 
     }
 
-    private void checkButtons(Node node) {
-        if (node instanceof Controllable)
+    private void checkButtons() {
+        for(Controllable controllable : MainView.CONTROLLABLE_LIST)
         {
-            ((Controllable) node).checkButton(controlls);
+            controllable.checkButton(controlls);
         }
     }
 
-    private void moveNotes(Node node) {
-        if(node instanceof Moveable)
+    private void moveNotes() {
+        for(Moveable moveable : MainView.MOVEABLE_LIST)
         {
-            Moveable moveable = ((Moveable) node);
             moveable.move();
         }
     }
@@ -97,21 +82,29 @@ public class FirstViewMainController extends MainController {
             if(room.contains(player.getSceneHorizontalCenter() - 0.5, player.getSceneVerticalCenter() - 0.5))
             {
                 if(!Room.lastVisitedRoom.equals(room)) {
-                    room.enterRoom();//todo: bug: doet het links en rechts in room
+                    room.enterRoom();
+                    player.currentRoom = room;
                     break;
                 }
             }
         }
     }
 
-    private void destroyNodes(Node node, LinkedList<Destructible> toDestroy) {
-        if(node instanceof Destructible)
+    private void destroyNodes() {
+        LinkedList<Destructible> DestroyList = new LinkedList<>();
+
+        for(Destructible destructible : MainView.DESTRUCTIBLE_LIST)
         {
-            Destructible destructible = (Destructible) node;
             if(destructible.getHealth().get() <= 0)
             {
-                toDestroy.add(destructible);
+                DestroyList.add(destructible);
             }
+        }
+
+        for(Destructible destructible : DestroyList)//after the loop, delete all destructibles
+        {
+            MainView.getRoot().remove(destructible);
+            destructible.destroy();
         }
     }
 }

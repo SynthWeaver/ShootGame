@@ -124,5 +124,8 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
     public void addNodeToList()
     {
         Bullet.group.getChildren().add(this);
+
+        MainView.DESTRUCTIBLE_LIST.add(this);
+        MainView.MOVEABLE_LIST.add(this);
     }
 }

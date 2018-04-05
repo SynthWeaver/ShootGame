@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
 import walkgame.interfaces.Shootable;
+import walkgame.objects.map.Room;
 import walkgame.objects.microObjects.*;
 import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.parentClasses.Character;
@@ -23,6 +24,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     private String name;
     private Gun currentGun;
+    public Room currentRoom;
 
     private static final Sprites PLAYER_SPRITES = new Sprites(
             new Image("walkgame/res/player/none/north.png"),
@@ -41,6 +43,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         super(sprites, playerSpawn, PLAYER_HEALTH, PLAYER_SPEED);
         this.name = name;
         this.currentGun = currentGun;
+        this.currentRoom =  (Room) Room.group.getChildren().get(0);
         super.setImage(sprites.getSprite(Angle.SOUTH));
     }
 
@@ -172,51 +175,14 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         return isSolid;
     }
 
-    /*public double getRelativeX()
-    {
-        return getX() - MainView.getMovableGroup().getX();
-    }
-
-    public double getRelativeY()
-    {
-        return getY() - MainView.getMovableGroup().getY();
-    }
-
-    @Override
-    public double getSceneMaxX() {
-        return this.getRelativeX() + getWidth();
-    }
-
-    @Override
-    public double getSceneMaxY() {
-        return this.getRelativeY() + getHeight();
-    }
-
-    @Override
-    public double getSceneHorizontalCenter()
-    {
-        return getRelativeX() + (getWidth() / 2f);
-    }
-
-    @Override
-    public double getSceneVerticalCenter()
-    {
-        return getRelativeY() + (getHeight() / 2f);
-    }
-
-    public ImageView getRelativePlayer()
-    {
-        ImageView dummyPlayer = new ImageView();
-        dummyPlayer.setX(this.getRelativeX());
-        dummyPlayer.setY(this.getRelativeY());
-        dummyPlayer.setImage(this.getImage());
-        return dummyPlayer;
-    }*/
-
     @Override
     public void addNodeToList()
     {
         Player.group.getChildren().clear();
         Player.group.getChildren().add(0,this);
+
+        MainView.CONTROLLABLE_LIST.add(this);
+        MainView.DESTRUCTIBLE_LIST.add(this);
+        MainView.SHOOTABLE_LIST.add(this);
     }
 }
