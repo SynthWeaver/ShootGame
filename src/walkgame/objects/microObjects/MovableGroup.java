@@ -1,7 +1,6 @@
 package walkgame.objects.microObjects;
 
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.hud.Player;
@@ -55,7 +54,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         }
 
         Player player = (Player) Player.group.getChildren().get(0);
-        ImageView dummyPlayer = player.getRelativePlayer();
+        //ImageView dummyPlayer = player.getRelativePlayer();
         for (Node node : MainView.getListOfAllNodes())
         {
             if(node instanceof ImageViewObject && !node.equals(player))
@@ -64,12 +63,12 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
                 if(object.isSolid())
                 {
                     //North + South
-                    if(dummyPlayer.contains(object.getX() , object.getTotalHeight() + velocityY) || dummyPlayer.contains(object.getX() , object.getY() + velocityY))
+                    if(player.contains(object.getSceneX() , object.getSceneMaxY() + velocityY) || player.contains(object.getSceneX() , object.getSceneY() + velocityY))
                     {
                         velocityY = 0;
                     }
                     //East + West
-                    if(dummyPlayer.contains(object.getX() + velocityX, object.getY()) || dummyPlayer.contains(object.getTotalWidth() + velocityX, object.getTotalHeight()))
+                    if(player.contains(object.getSceneX() + velocityX, object.getSceneY()) || player.contains(object.getSceneMaxX() + velocityX, object.getSceneMaxY()))
                     {
                         velocityX = 0;
                     }

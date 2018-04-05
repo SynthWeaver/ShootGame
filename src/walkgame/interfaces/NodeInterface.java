@@ -15,12 +15,16 @@ public interface NodeInterface
 
     double getX();
     double getY();
+    double getSceneX();
+    double getSceneY();
     double getWidth();
     double getHeight();
+    double getSceneMaxX();
+    double getSceneMaxY();
     double getTotalWidth();
     double getTotalHeight();
-    double getHorizontalCenter();
-    double getVerticalCenter();
+    double getSceneHorizontalCenter();
+    double getSceneVerticalCenter();
 
     void setCoordinate(Coordinates coordinate);
     void setCoordinate(double x, double y);

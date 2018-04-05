@@ -1,5 +1,6 @@
 package walkgame.objects.parentClasses;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,24 +48,22 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     @Override
     public abstract void addNodeToList();
 
-    @Override
-    public Coordinates getCenter()
+    private Bounds getSceneBounds()
     {
-        double screenCenterX = this.getCoordinate().getX() + (getWidth() / 2f);
-        double screenCenterY = this.getCoordinate().getY() + (getHeight() / 2f);
-        return new Coordinates(screenCenterX, screenCenterY);
+        Bounds localBounds = this.getBoundsInLocal();
+        return this.localToScene(localBounds);
     }
 
     @Override
-    public double getWidth()
+    public double getSceneX()
     {
-        return super.getImage().getWidth();
+        return getSceneBounds().getMinX();
     }
 
     @Override
-    public double getHeight()
+    public double getSceneY()
     {
-        return super.getImage().getHeight();
+        return getSceneBounds().getMinY();
     }
 
     @Override
@@ -80,15 +79,57 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     }
 
     @Override
-    public double getHorizontalCenter()
+    public Coordinates getCenter()
     {
-        return getX() + (getWidth() / 2f);
+        double screenCenterX = this.getCoordinate().getX() + (getWidth() / 2f);
+        double screenCenterY = this.getCoordinate().getY() + (getHeight() / 2f);
+        return new Coordinates(screenCenterX, screenCenterY);
     }
 
     @Override
-    public double getVerticalCenter()
+    public double getWidth()
     {
-        return getY() + (getHeight() / 2f);
+        return getSceneBounds().getWidth();
+    }
+
+    @Override
+    public double getHeight()
+    {
+        return getSceneBounds().getHeight();
+    }
+
+    @Override
+    public double getSceneMaxX()
+    {
+        return  getSceneBounds().getMaxX();
+    }
+
+    @Override
+    public double getSceneMaxY()
+    {
+        return getSceneBounds().getMaxY();
+    }
+
+    @Override
+    public double getSceneHorizontalCenter()
+    {
+        return getSceneX() + (getWidth() / 2f);
+    }
+
+    @Override
+    public double getSceneVerticalCenter()
+    {
+        return getSceneY() + (getHeight() / 2f);
+    }
+
+    @Override
+    public boolean contains(double localX, double localY) {
+        return this.contains(new Point2D(localX, localY));
+    }
+
+    @Override
+    public boolean contains(Point2D localPoint) {
+        return this.getSceneBounds().contains(localPoint);
     }
 
     @Override

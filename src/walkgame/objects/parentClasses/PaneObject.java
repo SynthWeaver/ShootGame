@@ -1,5 +1,6 @@
 package walkgame.objects.parentClasses;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -38,12 +39,29 @@ public abstract class PaneObject extends Pane implements NodeInterface
     public Point2D getPoint2D()
     {
         Point2D point2D = new  Point2D(this.getX(), this.getY());
-        point2D.add(this.getTotalWidth(), this.getTotalHeight());
         return point2D;
     }
 
     @Override
     public abstract void addNodeToList();
+
+    private Bounds getSceneBounds()
+    {
+        Bounds localBounds = this.getBoundsInLocal();
+        return this.localToScene(localBounds);
+    }
+
+    @Override
+    public double getSceneX()
+    {
+        return getSceneBounds().getMinX();
+    }
+
+    @Override
+    public double getSceneY()
+    {
+        return getSceneBounds().getMinY();
+    }
 
     @Override
     public Coordinates getCenter()
@@ -66,6 +84,18 @@ public abstract class PaneObject extends Pane implements NodeInterface
     }
 
     @Override
+    public double getSceneMaxX()
+    {
+        return this.getX() + getWidth();
+    }
+
+    @Override
+    public double getSceneMaxY()
+    {
+        return this.getY() + getHeight();
+    }
+
+    @Override
     public double getTotalWidth()
     {
         return this.getX() + getWidth();
@@ -74,19 +104,29 @@ public abstract class PaneObject extends Pane implements NodeInterface
     @Override
     public double getTotalHeight()
     {
-        return this.getY() + getHeight();
+        return this.getX() + getHeight();
     }
 
     @Override
-    public double getHorizontalCenter()
+    public double getSceneHorizontalCenter()
     {
         return getX() + (getWidth() / 2f);
     }
 
     @Override
-    public double getVerticalCenter()
+    public double getSceneVerticalCenter()
     {
         return getY() + (getHeight() / 2f);
+    }
+
+    @Override
+    public boolean contains(double localX, double localY) {
+        return this.contains(new Point2D(localX, localY));
+    }
+
+    @Override
+    public boolean contains(Point2D localPoint) {
+        return this.getSceneBounds().contains(localPoint);
     }
 
     @Override

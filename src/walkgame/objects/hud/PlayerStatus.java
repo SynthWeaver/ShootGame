@@ -64,7 +64,7 @@ public class PlayerStatus extends PaneObject
     }
 
     @Override
-    public double getTotalWidth()
+    public double getSceneMaxX()
     {
         return this.getX() + width;
     }

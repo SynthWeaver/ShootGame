@@ -54,13 +54,12 @@ public class FirstViewMainController extends MainController {
         for(Node node : MainView.getListOfAllNodes())
         {
             checkButtons(node);
-
             moveNotes(node);
-
-            playerEnterRoom(node);
 
             destroyNodes(node, toDestroy);
         }
+
+        playerEnterRoom();
 
         for(Destructible destructible : toDestroy)//after the loop, delete all destructibles
         {
@@ -89,14 +88,17 @@ public class FirstViewMainController extends MainController {
         }
     }
 
-    private void playerEnterRoom(Node node) {
-        if(node instanceof Room) {
+    private void playerEnterRoom() {
+        for(Node node : Room.group.getChildren()) {
             Room room = (Room) node;
             Player player = firstView.player;
 
-            if (room.contains(player.getRelativeX(), player.getRelativeY()) || room.contains(player.getTotalWidth(), player.getTotalHeight())){
+            //player center collission
+            if(room.contains(player.getSceneHorizontalCenter() - 0.5, player.getSceneVerticalCenter() - 0.5))
+            {
                 if(!Room.lastVisitedRoom.equals(room)) {
-                    room.enterRoom();
+                    room.enterRoom();//todo: bug: doet het links en rechts in room
+                    break;
                 }
             }
         }

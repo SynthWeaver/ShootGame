@@ -4,7 +4,6 @@ import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
 import walkgame.interfaces.Shootable;
@@ -173,7 +172,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         return isSolid;
     }
 
-    public double getRelativeX()
+    /*public double getRelativeX()
     {
         return getX() - MainView.getMovableGroup().getX();
     }
@@ -184,23 +183,23 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public double getTotalWidth() {
+    public double getSceneMaxX() {
         return this.getRelativeX() + getWidth();
     }
 
     @Override
-    public double getTotalHeight() {
+    public double getSceneMaxY() {
         return this.getRelativeY() + getHeight();
     }
 
     @Override
-    public double getHorizontalCenter()
+    public double getSceneHorizontalCenter()
     {
         return getRelativeX() + (getWidth() / 2f);
     }
 
     @Override
-    public double getVerticalCenter()
+    public double getSceneVerticalCenter()
     {
         return getRelativeY() + (getHeight() / 2f);
     }
@@ -212,7 +211,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         dummyPlayer.setY(this.getRelativeY());
         dummyPlayer.setImage(this.getImage());
         return dummyPlayer;
-    }
+    }*/
 
     @Override
     public void addNodeToList()

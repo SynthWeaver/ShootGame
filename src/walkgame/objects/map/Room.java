@@ -47,10 +47,10 @@ public class Room extends ImageViewObject
         visited = false;
         renderWalls();
 
-        NORTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getY() - super.getImage().getHeight());
-        EAST_ROOM_COORDINATES = new Coordinates(super.getX() + super.getImage().getWidth(), super.getY());
-        SOUTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getY() + super.getImage().getHeight());
-        WEST_ROOM_COORDINATES =  new Coordinates(super.getX() - super.getImage().getWidth(), super.getY());
+        NORTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getY() - super.getHeight());
+        EAST_ROOM_COORDINATES = new Coordinates(super.getTotalWidth(), super.getY());
+        SOUTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getTotalHeight());
+        WEST_ROOM_COORDINATES =  new Coordinates(super.getX() - super.getWidth(), super.getY());
 
         fog = new Fog(this);
     }
@@ -77,19 +77,19 @@ public class Room extends ImageViewObject
                 Room room = (Room) node;
                 if(!room.equals(this))
                 {
-                    if(this.contains(room.getHorizontalCenter(), room.getTotalHeight() + 1))
+                    if(this.contains(room.getSceneHorizontalCenter(), room.getSceneMaxY() + 1))
                     {
                         if(this.roomNorth == null){this.roomNorth = room;}
                     }
-                    else if(this.contains(room.getX() - 1, room.getVerticalCenter()))
+                    else if(this.contains(room.getSceneX() - 1, room.getSceneVerticalCenter()))
                     {
                         if(this.roomEast == null){this.roomEast = room;}
                     }
-                    else if(this.contains(room.getHorizontalCenter(), room.getY() - 1))
+                    else if(this.contains(room.getSceneHorizontalCenter(), room.getSceneY() - 1))
                     {
                         if(this.roomSouth == null){this.roomSouth = room;}
                     }
-                    else if(this.contains(room.getTotalWidth() + 1, room.getVerticalCenter()))
+                    else if(this.contains(room.getSceneMaxX() + 1, room.getSceneVerticalCenter()))
                     {
                         if(this.roomWest == null){this.roomWest = room;}
                     }
@@ -109,10 +109,11 @@ public class Room extends ImageViewObject
     }
 
     private void renderWalls() {
-
         double screenCenter = MainView.getScreenCenter().getX();
         double wallSize = Wall.STANDARD_IMAGE.getWidth();
-        for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
+
+        //left wall
+        for (int i = 0; i < super.getWidth() ; i += wallSize) {
             if(i >= screenCenter - 30 && i <= screenCenter + 30)
             {
                 new Door(new Coordinates(getX(), getY() + i), this);
@@ -122,7 +123,9 @@ public class Room extends ImageViewObject
                 new Wall(new Coordinates(getX(), getY() + i), this);
             }
         }
-        for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
+
+        //right wall
+        for (int i = 0; i < super.getWidth() ; i += wallSize) {
             if(i >= screenCenter - 30 && i <= screenCenter + 30)
             {
                 new Door(new Coordinates(getTotalWidth() - wallSize, getY() + i), this);
@@ -132,7 +135,9 @@ public class Room extends ImageViewObject
                 new Wall(new Coordinates(getTotalWidth() - wallSize, getY() + i), this);
             }
         }
-        for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
+
+        //top wall
+        for (int i = 0; i < super.getWidth() ; i += wallSize) {
             if(i >= screenCenter - 30 && i <= screenCenter + 30)
             {
                 new Door(new Coordinates(getX() + i, getY()), this);
@@ -141,7 +146,9 @@ public class Room extends ImageViewObject
                 new Wall(new Coordinates(getX() + i, getY()), this);
             }
         }
-        for (int i = 0; i < super.getImage().getWidth() ; i += wallSize) {
+
+        //bottom wall
+        for (int i = 0; i < super.getWidth() ; i += wallSize) {
             if(i >= screenCenter - 30 && i <= screenCenter + 30)
             {
                 new Door(new Coordinates(getX() + i, getTotalHeight() - wallSize), this);
