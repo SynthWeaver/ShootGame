@@ -8,6 +8,7 @@ import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.map.Room;
+import walkgame.objects.microObjects.Controlls;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
@@ -17,6 +18,7 @@ import java.util.LinkedList;
 
 public class FirstViewMainController extends MainController {
 
+    private Controlls controlls = new Controlls();
     public FirstMainView firstView;
     public FirstViewMainController(FirstMainView firstView) {
         this.firstView = firstView;
@@ -26,7 +28,8 @@ public class FirstViewMainController extends MainController {
 
     public void pressKeyButton(KeyCode k)
     {
-        MainView.getMovableGroup().pressButton(k);
+        controlls.pressButton((char) k.getCode());
+        /*MainView.getMovableGroup().pressButton(k);
 
         for(Node node : MainView.getListOfAllNodes())
         {
@@ -34,12 +37,13 @@ public class FirstViewMainController extends MainController {
             {
                 ((Controllable) node).pressButton(k);
             }
-        }
+        }*/
     }
 
     public void releaseKeyButton(KeyCode k)
     {
-        MainView.getMovableGroup().releaseButton(k);
+        controlls.releaseButton((char) k.getCode());
+        /*MainView.getMovableGroup().releaseButton(k);
 
         for(Node node : MainView.getListOfAllNodes())
         {
@@ -47,7 +51,7 @@ public class FirstViewMainController extends MainController {
             {
                 ((Controllable) node).releaseButton(k);
             }
-        }
+        }*/
     }
 
     public void mouseClick(Coordinates mouseCoordinates)
@@ -64,6 +68,8 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()//todo: set content to render method for performance boost
     {
+        checkButtons();
+
         MainView.getMovableGroup().move();
 
         for(Node node : MainView.getListOfAllNodes())
@@ -101,5 +107,22 @@ public class FirstViewMainController extends MainController {
                 room.enterRoom();
             }
         }
+    }
+
+    private void checkButtons() {
+
+        MainView.getMovableGroup().checkButton(controlls);
+        for(Node node : MainView.getListOfAllNodes())
+        {
+            if (node instanceof Controllable)
+            {
+                ((Controllable) node).checkButton(controlls);
+            }
+        }
+    }
+
+    @Override
+    public void render() {
+
     }
 }

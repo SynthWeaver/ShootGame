@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
 import walkgame.objects.hud.Player;
+import walkgame.objects.microObjects.Controlls;
 import walkgame.objects.microObjects.Coordinates;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,8 +26,8 @@ class PlayerTest extends TestClasses {
 
         player.setVelocityX(100);
         player.setVelocityY(100);
-        player.pressButton(KeyCode.W);
-        player.pressButton(KeyCode.D);
+        player.pressButton(Controlls.up);
+        player.pressButton(Controlls.right);
         player.move();
 
         assertFalse(firstCoordinates.equals(player.getCoordinate()));

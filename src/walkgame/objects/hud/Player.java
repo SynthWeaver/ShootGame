@@ -9,10 +9,7 @@ import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
 import walkgame.interfaces.Shootable;
-import walkgame.objects.microObjects.Angle;
-import walkgame.objects.microObjects.Coordinates;
-import walkgame.objects.microObjects.Functions;
-import walkgame.objects.microObjects.Sprites;
+import walkgame.objects.microObjects.*;
 import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.parentClasses.Character;
 import walkgame.views.parentClasses.MainView;
@@ -117,37 +114,54 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public void pressButton(KeyCode k) {
-        switch (k){
-            case W:
-                goNorth = true;
-                goSouth = false;
-                break;
-            case D:
-                goEast = true;
-                goWest = false;
-                break;
-            case S:
-                goSouth = true;
-                goNorth = false;
-                break;
-            case A:
-                goWest = true;
-                goEast = false;
-                break;
-            case R:
-                this.currentGun.reload();
-                break;
+    public void checkButton(Controlls controlls) {
+        for(Key key : controlls.getPressedButtons())
+        {
+            pressButton(key);
+        }
+        for(Key key : controlls.getReleasedButtons())
+        {
+            releaseButton(key);
         }
     }
 
     @Override
-    public void releaseButton(KeyCode k) {
-        switch (k){
-            case W: goNorth = false; break;
-            case D: goEast = false; break;
-            case S: goSouth = false; break;
-            case A: goWest = false; break;
+    public void pressButton(Key k) {
+        if(k == Controlls.up) {
+            goNorth = true;
+            goSouth = false;
+        }
+        else if(k == Controlls.right) {
+            goEast = true;
+            goWest = false;
+        }
+        else if(k == Controlls.down) {
+            goSouth = true;
+            goNorth = false;
+        }
+        else if(k == Controlls.left) {
+            goWest = true;
+            goEast = false;
+        }
+        else if(k == Controlls.reload) {
+            this.currentGun.reload();
+            Controlls.reload.release();
+        }
+    }
+
+    @Override
+    public void releaseButton(Key k) {
+        if(k == Controlls.up) {
+            goNorth = false;
+        }
+        else if(k == Controlls.right) {
+            goEast = false;
+        }
+        else if(k == Controlls.down) {
+            goSouth = false;
+        }
+        else if(k == Controlls.left) {
+            goWest = false;
         }
     }
 

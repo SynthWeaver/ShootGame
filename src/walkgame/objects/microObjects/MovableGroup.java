@@ -1,5 +1,6 @@
 package walkgame.objects.microObjects;
 
+import gameloop.GameLoop;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -74,7 +75,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
                     {
                         velocityX = 0;
                     }
-                    if(velocityX == 0 && velocityY == 0){return;}
+                    //if(velocityX == 0 && velocityY == 0){return;}
                 }
             }
         }
@@ -145,38 +146,54 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     }
 
     @Override
-    public void pressButton(KeyCode k) {
-        switch (k){
-            case W:
-                setVelocityY(getSpeed());
-                goNorth = true;
-                goSouth = false;
-                break;
-            case D:
-                setVelocityX(0 - getSpeed());
-                goEast = true;
-                goWest = false;
-                break;
-            case S:
-                setVelocityY(0 - getSpeed());
-                goSouth = true;
-                goNorth = false;
-                break;
-            case A:
-                setVelocityX(getSpeed());
-                goWest = true;
-                goEast = false;
-                break;
+    public void checkButton(Controlls controlls) {
+        for(Key key : controlls.getPressedButtons())
+        {
+            pressButton(key);
+        }
+        for(Key key : controlls.getReleasedButtons())
+        {
+            releaseButton(key);
         }
     }
 
     @Override
-    public void releaseButton(KeyCode k) {
-        switch (k){
-            case W: goNorth = false; break;
-            case D: goEast = false; break;
-            case S: goSouth = false; break;
-            case A: goWest = false; break;
+    public void pressButton(Key k) {
+        if(k == Controlls.up) {
+            setVelocityY(getSpeed());
+            goNorth = true;
+            goSouth = false;
+        }
+        else if(k == Controlls.right) {
+            setVelocityX(0 - getSpeed());
+            goEast = true;
+            goWest = false;
+        }
+        else if(k == Controlls.down) {
+            setVelocityY(0 - getSpeed());
+            goSouth = true;
+            goNorth = false;
+        }
+        else if(k == Controlls.left) {
+            setVelocityX(getSpeed());
+            goWest = true;
+            goEast = false;
+        }
+    }
+
+    @Override
+    public void releaseButton(Key k) {
+        if(k == Controlls.up) {
+            goNorth = false;
+        }
+        else if(k == Controlls.right) {
+            goEast = false;
+        }
+        else if(k == Controlls.down) {
+            goSouth = false;
+        }
+        else if(k == Controlls.left) {
+            goWest = false;
         }
     }
 
