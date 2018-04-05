@@ -1,9 +1,7 @@
 package walkgame.objects.microObjects;
 
-import gameloop.GameLoop;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.hud.Player;

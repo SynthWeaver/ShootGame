@@ -101,6 +101,8 @@ public abstract class MainView extends gameloop.View {
             }
         }
 
+        list.add(getMovableGroup());
+
         return list;
     }
 

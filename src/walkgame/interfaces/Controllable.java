@@ -1,6 +1,5 @@
 package walkgame.interfaces;
 
-import javafx.scene.input.KeyCode;
 import walkgame.objects.microObjects.Controlls;
 import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Key;

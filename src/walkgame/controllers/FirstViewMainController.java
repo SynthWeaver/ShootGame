@@ -13,7 +13,6 @@ import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class FirstViewMainController extends MainController {
@@ -29,29 +28,11 @@ public class FirstViewMainController extends MainController {
     public void pressKeyButton(KeyCode k)
     {
         controlls.pressButton((char) k.getCode());
-        /*MainView.getMovableGroup().pressButton(k);
-
-        for(Node node : MainView.getListOfAllNodes())
-        {
-            if (node instanceof Controllable)
-            {
-                ((Controllable) node).pressButton(k);
-            }
-        }*/
     }
 
     public void releaseKeyButton(KeyCode k)
     {
         controlls.releaseButton((char) k.getCode());
-        /*MainView.getMovableGroup().releaseButton(k);
-
-        for(Node node : MainView.getListOfAllNodes())
-        {
-            if (node instanceof Controllable)
-            {
-                ((Controllable) node).releaseButton(k);
-            }
-        }*/
     }
 
     public void mouseClick(Coordinates mouseCoordinates)
@@ -68,61 +49,63 @@ public class FirstViewMainController extends MainController {
     @Override
     public void tick()//todo: set content to render method for performance boost
     {
-        checkButtons();
-
-        MainView.getMovableGroup().move();
-
+        LinkedList<Destructible> toDestroy = new LinkedList<>();
         for(Node node : MainView.getListOfAllNodes())
         {
-            LinkedList<Destructible> toDestroy = new LinkedList<>();
-            if(node instanceof Moveable)
-            {
-                Moveable moveable = ((Moveable) node);
-                moveable.move();
-            }
-            if(node instanceof Destructible)
-            {
-                Destructible destructible = (Destructible) node;
-                if(destructible.getHealth().get() <= 0)
-                {
-                    toDestroy.add(destructible);
-                }
-            }
+            checkButtons(node);
 
-            for(Destructible destructible : toDestroy)//after the loop, delete all destructibles
-            {
-                MainView.getRoot().remove(destructible);
-                destructible.destroy();
-            }
+            moveNotes(node);
+
+            playerEnterRoom(node);
+
+            destroyNodes(node, toDestroy);
         }
 
-        //check if player is in room
-        ArrayList<Node> floorList = new ArrayList<>(Room.group.getChildren());
-        for(Node node : floorList)
+        for(Destructible destructible : toDestroy)//after the loop, delete all destructibles
         {
-            Room room = (Room) node;
-
-            if(room.contains(firstView.player.getPoint2D()) && !Room.lastVisitedRoom.equals(room))
-            {
-                room.enterRoom();
-            }
-        }
-    }
-
-    private void checkButtons() {
-
-        MainView.getMovableGroup().checkButton(controlls);
-        for(Node node : MainView.getListOfAllNodes())
-        {
-            if (node instanceof Controllable)
-            {
-                ((Controllable) node).checkButton(controlls);
-            }
+            MainView.getRoot().remove(destructible);
+            destructible.destroy();
         }
     }
 
     @Override
     public void render() {
 
+    }
+
+    private void checkButtons(Node node) {
+        if (node instanceof Controllable)
+        {
+            ((Controllable) node).checkButton(controlls);
+        }
+    }
+
+    private void moveNotes(Node node) {
+        if(node instanceof Moveable)
+        {
+            Moveable moveable = ((Moveable) node);
+            moveable.move();
+        }
+    }
+
+    private void playerEnterRoom(Node node) {
+        if(node instanceof Room) {
+            Room room = (Room) node;
+
+            if (room.contains(firstView.player.getPoint2D()) && !Room.lastVisitedRoom.equals(room)) {
+                room.enterRoom();
+            }
+        }
+    }
+
+    private void destroyNodes(Node node, LinkedList<Destructible> toDestroy) {
+        if(node instanceof Destructible)
+        {
+            Destructible destructible = (Destructible) node;
+            if(destructible.getHealth().get() <= 0)
+            {
+                toDestroy.add(destructible);
+            }
+        }
     }
 }

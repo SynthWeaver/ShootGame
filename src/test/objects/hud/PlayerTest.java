@@ -1,7 +1,6 @@
 package test.objects.hud;
 
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
