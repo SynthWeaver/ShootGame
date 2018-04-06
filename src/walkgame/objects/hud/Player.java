@@ -2,6 +2,7 @@ package walkgame.objects.hud;
 
 import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Controllable;
@@ -19,7 +20,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     private static final SimpleIntegerProperty PLAYER_HEALTH = new SimpleIntegerProperty(100);
     private static final double PLAYER_SPEED = 0;
-    public static final Coordinates PLAYER_SIZE  = new Coordinates(32,32);
+    public static final Point2D PLAYER_SIZE  = new Point2D(32,32);
     private static final boolean isSolid = true;
 
     private String name;
@@ -38,7 +39,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     );
 
 
-    public Player(Sprites sprites, Coordinates playerSpawn, String name, Gun currentGun)
+    public Player(Sprites sprites, Point2D playerSpawn, String name, Gun currentGun)
     {
         super(sprites, playerSpawn, PLAYER_HEALTH, PLAYER_SPEED);
         this.name = name;
@@ -47,7 +48,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         super.setImage(sprites.getSprite(Angle.SOUTH));
     }
 
-    public Player(Coordinates playerSpawn, String name, Gun currentGun)
+    public Player(Point2D playerSpawn, String name, Gun currentGun)
     {
         this(PLAYER_SPRITES, playerSpawn, name, currentGun);
     }
@@ -73,7 +74,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public void rotateImage(Coordinates mouseCoordinates) {
+    public void rotateImage(Point2D mouseCoordinates) {
         Image image = sprites.getSprite(Angle.SOUTH);
         double angle = Functions.getAngle(MainView.getScreenCenter(), mouseCoordinates);
 

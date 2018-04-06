@@ -1,10 +1,10 @@
 package test.objects.microObjects;
 
+import javafx.geometry.Point2D;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
 import walkgame.objects.microObjects.Controlls;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,9 +22,9 @@ class MovableGroupTest extends TestClasses {
 
     @Test
     void move() {
-        Coordinates firstCoordinates = movableGroup.getCoordinate();
+        Point2D firstCoordinates = movableGroup.getPoint2D();
 
-        assertTrue(firstCoordinates.equals(movableGroup.getCoordinate()));
+        assertTrue(firstCoordinates.equals(movableGroup.getPoint2D()));
 
         movableGroup.setVelocityX(100);
         movableGroup.setVelocityY(100);
@@ -34,6 +34,6 @@ class MovableGroupTest extends TestClasses {
         movableGroup.checkButton(controll);
         movableGroup.move();
 
-        assertFalse(firstCoordinates.equals(movableGroup.getCoordinate()));
+        assertFalse(firstCoordinates.equals(movableGroup.getPoint2D()));
     }
 }

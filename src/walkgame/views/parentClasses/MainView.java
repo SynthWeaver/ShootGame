@@ -1,6 +1,7 @@
 package walkgame.views.parentClasses;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -10,7 +11,6 @@ import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.interfaces.Shootable;
 import walkgame.objects.hud.Player;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
 import walkgame.objects.microObjects.SceneBundle;
 
@@ -29,8 +29,8 @@ public abstract class MainView extends gameloop.View {
     public Scene scene;
     protected static SceneBundle sceneBundle = new SceneBundle();
 
-    public static Coordinates screenSize = new Coordinates(300, 300);
-    public static Coordinates playerSpawn = new Coordinates(MainView.getScreenCenter().getX() - (Player.PLAYER_SIZE.getX() / 2f) , MainView.getScreenCenter().getY() - (Player.PLAYER_SIZE.getY() / 2f));//todo: moet anders
+    public static Point2D screenSize = new Point2D(300, 300);
+    public static Point2D playerSpawn = new Point2D(MainView.getScreenCenter().getX() - (Player.PLAYER_SIZE.getX() / 2f) , MainView.getScreenCenter().getY() - (Player.PLAYER_SIZE.getY() / 2f));//todo: moet anders
 
     public static final ArrayList<Controllable> CONTROLLABLE_LIST = new ArrayList<>();
     public static final ArrayList<Destructible> DESTRUCTIBLE_LIST = new ArrayList<>();
@@ -47,9 +47,9 @@ public abstract class MainView extends gameloop.View {
         return;
     }
 
-    public static Coordinates getScreenCenter()
+    public static Point2D getScreenCenter()
     {
-        return new Coordinates(MainView.screenSize.getX() / 2f, MainView.screenSize.getY() / 2f);
+        return new Point2D(MainView.screenSize.getX() / 2f, MainView.screenSize.getY() / 2f);
     }
 
     protected void createScene()
@@ -70,6 +70,11 @@ public abstract class MainView extends gameloop.View {
     public static MovableGroup getMovableGroup(){
         ObservableList<Node> root = MainView.getRoot();
         return (MovableGroup) root.get(0);
+    }
+
+    public static Player getCurrentPlayer()
+    {
+        return (Player) Player.group.getChildren().get(0);
     }
 
     public static Group getMap() {

@@ -1,11 +1,12 @@
 package test.objects.hud;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
 import walkgame.objects.hud.Player;
-import walkgame.objects.microObjects.Coordinates;
+import walkgame.views.parentClasses.MainView;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +25,7 @@ class PlayerTest extends TestClasses {
         Image actual = player.getImage();
         assertEquals(expected, actual);
 
-        player.rotateImage(new Coordinates(100, 100));
+        player.rotateImage(new Point2D(100, 100));
 
         expected = image;
         actual = player.getImage();
@@ -33,7 +34,7 @@ class PlayerTest extends TestClasses {
 
     @Test
     void destroy() {
-        Player expected = (Player) Player.group.getChildren().get(0);
+        Player expected = MainView.getCurrentPlayer();
         Player actual = player;
         assertEquals(expected, actual);
 

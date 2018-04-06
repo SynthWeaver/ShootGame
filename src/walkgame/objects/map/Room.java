@@ -1,10 +1,10 @@
 package walkgame.objects.map;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import walkgame.objects.cast.Fog;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
 
@@ -24,17 +24,17 @@ public class Room extends ImageViewObject
     public ArrayList<Room> nextRooms;
     public ArrayList<Node> sollidObjects = new ArrayList<>();
 
-    public Coordinates NORTH_ROOM_COORDINATES;
-    public Coordinates EAST_ROOM_COORDINATES;
-    public Coordinates SOUTH_ROOM_COORDINATES;
-    public Coordinates WEST_ROOM_COORDINATES;
+    public Point2D NORTH_ROOM_COORDINATES;
+    public Point2D EAST_ROOM_COORDINATES;
+    public Point2D SOUTH_ROOM_COORDINATES;
+    public Point2D WEST_ROOM_COORDINATES;
 
     private static final boolean isSolid = false;
     public static final Image STANDARD_IMAGE = new Image("walkgame/res/map/room.png");
 
     public boolean visited;
 
-    public Room(Coordinates coordinates) {
+    public Room(Point2D coordinates) {
         super(STANDARD_IMAGE, coordinates);
         innit(STANDARD_IMAGE);
         if(lastVisitedRoom == null)//firstRoom
@@ -48,10 +48,10 @@ public class Room extends ImageViewObject
         visited = false;
         renderWalls();
 
-        NORTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getY() - super.getHeight());
-        EAST_ROOM_COORDINATES = new Coordinates(super.getTotalWidth(), super.getY());
-        SOUTH_ROOM_COORDINATES = new Coordinates(super.getX(), super.getTotalHeight());
-        WEST_ROOM_COORDINATES =  new Coordinates(super.getX() - super.getWidth(), super.getY());
+        NORTH_ROOM_COORDINATES = new Point2D(super.getX(), super.getY() - super.getHeight());
+        EAST_ROOM_COORDINATES = new Point2D(super.getMaxX(), super.getY());
+        SOUTH_ROOM_COORDINATES = new Point2D(super.getX(), super.getMaxY());
+        WEST_ROOM_COORDINATES =  new Point2D(super.getX() - super.getWidth(), super.getY());
 
         fog = new Fog(this);
     }
@@ -78,19 +78,19 @@ public class Room extends ImageViewObject
                 Room room = (Room) node;
                 if(!room.equals(this))
                 {
-                    if(this.contains(room.getSceneHorizontalCenter(), room.getSceneMaxY() + 1))
+                    if(this.contains(room.getSceneHorizontalCenter(), room.getMaxY() + 1))
                     {
                         if(this.roomNorth == null){this.roomNorth = room;}
                     }
-                    else if(this.contains(room.getSceneX() - 1, room.getSceneVerticalCenter()))
+                    else if(this.contains(room.getX() - 1, room.getSceneVerticalCenter()))
                     {
                         if(this.roomEast == null){this.roomEast = room;}
                     }
-                    else if(this.contains(room.getSceneHorizontalCenter(), room.getSceneY() - 1))
+                    else if(this.contains(room.getSceneHorizontalCenter(), room.getY() - 1))
                     {
                         if(this.roomSouth == null){this.roomSouth = room;}
                     }
-                    else if(this.contains(room.getSceneMaxX() + 1, room.getSceneVerticalCenter()))
+                    else if(this.contains(room.getMaxX() + 1, room.getSceneVerticalCenter()))
                     {
                         if(this.roomWest == null){this.roomWest = room;}
                     }
@@ -117,11 +117,11 @@ public class Room extends ImageViewObject
         for (int i = 0; i < super.getWidth() ; i += wallSize) {
             if(i >= screenCenter - 30 && i <= screenCenter + 30)
             {
-                new Door(new Coordinates(getX(), getY() + i), this);
+                new Door(new Point2D(getX(), getY() + i), this);
             }
             else
             {
-                new Wall(new Coordinates(getX(), getY() + i), this);
+                new Wall(new Point2D(getX(), getY() + i), this);
             }
         }
 
@@ -129,11 +129,11 @@ public class Room extends ImageViewObject
         for (int i = 0; i < super.getWidth() ; i += wallSize) {
             if(i >= screenCenter - 30 && i <= screenCenter + 30)
             {
-                new Door(new Coordinates(getTotalWidth() - wallSize, getY() + i), this);
+                new Door(new Point2D(getMaxX() - wallSize, getY() + i), this);
             }
             else
             {
-                new Wall(new Coordinates(getTotalWidth() - wallSize, getY() + i), this);
+                new Wall(new Point2D(getMaxX() - wallSize, getY() + i), this);
             }
         }
 
@@ -141,10 +141,10 @@ public class Room extends ImageViewObject
         for (int i = 0; i < super.getWidth() ; i += wallSize) {
             if(i >= screenCenter - 30 && i <= screenCenter + 30)
             {
-                new Door(new Coordinates(getX() + i, getY()), this);
+                new Door(new Point2D(getX() + i, getY()), this);
             }
             else{
-                new Wall(new Coordinates(getX() + i, getY()), this);
+                new Wall(new Point2D(getX() + i, getY()), this);
             }
         }
 
@@ -152,10 +152,10 @@ public class Room extends ImageViewObject
         for (int i = 0; i < super.getWidth() ; i += wallSize) {
             if(i >= screenCenter - 30 && i <= screenCenter + 30)
             {
-                new Door(new Coordinates(getX() + i, getTotalHeight() - wallSize), this);
+                new Door(new Point2D(getX() + i, getMaxY() - wallSize), this);
             }
             else{
-                new Wall(new Coordinates(getX() + i, getTotalHeight() - wallSize), this);
+                new Wall(new Point2D(getX() + i, getMaxY() - wallSize), this);
             }
         }
     }

@@ -1,12 +1,12 @@
 package walkgame.objects.hud;
 
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentClasses.PaneObject;
 import walkgame.views.parentClasses.MainView;
 
@@ -23,7 +23,7 @@ public class PlayerStatus extends PaneObject
 
     private double width = 0.00;
     public PlayerStatus() {
-        super(new Coordinates(MainView.screenSize.getX(), 0));
+        super(new Point2D(MainView.screenSize.getX(), 0));
 
         generateHud(loadText());
 
@@ -33,7 +33,7 @@ public class PlayerStatus extends PaneObject
 
     private Text[] loadText()
     {
-        Player player = (Player) Player.group.getChildren().get(0);
+        Player player = MainView.getCurrentPlayer();
 
         Text[] textArray = new Text[]{new Text("0"), new Text("0"), new Text("0")};
         textArray[0].textProperty().bind(player.getHealth().asString());
@@ -61,12 +61,6 @@ public class PlayerStatus extends PaneObject
         }
 
         return width;
-    }
-
-    @Override
-    public double getSceneMaxX()
-    {
-        return this.getX() + width;
     }
 
     @Override

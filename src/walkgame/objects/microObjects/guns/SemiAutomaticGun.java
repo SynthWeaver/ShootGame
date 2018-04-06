@@ -1,9 +1,9 @@
 package walkgame.objects.microObjects.guns;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import walkgame.objects.cast.bullets.Bullet;
-import walkgame.objects.microObjects.Coordinates;
 
 public abstract class SemiAutomaticGun extends Gun {
 
@@ -12,7 +12,7 @@ public abstract class SemiAutomaticGun extends Gun {
     }
 
     @Override
-    public void shoot(Coordinates gunCoordinates, Coordinates directionCoordinates) {
+    public void shoot(Point2D gunCoordinates, Point2D directionCoordinates) {
         if(super.getClipAmmo().get() >= 1) {
             boolean containsBullet = false;
             for (Node object : Bullet.group.getChildren()) {

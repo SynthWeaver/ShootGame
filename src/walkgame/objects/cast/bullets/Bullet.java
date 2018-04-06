@@ -2,11 +2,11 @@ package walkgame.objects.cast.bullets;
 
 import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
@@ -23,7 +23,7 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
     private double speed;
     private double velocityX = 0, velocityY = 0;
 
-    public Bullet(Image image, Coordinates startingCoordinates, Coordinates directionCoordinates) {
+    public Bullet(Image image, Point2D startingCoordinates, Point2D directionCoordinates) {
         super(image, startingCoordinates);
         this.health.set(DEFAULT_HEALTH);
         this.speed = DEFAULT_SPEED;
@@ -31,9 +31,9 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
         shoot(directionCoordinates);
     }
 
-    private void shoot(Coordinates directionCoordinates)
+    private void shoot(Point2D directionCoordinates)
     {
-        double angle = Functions.getAngle(super.getCoordinate(), directionCoordinates);
+        double angle = Functions.getAngle(super.getPoint2D(), directionCoordinates);
         angle -= 90;
 
         this.velocityX = this.speed * Math.cos((angle/180) * Math.PI);
@@ -92,8 +92,10 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
         double x = super.getX();
         double y = super.getY();
 
-        Coordinates screen = new Coordinates(0,0).getRelativisedHudCoordinate();
-        Coordinates screenSize = MainView.screenSize.getRelativisedHudCoordinate();
+        Point2D screen = new Point2D(0,0);
+        Point2D screenSize = MainView.screenSize;
+
+        //todo:
 
         if(x > screenSize.getX() + 20 || x < screen.getX() - 20)
         {

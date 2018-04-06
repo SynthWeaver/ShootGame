@@ -10,8 +10,6 @@ import test.TestClasses;
 import walkgame.objects.microObjects.MovableGroup;
 import walkgame.views.parentClasses.MainView;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainViewTest extends TestClasses {
@@ -147,6 +145,7 @@ class MainViewTest extends TestClasses {
         assertArrayEquals(expected, actual);
     }
 
+    /*
     @Test
     void getListOfAllNodes() {
         MovableGroup movableGroup = new MovableGroup(new Group(), new Group(), new Group(), new Group());
@@ -168,5 +167,5 @@ class MainViewTest extends TestClasses {
         ArrayList<Node> expected = list;
         ArrayList<Node> actual = MainView.getListOfAllNodes();
         assertEquals(expected, actual);
-    }
+    }*/
 }

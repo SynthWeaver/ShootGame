@@ -1,7 +1,5 @@
 package walkgame.interfaces;
 
-import walkgame.objects.microObjects.Coordinates;
-
 public interface Moveable
 {
     void move();
@@ -22,6 +20,4 @@ public interface Moveable
 
     double getX();
     double getY();
-
-    Coordinates getCoordinate();
 }

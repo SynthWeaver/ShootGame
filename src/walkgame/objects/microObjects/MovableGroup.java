@@ -1,5 +1,6 @@
 package walkgame.objects.microObjects;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
@@ -56,7 +57,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
             return;
         }
 
-        Player player = (Player) Player.group.getChildren().get(0);
+        Player player = MainView.getCurrentPlayer();
         for (Node node : player.currentRoom.sollidObjects)
         {
             if(node instanceof ImageViewObject && !node.equals(player))
@@ -65,12 +66,12 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
                 if(object.isSolid())
                 {
                     //North + South
-                    if(player.contains(object.getSceneX() , object.getSceneMaxY() + velocityY) || player.contains(object.getSceneX() , object.getSceneY() + velocityY))
+                    if(player.contains(object.getX() , object.getMaxY() + velocityY) || player.contains(object.getX() , object.getY() + velocityY))
                     {
                         velocityY = 0;
                     }
                     //East + West
-                    if(player.contains(object.getSceneX() + velocityX, object.getSceneY()) || player.contains(object.getSceneMaxX() + velocityX, object.getSceneMaxY()))
+                    if(player.contains(object.getX() + velocityX, object.getY()) || player.contains(object.getMaxX() + velocityX, object.getMaxY()))
                     {
                         velocityX = 0;
                     }
@@ -99,12 +100,6 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     }
 
     @Override
-    public Coordinates getCoordinate()
-    {
-        return new Coordinates(getX(), getY());
-    }
-
-    @Override
     public double getX() {
         return super.getLayoutX();
     }
@@ -112,6 +107,12 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     @Override
     public double getY() {
         return super.getLayoutY();
+    }
+
+    public Point2D getPoint2D()
+    {
+        Point2D point2D = new  Point2D(this.getX(), this.getY());
+        return point2D;
     }
 
     @Override
@@ -142,6 +143,17 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     @Override
     public void setY(double y) {
         super.setLayoutY(y);
+    }
+
+    public Point2D getNegativePoint2D()
+    {
+        Point2D point2D = this.getPoint2D();
+        double x = point2D.getX() * -1;
+        double y = point2D.getY() * -1;
+
+
+
+        return new Point2D(x , y);
     }
 
     @Override
@@ -195,7 +207,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     }
 
     @Override
-    public void rotateImage(Coordinates mouseCoordinates) {
+    public void rotateImage(Point2D mouseCoordinates) {
         return;
     }
 

@@ -1,7 +1,7 @@
 package walkgame.objects.microObjects.guns;
 
 import javafx.beans.property.SimpleIntegerProperty;
-import walkgame.objects.microObjects.Coordinates;
+import javafx.geometry.Point2D;
 
 public abstract class AutomaticGun extends Gun {
 
@@ -13,7 +13,7 @@ public abstract class AutomaticGun extends Gun {
     }
 
     @Override
-    public void shoot(Coordinates gunCoordinates, Coordinates directionCoordinates) {
+    public void shoot(Point2D gunCoordinates, Point2D directionCoordinates) {
 
     }
 

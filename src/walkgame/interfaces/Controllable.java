@@ -1,10 +1,10 @@
 package walkgame.interfaces;
 
+import javafx.geometry.Point2D;
 import walkgame.objects.microObjects.Controlls;
-import walkgame.objects.microObjects.Coordinates;
 
 public interface Controllable
 {
     void checkButton(Controlls controlls);
-    void rotateImage(Coordinates mouseCoordinates);
+    void rotateImage(Point2D mouseCoordinates);
 }

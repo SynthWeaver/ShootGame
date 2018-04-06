@@ -1,6 +1,7 @@
 package test;
 
 import javafx.embed.swing.JFXPanel;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import walkgame.objects.cast.Enemy;
@@ -11,7 +12,6 @@ import walkgame.objects.hud.PlayerStatus;
 import walkgame.objects.map.Door;
 import walkgame.objects.map.Room;
 import walkgame.objects.map.Wall;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.MovableGroup;
 import walkgame.objects.microObjects.guns.Pistol;
 import walkgame.views.parentClasses.MainView;
@@ -47,7 +47,7 @@ public class TestClasses {
         scene = new Scene(root);
         MainView.addScene(scene);
 
-        room = new Room(new Coordinates(0,0));
+        room = new Room(new Point2D(0,0));
         player = new Player(MainView.playerSpawn, "Jack", new Pistol());
 
     }

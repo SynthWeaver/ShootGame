@@ -1,7 +1,7 @@
 package walkgame.objects.microObjects.guns;
 
 import javafx.beans.property.SimpleIntegerProperty;
-import walkgame.objects.microObjects.Coordinates;
+import javafx.geometry.Point2D;
 
 public abstract class Gun {//todo: meer guns en ammo
 
@@ -26,11 +26,11 @@ public abstract class Gun {//todo: meer guns en ammo
         this.shooting = false;
     }
 
-    public abstract void shoot(Coordinates gunCoordinates, Coordinates directionCoordinates);
+    public abstract void shoot(Point2D gunCoordinates, Point2D directionCoordinates);
 
     public abstract void releaseTrigger();
 
-    abstract void shootBullet(Coordinates gunCoordinates, Coordinates directionCoordinates);
+    abstract void shootBullet(Point2D gunCoordinates, Point2D directionCoordinates);
 
     protected void removeBulletFromClip()
     {

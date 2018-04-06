@@ -1,8 +1,8 @@
 package walkgame.objects.microObjects.guns;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Point2D;
 import walkgame.objects.cast.bullets.PistolBullet;
-import walkgame.objects.microObjects.Coordinates;
 
 public class Pistol extends SemiAutomaticGun {
 
@@ -17,7 +17,7 @@ public class Pistol extends SemiAutomaticGun {
     }
 
     @Override
-    void shootBullet(Coordinates gunCoordinates, Coordinates directionCoordinates)
+    void shootBullet(Point2D gunCoordinates, Point2D directionCoordinates)
     {
         new PistolBullet(gunCoordinates, directionCoordinates);
     }

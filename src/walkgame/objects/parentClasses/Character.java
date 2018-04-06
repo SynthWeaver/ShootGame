@@ -1,16 +1,16 @@
 package walkgame.objects.parentClasses;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.microObjects.Angle;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.Sprites;
 
 public abstract class Character extends ImageViewObject implements Moveable, Destructible
 {
-    public Character(Sprites sprites, Coordinates coordinates, SimpleIntegerProperty health, double speed) {
+    public Character(Sprites sprites, Point2D coordinates, SimpleIntegerProperty health, double speed) {
         super(coordinates);
         this.speed = speed;
         this.sprites = sprites;

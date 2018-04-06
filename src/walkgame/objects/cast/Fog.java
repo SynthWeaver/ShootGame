@@ -17,7 +17,7 @@ public class Fog extends ImageViewObject
 
     public Fog(Room room)
     {
-        super(room.getImage(), room.getCoordinate());
+        super(room.getImage(), room.getPoint2D());
         hideFog();
         this.room = room;
         setToFogToUnknown();

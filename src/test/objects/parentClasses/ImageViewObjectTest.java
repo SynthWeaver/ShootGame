@@ -1,10 +1,10 @@
 package test.objects.parentClasses;
 
+import javafx.geometry.Point2D;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
 import walkgame.objects.map.Room;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.parentClasses.ImageViewObject;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +16,7 @@ class ImageViewObjectTest extends TestClasses {
     @BeforeEach
     void setUp() {
         super.innit();
-        imageViewObject = new Room(new Coordinates(0,0));
+        imageViewObject = new Room(new Point2D(0,0));
     }
 
     @Test
@@ -30,17 +30,17 @@ class ImageViewObjectTest extends TestClasses {
     void containsObject() {
         assertTrue(imageViewObject.contains(player.getPoint2D()));
 
-        assertFalse(player.contains((new Room(new Coordinates(300, 300))).getPoint2D()));
+        assertFalse(player.contains((new Room(new Point2D(300, 300))).getPoint2D()));
     }
 
     @Test
     void getCenter() {
-        Coordinates a = room.getCenter();
-        Coordinates b = new Coordinates(150,150);
+        Point2D a = room.getSceneCenter();
+        Point2D b = new Point2D(150,150);
 
         assertTrue(a.equals(b));
 
-        b = new Coordinates(100,100);
+        b = new Point2D(100,100);
         
         assertFalse(a.equals(b));
     }

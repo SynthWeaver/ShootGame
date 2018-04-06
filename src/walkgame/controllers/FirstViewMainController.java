@@ -1,16 +1,17 @@
 package walkgame.controllers;
 
 
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import walkgame.controllers.parentClasses.MainController;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.objects.hud.Hud;
 import walkgame.objects.hud.Player;
 import walkgame.objects.map.Room;
 import walkgame.objects.microObjects.Controlls;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.views.FirstMainView;
 import walkgame.views.parentClasses.MainView;
 
@@ -34,10 +35,14 @@ public class FirstViewMainController extends MainController {
         controlls.releaseButton((char) k.getCode());
     }
 
-    public void mouseClick(Coordinates mouseCoordinates)
+    public void mouseClick(Point2D mouseCoordinates)
     {
-        Coordinates screenCenter = MainView.getScreenCenter().getRelativisedHudCoordinate();
-        firstView.player.getCurrentGun().shoot(screenCenter, mouseCoordinates.getRelativisedHudCoordinate());
+        Player player = MainView.getCurrentPlayer();//todo: scene coordinates
+
+        Point2D relativePlayerCenter =  Hud.hudToMovableGroup(player.getSceneCenter());
+        Point2D relativeMouseCoordinates = Hud.hudToMovableGroup(mouseCoordinates);
+
+        firstView.player.getCurrentGun().shoot(relativePlayerCenter, relativeMouseCoordinates);
     }
 
     public void mouseRelease()
@@ -78,8 +83,9 @@ public class FirstViewMainController extends MainController {
             Room room = (Room) node;
             Player player = firstView.player;
 
-            //player center collission
-            if(room.contains(player.getSceneHorizontalCenter() - 0.5, player.getSceneVerticalCenter() - 0.5))
+            Point2D relativePlayerCenter = Hud.hudToMovableGroup(player.getSceneCenter().subtract(0.5, 0.5));
+
+            if(room.contains(relativePlayerCenter))
             {
                 if(!Room.lastVisitedRoom.equals(room)) {
                     room.enterRoom();

@@ -1,9 +1,9 @@
 package test.objects.microObjects.guns;
 
+import javafx.geometry.Point2D;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
-import walkgame.objects.microObjects.Coordinates;
 import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.microObjects.guns.Pistol;
 
@@ -22,7 +22,7 @@ class GunTest extends TestClasses {
     @Test
     void removeBulletFromClip() {
         int ammo = gun.getClipAmmo().get();
-        gun.shoot(new Coordinates(0,0), new Coordinates(300,0));
+        gun.shoot(new Point2D(0,0), new Point2D(300,0));
 
         int expeted = ammo;
         int actual = gun.getClipAmmo().get();

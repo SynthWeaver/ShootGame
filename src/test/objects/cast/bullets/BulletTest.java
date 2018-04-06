@@ -1,11 +1,11 @@
 package test.objects.cast.bullets;
 
+import javafx.geometry.Point2D;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
 import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.cast.bullets.PistolBullet;
-import walkgame.objects.microObjects.Coordinates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -17,7 +17,7 @@ class BulletTest extends TestClasses {
     @BeforeEach
     void setUp() {
         super.innit();
-        bullet = new PistolBullet(new Coordinates(0, 0), new Coordinates(300, 0));
+        bullet = new PistolBullet(new Point2D(0, 0), new Point2D(300, 0));
     }
 
     @Test
