@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.objects.hud.Hud;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
@@ -90,10 +91,8 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
         double x = super.getX();
         double y = super.getY();
 
-        Point2D screen = new Point2D(0,0);
-        Point2D screenSize = MainView.screenSize;
-
-        //todo:
+        Point2D screen = Hud.hudToMovableGroup(new Point2D(0,0));
+        Point2D screenSize = Hud.hudToMovableGroup(MainView.screenSize);
 
         if(x > screenSize.getX() + 20 || x < screen.getX() - 20)
         {
