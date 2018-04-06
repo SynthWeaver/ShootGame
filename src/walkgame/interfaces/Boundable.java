@@ -22,4 +22,6 @@ public interface Boundable {
     boolean contains(Point2D point2D);
     boolean contains(double x, double y);
 
+    boolean isSolid();
+
 }

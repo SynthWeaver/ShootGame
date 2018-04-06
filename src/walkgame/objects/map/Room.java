@@ -23,7 +23,7 @@ public class Room extends ImageViewObject
     public Room roomSouth;
     public Room roomWest;
     public ArrayList<Room> nextRooms;
-    public ArrayList<Node> sollidObjects = new ArrayList<>();
+    public ArrayList<ImageViewObject> sollidObjects = new ArrayList<>();
 
     public Point2D NORTH_ROOM_COORDINATES;
     public Point2D EAST_ROOM_COORDINATES;
@@ -173,9 +173,9 @@ public class Room extends ImageViewObject
         double velocityX = moveableNode.getVelocityX();
         double velocityY = moveableNode.getVelocityY();
 
-        for (Node sollidNode : sollidObjects)
+        for (ImageViewObject sollidNode : sollidObjects)
         {
-            if(!sollidNode.equals(moveableNode))
+            if(!sollidNode.equals(moveableNode) && sollidNode.isSolid())
             {
                 ImageViewObject object = (ImageViewObject) sollidNode;
                 //North + South

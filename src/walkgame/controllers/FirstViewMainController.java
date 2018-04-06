@@ -90,7 +90,7 @@ public class FirstViewMainController extends MainController {
             {
                 if(!Room.lastVisitedRoom.equals(room)) {
                     room.enterRoom();
-                    player.currentRoom = room;
+                    player.setCurrentRoom(room);
                     break;
                 }
             }

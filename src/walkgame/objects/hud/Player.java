@@ -25,7 +25,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     private String name;
     private Gun currentGun;
-    public Room currentRoom;
+    private Room currentRoom;
 
     private static final Sprites PLAYER_SPRITES = new Sprites(
             new Image("walkgame/res/player/none/north.png"),
@@ -67,6 +67,10 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         return currentGun;
     }
 
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
     @Override
     public Point2D getPoint2D()
     {
@@ -77,6 +81,10 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     public Point2D getMaxPoint2D()
     {
         return Hud.hudToMovableGroup(super.getMaxPoint2D());
+    }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
     }
 
     @Override

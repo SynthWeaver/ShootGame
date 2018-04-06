@@ -5,13 +5,14 @@ import javafx.scene.Node;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.hud.Player;
-import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
 
 import java.util.Collection;
 
 public class MovableGroup extends javafx.scene.Group implements Controllable, Moveable
 {
+    private static final boolean isSolid = false;
+
     private double speed = 1.5;
     private double velocityX = 0;
     private double velocityY = 0;
@@ -59,27 +60,12 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
 
         //check if player has collision with something sollit from player currents room
         Player player = MainView.getCurrentPlayer();
-        for (Node node : player.currentRoom.sollidObjects)
-        {
-            if(node instanceof ImageViewObject && !node.equals(player))
-            {
-                ImageViewObject object = (ImageViewObject) node;
-                if(object.isSolid())
-                {
-                    //North + South
-                    if(player.contains(object.getX() , object.getMaxY() + velocityY) || player.contains(object.getX() , object.getY() + velocityY))
-                    {
-                        velocityY = 0;//todo: player kan via deur vast zitten in de muur.
-                    }
-                    //East + West
-                    if(player.contains(object.getX() + velocityX, object.getY()) || player.contains(object.getMaxX() + velocityX, object.getMaxY()))
-                    {
-                        velocityX = 0;
-                    }
-                    if(velocityX == 0 && velocityY == 0){return;}
-                }
-            }
-        }
+        player.setVelocityX(this.velocityX);
+        player.setVelocityY(this.velocityY);
+
+        double[] velocityList = player.getCurrentRoom().hasCollisionWith(player);
+        this.velocityX = velocityList[0];
+        this.velocityY = velocityList[1];
 
         if(velocityX != 0 || velocityY != 0 ) {
             double x = getX();
@@ -255,6 +241,11 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         else if(k == Controlls.left) {
             goWest = false;
         }
+    }
+
+    @Override
+    public boolean isSolid() {
+        return isSolid;
     }
 
     @Override
