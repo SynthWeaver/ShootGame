@@ -68,7 +68,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     public Room getCurrentRoom() {
-        return currentRoom;
+         return currentRoom;
     }
 
     @Override

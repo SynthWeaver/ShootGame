@@ -7,6 +7,7 @@ import walkgame.interfaces.Moveable;
 import walkgame.objects.hud.Player;
 import walkgame.views.parentClasses.MainView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class MovableGroup extends javafx.scene.Group implements Controllable, Moveable
@@ -63,9 +64,17 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         player.setVelocityX(this.velocityX);
         player.setVelocityY(this.velocityY);
 
-        double[] velocityList = player.getCurrentRoom().hasCollisionWith(player);
-        this.velocityX = velocityList[0];
-        this.velocityY = velocityList[1];
+        ArrayList<Character> directionList = player.getCurrentRoom().getCollisionWith(player);
+        for(char direction : directionList)
+        {
+            switch (direction)
+            {
+                case Compass.NORTH : velocityY = 0; break;
+                case Compass.SOUTH: velocityY = 0; break;
+                case Compass.EAST: velocityX = 0; break;
+                case Compass.WEST: velocityX = 0; break;
+            }
+        }
 
         if(velocityX != 0 || velocityY != 0 ) {
             double x = getX();

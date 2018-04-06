@@ -3,10 +3,12 @@ package walkgame.objects.cast.bullets;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.hud.Hud;
+import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
@@ -94,7 +96,11 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
         Point2D screen = Hud.hudToMovableGroup(new Point2D(0,0));
         Point2D screenSize = Hud.hudToMovableGroup(MainView.screenSize);
 
-        if(x > screenSize.getX() + 20 || x < screen.getX() - 20)
+        if(hasCollision())
+        {
+            this.setHealth(0);
+        }
+        else if(x > screenSize.getX() + 20 || x < screen.getX() - 20)
         {
             this.setHealth(0);
         }
@@ -107,6 +113,20 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
             super.setX(x + velocityX);
             super.setY(y + velocityY);
         }
+    }
+
+    private boolean hasCollision()
+    {
+
+        for(Node node : Player.group.getChildren())
+        {
+            Player player = (Player) node;
+            if(player.getCurrentRoom().hasCollisionWith(this))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

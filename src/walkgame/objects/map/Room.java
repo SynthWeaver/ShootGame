@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Moveable;
 import walkgame.objects.cast.Fog;
+import walkgame.objects.microObjects.Compass;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
 
@@ -168,33 +169,49 @@ public class Room extends ImageViewObject
      * @param moveableNode A Moveable object that can be compared
      * @return velocityX and VelocityY
      */
-    public double[] hasCollisionWith(Moveable moveableNode)
+    public ArrayList<Character> getCollisionWith(Moveable moveableNode)
     {
         double velocityX = moveableNode.getVelocityX();
         double velocityY = moveableNode.getVelocityY();
+
+        ArrayList<Character> direction = new ArrayList<>();
 
         for (ImageViewObject sollidNode : sollidObjects)
         {
             if(!sollidNode.equals(moveableNode) && sollidNode.isSolid())
             {
-                ImageViewObject object = (ImageViewObject) sollidNode;
-                //North + South
-                if(moveableNode.contains(object.getX() , object.getMaxY() + velocityY) || moveableNode.contains(object.getX() , object.getY() + velocityY))
+                //North
+                if(moveableNode.contains(sollidNode.getX() , sollidNode.getMaxY() + velocityY))//todo: player kan via deur vast zitten in de muur.
                 {
-                    velocityY = 0;//todo: player kan via deur vast zitten in de muur.
+                    direction.add(Compass.NORTH);
                 }
-                //East + West
-                if(moveableNode.contains(object.getX() + velocityX, object.getY()) || moveableNode.contains(object.getMaxX() + velocityX, object.getMaxY()))
+                //East
+                if(moveableNode.contains(sollidNode.getX() + velocityX, sollidNode.getY()))
                 {
-                    velocityX = 0;
+                    direction.add(Compass.EAST);
                 }
-                if(velocityX == 0 && velocityY == 0)
+                //South
+                if(moveableNode.contains(sollidNode.getX() , sollidNode.getY() + velocityY))
+                {
+                    direction.add(Compass.SOUTH);
+                }
+                //West
+                if(moveableNode.contains(sollidNode.getMaxX() + velocityX, sollidNode.getMaxY()))
+                {
+                    direction.add(Compass.WEST);
+                }
+                if(direction.size() >= 2)
                 {
                     break;
                 }
             }
         }
-        return new double[]{velocityX, velocityY};
+        return direction;
+    }
+
+    public boolean hasCollisionWith(Moveable moveableNode)
+    {
+        return getCollisionWith(moveableNode).size() >= 1;
     }
 
     private void scoutFog()

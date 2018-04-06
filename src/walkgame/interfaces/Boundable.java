@@ -23,5 +23,4 @@ public interface Boundable {
     boolean contains(double x, double y);
 
     boolean isSolid();
-
 }
