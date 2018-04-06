@@ -36,6 +36,12 @@ public abstract class PaneObject extends Pane implements NodeInterface
     }
 
     @Override
+    public Point2D getMaxPoint2D() {
+        Point2D point2D = new  Point2D(this.getMaxX(), this.getMaxY());
+        return point2D;
+    }
+
+    @Override
     public abstract void addNodeToList();
 
     private Bounds getSceneBounds()

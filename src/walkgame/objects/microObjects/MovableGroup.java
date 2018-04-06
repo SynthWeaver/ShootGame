@@ -57,6 +57,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
             return;
         }
 
+        //check if player has collision with something sollit from player currents room
         Player player = MainView.getCurrentPlayer();
         for (Node node : player.currentRoom.sollidObjects)
         {
@@ -66,12 +67,12 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
                 if(object.isSolid())
                 {
                     //North + South
-                    if(player.contains(object.getX() , object.getMaxY() + velocityY) || player.contains(object.getX() , object.getY() + velocityY))
+                    if(player.containsHudToMovableGroup(object.getX() , object.getMaxY() + velocityY) || player.containsHudToMovableGroup(object.getX() , object.getY() + velocityY))
                     {
-                        velocityY = 0;
+                        velocityY = 0;//todo: player kan via deur vast zitten in de muur.
                     }
                     //East + West
-                    if(player.contains(object.getX() + velocityX, object.getY()) || player.contains(object.getMaxX() + velocityX, object.getMaxY()))
+                    if(player.containsHudToMovableGroup(object.getX() + velocityX, object.getY()) || player.containsHudToMovableGroup(object.getMaxX() + velocityX, object.getMaxY()))
                     {
                         velocityX = 0;
                     }

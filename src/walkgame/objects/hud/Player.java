@@ -1,6 +1,7 @@
 package walkgame.objects.hud;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -64,6 +65,33 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     public Gun getCurrentGun() {
         return currentGun;
+    }
+
+    public Point2D getGroupPoint2dHudToMovable()
+    {
+        return Hud.hudToMovableGroup(super.getPoint2D());
+    }
+
+    public Point2D getMaxGroupPoint2dHudToMovable()
+    {
+        return Hud.hudToMovableGroup(super.getMaxPoint2D());
+    }
+
+    public boolean containsHudToMovableGroup(double localX, double localY) {
+        return this.containsHudToMovableGroup(new Point2D(localX, localY));
+    }
+
+    public boolean containsHudToMovableGroup(Point2D point2D) {
+        Point2D playerCoordinates = this.getGroupPoint2dHudToMovable();
+
+        double playerX = playerCoordinates.getX();
+        double playerY = playerCoordinates.getY();
+        double playerWidth = super.getWidth();
+        double playerHeight = super.getHeight();
+
+        BoundingBox relativePlayerBox = new BoundingBox(playerX, playerY, playerWidth, playerHeight);
+
+        return relativePlayerBox.contains(point2D);
     }
 
     @Override

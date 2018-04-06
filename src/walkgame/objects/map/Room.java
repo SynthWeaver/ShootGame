@@ -46,6 +46,8 @@ public class Room extends ImageViewObject
     private void innit(Image image)
     {
         visited = false;
+        System.out.println(String.format("Room: %s has been created (%s, %S)", this, this.getX(), this.getY()));
+
         renderWalls();
 
         NORTH_ROOM_COORDINATES = new Point2D(super.getX(), super.getY() - super.getHeight());

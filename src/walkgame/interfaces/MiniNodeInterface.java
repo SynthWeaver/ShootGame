@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 
 public interface MiniNodeInterface {
     Point2D getPoint2D();
+    Point2D getMaxPoint2D();
 
     double getX();
     double getY();

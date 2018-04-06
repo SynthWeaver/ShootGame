@@ -30,7 +30,14 @@ public abstract class ImageViewObject extends ImageView implements NodeInterface
     @Override
     public Point2D getPoint2D()
     {
-        Point2D point2D = new  Point2D(this.getX(), this.getY());
+        Point2D point2D = new Point2D(this.getX(), this.getY());
+        return point2D;
+    }
+
+    @Override
+    public Point2D getMaxPoint2D()
+    {
+        Point2D point2D = new Point2D(this.getMaxX(), this.getMaxY());
         return point2D;
     }
 
