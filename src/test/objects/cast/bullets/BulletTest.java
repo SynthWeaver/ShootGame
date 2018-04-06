@@ -7,8 +7,7 @@ import test.TestClasses;
 import walkgame.objects.cast.bullets.Bullet;
 import walkgame.objects.cast.bullets.PistolBullet;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BulletTest extends TestClasses {
 
@@ -17,27 +16,50 @@ class BulletTest extends TestClasses {
     @BeforeEach
     void setUp() {
         super.innit();
-        bullet = new PistolBullet(new Point2D(0, 0), new Point2D(300, 0));
+        bullet = new PistolBullet(new Point2D(150, 150), new Point2D(300, 0));
     }
 
     @Test
     void move() {
-        double x = bullet.getX();
+        double expected = bullet.getX();
         bullet.move();
 
-        double expected = x;
         double actual = bullet.getX();
         assertNotEquals(expected, actual);
+    }
 
-        int expected2 = 1;
-        int actual2 = bullet.getHealth().get();
-        assertEquals(expected2, actual2);
+    @Test
+    void destroy() {
+        int expected = 1;
+        int actual = bullet.getHealth().get();
+        assertEquals(expected, actual);
 
         bullet.setX(1000);
         bullet.move();
 
-        expected2 = 0;
-        actual2 = bullet.getHealth().get();
-        assertEquals(expected2, actual2);
+        expected = 0;
+        actual = bullet.getHealth().get();
+        assertEquals(expected, actual);
+
+        bullet.destroy();
+
+        assertTrue(Bullet.group.getChildren().isEmpty());
+    }
+
+    @Test
+    void WallCollision() {
+        bullet.move();
+
+        int expected = 1;
+        int actual = bullet.getHealth().get();
+        assertEquals(expected, actual);
+
+        bullet.setX(0);
+        bullet.setY(0);
+        bullet.move();
+
+        expected = 0;
+        actual = bullet.getHealth().get();
+        assertEquals(expected, actual);
     }
 }

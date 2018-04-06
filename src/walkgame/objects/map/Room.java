@@ -176,27 +176,27 @@ public class Room extends ImageViewObject
 
         ArrayList<Character> direction = new ArrayList<>();
 
-        for (ImageViewObject sollidNode : sollidObjects)
+        for (ImageViewObject sollidNode : sollidObjects)//todo: player kan via deur vast zitten in de muur.
         {
             if(!sollidNode.equals(moveableNode) && sollidNode.isSolid())
             {
                 //North
-                if(moveableNode.contains(sollidNode.getX() , sollidNode.getMaxY() + velocityY))//todo: player kan via deur vast zitten in de muur.
+                if(moveableNode.contains(sollidNode.getX() , sollidNode.getMaxY() + velocityY) && !direction.contains(Compass.NORTH))
                 {
                     direction.add(Compass.NORTH);
                 }
                 //East
-                if(moveableNode.contains(sollidNode.getX() + velocityX, sollidNode.getY()))
+                if(moveableNode.contains(sollidNode.getX() + velocityX, sollidNode.getY()) && !direction.contains(Compass.EAST))
                 {
                     direction.add(Compass.EAST);
                 }
                 //South
-                if(moveableNode.contains(sollidNode.getX() , sollidNode.getY() + velocityY))
+                if(moveableNode.contains(sollidNode.getX() , sollidNode.getY() + velocityY) && !direction.contains(Compass.SOUTH))
                 {
                     direction.add(Compass.SOUTH);
                 }
                 //West
-                if(moveableNode.contains(sollidNode.getMaxX() + velocityX, sollidNode.getMaxY()))
+                if(moveableNode.contains(sollidNode.getMaxX() + velocityX, sollidNode.getMaxY()) && !direction.contains(Compass.WEST))
                 {
                     direction.add(Compass.WEST);
                 }

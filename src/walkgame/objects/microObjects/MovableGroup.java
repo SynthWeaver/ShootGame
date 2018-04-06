@@ -54,27 +54,11 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         {
             velocityX = 0;
         }
-
         if(velocityX == 0 && velocityY == 0 ) {
             return;
         }
 
-        //check if player has collision with something sollit from player currents room
-        Player player = MainView.getCurrentPlayer();
-        player.setVelocityX(this.velocityX);
-        player.setVelocityY(this.velocityY);
-
-        ArrayList<Character> directionList = player.getCurrentRoom().getCollisionWith(player);
-        for(char direction : directionList)
-        {
-            switch (direction)
-            {
-                case Compass.NORTH : velocityY = 0; break;
-                case Compass.SOUTH: velocityY = 0; break;
-                case Compass.EAST: velocityX = 0; break;
-                case Compass.WEST: velocityX = 0; break;
-            }
-        }
+        checkCollision();
 
         if(velocityX != 0 || velocityY != 0 ) {
             double x = getX();
@@ -82,6 +66,24 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
 
             setX(x + velocityX);
             setY(y + velocityY);
+        }
+    }
+
+    private void checkCollision() {
+        //check if player has collision with something sollit from player currents room
+        Player player = MainView.getCurrentPlayer();
+        player.setVelocityX(this.velocityX);
+        player.setVelocityY(this.velocityY);
+
+        ArrayList<Character> directionList = player.getCurrentRoom().getCollisionWith(player);
+
+        if(directionList.contains(Compass.EAST) || directionList.contains(Compass.WEST))
+        {
+            this.velocityX = 0;
+        }
+        if(directionList.contains(Compass.NORTH) || directionList.contains(Compass.SOUTH))
+        {
+            this.velocityY = 0;
         }
     }
 

@@ -22,7 +22,7 @@ public class Controlls {
         }
     }
 
-    public void releaseButton(Character keyPressed)
+    public void releaseButton(Character keyPressed)//todo: van schermwisselen verpest dit
     {
         Key[] keyList = {up, left, down, right};
 

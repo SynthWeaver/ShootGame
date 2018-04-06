@@ -7,7 +7,6 @@ public class Functions {
         double angle = Math.toDegrees(Math.atan2(target.getY() - start.getY(), target.getX() - start.getX()));
         angle += 90;
 
-
         if(angle < 0){
             angle += 360;
         }
