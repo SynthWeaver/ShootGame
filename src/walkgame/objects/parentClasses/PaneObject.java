@@ -4,9 +4,9 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import walkgame.interfaces.NodeInterface;
+import walkgame.interfaces.ImageViewInterface;
 
-public abstract class PaneObject extends Pane implements NodeInterface
+public abstract class PaneObject extends Pane implements ImageViewInterface
 {
     public PaneObject(Point2D coordinates)
     {

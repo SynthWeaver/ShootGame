@@ -3,9 +3,9 @@ package walkgame.objects.parentClasses;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import walkgame.interfaces.NodeInterface;
+import walkgame.interfaces.ImageViewInterface;
 
-public abstract class ImageViewObject extends ImageView implements NodeInterface
+public abstract class ImageViewObject extends ImageView implements ImageViewInterface
 {
     public ImageViewObject(Point2D point2D)
     {

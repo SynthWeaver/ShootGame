@@ -67,22 +67,26 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         return currentGun;
     }
 
-    public Point2D getGroupPoint2dHudToMovable()
+    @Override
+    public Point2D getPoint2D()
     {
         return Hud.hudToMovableGroup(super.getPoint2D());
     }
 
-    public Point2D getMaxGroupPoint2dHudToMovable()
+    @Override
+    public Point2D getMaxPoint2D()
     {
         return Hud.hudToMovableGroup(super.getMaxPoint2D());
     }
 
-    public boolean containsHudToMovableGroup(double localX, double localY) {
-        return this.containsHudToMovableGroup(new Point2D(localX, localY));
+    @Override
+    public boolean contains(double localX, double localY) {
+        return this.contains(new Point2D(localX, localY));
     }
 
-    public boolean containsHudToMovableGroup(Point2D point2D) {
-        Point2D playerCoordinates = this.getGroupPoint2dHudToMovable();
+    @Override
+    public boolean contains(Point2D point2D) {
+        Point2D playerCoordinates = this.getPoint2D();
 
         double playerX = playerCoordinates.getX();
         double playerY = playerCoordinates.getY();

@@ -1,6 +1,6 @@
 package walkgame.interfaces;
 
-public interface Moveable
+public interface Moveable extends Boundable
 {
     void move();
     void rotateImage();

@@ -2,7 +2,7 @@ package walkgame.interfaces;
 
 import javafx.geometry.Point2D;
 
-public interface MiniNodeInterface {
+public interface Boundable {
     Point2D getPoint2D();
     Point2D getMaxPoint2D();
 
@@ -18,4 +18,8 @@ public interface MiniNodeInterface {
 
     void setX(double x);
     void setY(double y);
+
+    boolean contains(Point2D point2D);
+    boolean contains(double x, double y);
+
 }

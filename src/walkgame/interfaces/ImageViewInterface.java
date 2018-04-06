@@ -1,7 +1,7 @@
 package walkgame.interfaces;
 
 
-public interface NodeInterface extends MiniNodeInterface
+public interface ImageViewInterface extends Boundable
 {
     boolean isSolid();
     void addNodeToList();

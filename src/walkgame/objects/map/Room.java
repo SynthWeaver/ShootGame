@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import walkgame.interfaces.Moveable;
 import walkgame.objects.cast.Fog;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
@@ -160,6 +161,40 @@ public class Room extends ImageViewObject
                 new Wall(new Point2D(getX() + i, getMaxY() - wallSize), this);
             }
         }
+    }
+
+    /**
+     * Compares the parameter with all Sollid objects in this room
+     * @param moveableNode A Moveable object that can be compared
+     * @return velocityX and VelocityY
+     */
+    public double[] hasCollisionWith(Moveable moveableNode)
+    {
+        double velocityX = moveableNode.getVelocityX();
+        double velocityY = moveableNode.getVelocityY();
+
+        for (Node sollidNode : sollidObjects)
+        {
+            if(!sollidNode.equals(moveableNode))
+            {
+                ImageViewObject object = (ImageViewObject) sollidNode;
+                //North + South
+                if(moveableNode.contains(object.getX() , object.getMaxY() + velocityY) || moveableNode.contains(object.getX() , object.getY() + velocityY))
+                {
+                    velocityY = 0;//todo: player kan via deur vast zitten in de muur.
+                }
+                //East + West
+                if(moveableNode.contains(object.getX() + velocityX, object.getY()) || moveableNode.contains(object.getMaxX() + velocityX, object.getMaxY()))
+                {
+                    velocityX = 0;
+                }
+                if(velocityX == 0 && velocityY == 0)
+                {
+                    break;
+                }
+            }
+        }
+        return new double[]{velocityX, velocityY};
     }
 
     private void scoutFog()

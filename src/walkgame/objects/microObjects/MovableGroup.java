@@ -67,12 +67,12 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
                 if(object.isSolid())
                 {
                     //North + South
-                    if(player.containsHudToMovableGroup(object.getX() , object.getMaxY() + velocityY) || player.containsHudToMovableGroup(object.getX() , object.getY() + velocityY))
+                    if(player.contains(object.getX() , object.getMaxY() + velocityY) || player.contains(object.getX() , object.getY() + velocityY))
                     {
                         velocityY = 0;//todo: player kan via deur vast zitten in de muur.
                     }
                     //East + West
-                    if(player.containsHudToMovableGroup(object.getX() + velocityX, object.getY()) || player.containsHudToMovableGroup(object.getMaxX() + velocityX, object.getMaxY()))
+                    if(player.contains(object.getX() + velocityX, object.getY()) || player.contains(object.getMaxX() + velocityX, object.getMaxY()))
                     {
                         velocityX = 0;
                     }
@@ -101,6 +101,20 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     }
 
     @Override
+    public Point2D getPoint2D()
+    {
+        Point2D point2D = new Point2D(this.getX(), this.getY());
+        return point2D;
+    }
+
+    @Override
+    public Point2D getMaxPoint2D()
+    {
+        Point2D point2D = new Point2D(this.getMaxX(), this.getMaxY());
+        return point2D;
+    }
+
+    @Override
     public double getX() {
         return super.getLayoutX();
     }
@@ -110,10 +124,46 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         return super.getLayoutY();
     }
 
-    public Point2D getPoint2D()
+    @Override
+    public double getMaxX()
     {
-        Point2D point2D = new  Point2D(this.getX(), this.getY());
-        return point2D;
+        return this.getX() + getWidth();
+    }
+
+    @Override
+    public double getMaxY()
+    {
+        return this.getY() + getHeight();
+    }
+
+    @Override
+    public double getWidth()
+    {
+        return this.getBoundsInParent().getWidth();
+    }
+
+    @Override
+    public double getHeight()
+    {
+        return this.getBoundsInParent().getHeight();
+    }
+
+    @Override
+    public double getSceneHorizontalCenter()
+    {
+        return getX() + (getWidth() / 2f);
+    }
+
+    @Override
+    public double getSceneVerticalCenter()
+    {
+        return getY() + (getHeight() / 2f);
+    }
+
+    @Override
+    public Point2D getSceneCenter()
+    {
+        return new Point2D(getSceneHorizontalCenter(), getSceneVerticalCenter());
     }
 
     @Override
