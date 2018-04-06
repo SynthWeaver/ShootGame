@@ -1,6 +1,5 @@
 package walkgame.objects.cast.bullets;
 
-import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -44,7 +43,6 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
     public void destroy()
     {
         Bullet.group.getChildren().remove(this);
-        GameLoop.doLogicUpdate();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package walkgame.objects.hud;
 
-import gameloop.GameLoop;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -168,7 +167,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void destroy() {
         Player.group.getChildren().remove(this);
-        GameLoop.doLogicUpdate();
     }
 
     @Override

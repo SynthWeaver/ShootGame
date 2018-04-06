@@ -8,6 +8,7 @@ import walkgame.controllers.parentClasses.MainController;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.interfaces.Shootable;
 import walkgame.objects.hud.Hud;
 import walkgame.objects.hud.Player;
 import walkgame.objects.map.Room;
@@ -111,6 +112,24 @@ public class FirstViewMainController extends MainController {
         {
             MainView.getRoot().remove(destructible);
             destructible.destroy();
+
+            if(destructible instanceof Controllable)
+            {
+                MainView.CONTROLLABLE_LIST.remove(destructible);
+            }
+
+            MainView.DESTRUCTIBLE_LIST.remove(destructible);
+
+            if(destructible instanceof Moveable)
+            {
+                MainView.MOVEABLE_LIST.remove(destructible);
+            }
+            if(destructible instanceof Shootable)
+            {
+                MainView.SHOOTABLE_LIST.remove(destructible);
+            }
+
+            System.out.println(String.format("Object %s has been destroyed", destructible));
         }
     }
 }
