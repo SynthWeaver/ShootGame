@@ -93,8 +93,6 @@ public abstract class Character extends StackPaneObject implements Moveable, Des
         }
     }
 
-
-
     @Override
     public void rotateImage() {
         double rotate = 0;

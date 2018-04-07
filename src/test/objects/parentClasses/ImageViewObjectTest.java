@@ -35,7 +35,7 @@ class ImageViewObjectTest extends TestClasses {
 
     @Test
     void getCenter() {
-        Point2D a = room.getSceneCenter();
+        Point2D a = room.getCenter();
         Point2D b = new Point2D(150,150);
 
         assertTrue(a.equals(b));

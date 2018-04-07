@@ -15,7 +15,7 @@ public interface Boundable {
     Point2D getSize();
     double getSceneHorizontalCenter();
     double getSceneVerticalCenter();
-    Point2D getSceneCenter();
+    Point2D getCenter();
 
     void setX(double x);
     void setY(double y);

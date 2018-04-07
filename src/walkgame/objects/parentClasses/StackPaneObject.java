@@ -101,7 +101,7 @@ public abstract class StackPaneObject extends StackPane implements ObjectInGame
     }
 
     @Override
-    public Point2D getSceneCenter()
+    public Point2D getCenter()
     {
         return new Point2D(getSceneHorizontalCenter(), getSceneVerticalCenter());
     }

@@ -1,7 +1,6 @@
 package test.objects.hud;
 
 import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import test.TestClasses;
@@ -19,16 +18,16 @@ class PlayerTest extends TestClasses {
 
     @Test
     void rotateImage() {
-        Image image = player.getImage();
-
-        Image expected = image;
-        Image actual = player.getImage();
+        double expected = 0;
+        double actual = player.getRotate();
         assertEquals(expected, actual);
+
+        expected = player.getRotate();
 
         player.rotateImage(new Point2D(100, 100));
 
-        expected = image;
-        actual = player.getImage();
+        actual = player.getRotate();
+
         assertNotEquals(expected, actual);
     }
 

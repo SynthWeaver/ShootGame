@@ -47,7 +47,7 @@ public class FirstViewMainController extends MainController {
     {
         Player player = MainView.getCurrentPlayer();
 
-        Point2D relativePlayerCenter =  Hud.hudToMovableGroup(player.getSceneCenter());
+        Point2D relativePlayerCenter = player.getCenter();
         Point2D relativeMouseCoordinates = Hud.hudToMovableGroup(mouseCoordinates);
 
         firstView.player.getCurrentGun().shoot(relativePlayerCenter, relativeMouseCoordinates);
@@ -91,7 +91,7 @@ public class FirstViewMainController extends MainController {
             Room room = (Room) node;
             Player player = firstView.player;
 
-            Point2D relativePlayerCenter = Hud.hudToMovableGroup(player.getSceneCenter().subtract(0.5, 0.5));
+            Point2D relativePlayerCenter = player.getCenter().subtract(0.5, 0.5);
 
             if(room.contains(relativePlayerCenter))
             {

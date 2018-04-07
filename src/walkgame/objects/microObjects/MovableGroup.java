@@ -159,7 +159,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     }
 
     @Override
-    public Point2D getSceneCenter()
+    public Point2D getCenter()
     {
         return new Point2D(getSceneHorizontalCenter(), getSceneVerticalCenter());
     }

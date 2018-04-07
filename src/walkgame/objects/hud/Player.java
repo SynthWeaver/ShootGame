@@ -2,8 +2,10 @@ package walkgame.objects.hud;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
@@ -44,7 +46,7 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         super.setY(playerSpawn.getY());
     }
 
-    public Player( String name, Gun currentGun)
+    public Player(String name, Gun currentGun)
     {
         this(new Image[]{STANDARD_IMAGE, currentGun.getImage()}, name, currentGun);
     }
@@ -74,8 +76,8 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public Point2D getSceneCenter() {
-        return Hud.hudToMovableGroup(super.getSceneCenter());
+    public Point2D getCenter() {
+        return Hud.hudToMovableGroup(super.getCenter());
     }
 
     @Override
@@ -83,16 +85,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     {
         return Hud.hudToMovableGroup(super.getMaxPoint2D());
     }
-
-    /*@Override
-    public double getRealWidth() {
-        return Player.STANDARD_IMAGE.getWidth();
-    }
-
-    @Override
-    public double getRealHeight() {
-        return Player.STANDARD_IMAGE.getHeight();
-    }*/
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
@@ -105,17 +97,24 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     @Override
     public boolean contains(Point2D point2D) {//todo: heeft nog bugs
-        Point2D relativeCenter = Hud.hudToMovableGroup(super.getSceneCenter());
+        Bounds bounds = getPlayerImageBounds();
 
-        double playerWidth = Player.STANDARD_IMAGE.getWidth();
-        double playerHeight = Player.STANDARD_IMAGE.getHeight();
+        Point2D relativeCoordinate = this.getPoint2D();
 
-        double playerX = relativeCenter.getX() - (playerWidth / 2f);
-        double playerY = relativeCenter.getY() - (playerHeight / 2f);
+        double playerX = relativeCoordinate.getX() + bounds.getMinX();
+        double playerY = relativeCoordinate.getY() + bounds.getMinY();
+        double playerWidth = bounds.getWidth();
+        double playerHeight = bounds.getHeight();
 
         BoundingBox relativePlayerBox = new BoundingBox(playerX, playerY, playerWidth, playerHeight);
 
         return relativePlayerBox.contains(point2D);
+    }
+
+    private Bounds getPlayerImageBounds()
+    {
+        Node node = super.getChildren().get(0);
+        return node.getBoundsInParent();
     }
 
     @Override

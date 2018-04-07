@@ -87,7 +87,7 @@ public abstract class ImageViewObject extends ImageView implements ObjectInGame
     }
 
     @Override
-    public Point2D getSceneCenter()
+    public Point2D getCenter()
     {
         return new Point2D(getSceneHorizontalCenter(), getSceneVerticalCenter());
     }
