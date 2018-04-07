@@ -54,9 +54,6 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         {
             velocityX = 0;
         }
-        if(velocityX == 0 && velocityY == 0 ) {
-            return;
-        }
 
         checkCollision();
 

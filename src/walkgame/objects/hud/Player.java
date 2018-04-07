@@ -183,10 +183,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
             goWest = true;
             goEast = false;
         }
-        else if(k == Controlls.reload) {
-            this.currentGun.reload();
-            Controlls.reload.release();
-        }
     }
 
     private void releaseButton(Key k) {
@@ -201,6 +197,9 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         }
         else if(k == Controlls.left) {
             goWest = false;
+        }
+        else if(k == Controlls.reload) {
+            this.currentGun.reload();
         }
     }
 

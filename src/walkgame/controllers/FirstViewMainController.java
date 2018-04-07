@@ -26,14 +26,21 @@ public class FirstViewMainController extends MainController {
         this.firstView = firstView;
     }
 
-    public void pressKeyButton(KeyCode k)
+    public void pressKeyButton(KeyCode keyCode)
     {
-        controlls.pressButton((char) k.getCode());
+        Character k = (char) keyCode.getCode();
+        controlls.pressButton(k);
+
+        if(k.equals(Controlls.reload.key))//todo: dit kan mooier
+        {
+            firstView.player.getCurrentGun().reload();
+        }
     }
 
-    public void releaseKeyButton(KeyCode k)
+    public void releaseKeyButton(KeyCode keyCode)
     {
-        controlls.releaseButton((char) k.getCode());
+        Character k = (char) keyCode.getCode();
+        controlls.releaseButton(k);
     }
 
     public void mouseClick(Point2D mouseCoordinates)

@@ -174,7 +174,12 @@ public class Room extends ImageViewObject
         double velocityX = moveableNode.getVelocityX();
         double velocityY = moveableNode.getVelocityY();
 
+
         ArrayList<Character> direction = new ArrayList<>();
+
+        if(velocityX == 0 && velocityY == 0 ) {//if velocity == null, stop method
+            return direction;
+        }
 
         for (ImageViewObject sollidNode : sollidObjects)//todo: player kan via deur vast zitten in de muur.
         {
