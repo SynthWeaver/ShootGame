@@ -2,10 +2,12 @@ package walkgame.objects.microObjects.guns;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 
 public abstract class Gun {//todo: meer guns en ammo
 
     private String name;
+    private Image image;
     private SimpleIntegerProperty ammoCount;
 
     private int clipSize;
@@ -16,8 +18,9 @@ public abstract class Gun {//todo: meer guns en ammo
     protected boolean shooting;
 
 
-    public Gun(String name, SimpleIntegerProperty ammoCount, int clipSize, double reloadTime) {
+    public Gun(String name, Image image, SimpleIntegerProperty ammoCount, int clipSize, double reloadTime) {
         this.name = name;
+        this.image = image;
         this.ammoCount = ammoCount;
         this.clipSize = clipSize;
         this.clipAmmo = new SimpleIntegerProperty(clipSize);
@@ -59,6 +62,10 @@ public abstract class Gun {//todo: meer guns en ammo
 
     public String getName() {
         return name;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public SimpleIntegerProperty getAmmoCount() {

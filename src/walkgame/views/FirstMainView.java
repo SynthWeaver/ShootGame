@@ -39,7 +39,7 @@ public class FirstMainView extends MainView
         firstViewController = new FirstViewMainController(this);
 
         this.createFloor();
-        player = new Player(MainView.playerSpawn, "Jack", new Pistol());
+        player = new Player( "Jack", new Pistol());
         playerStatusUI = new PlayerStatus();
     }
 

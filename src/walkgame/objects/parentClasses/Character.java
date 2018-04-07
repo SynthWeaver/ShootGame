@@ -5,15 +5,14 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.interfaces.Solid;
 import walkgame.objects.microObjects.Angle;
-import walkgame.objects.microObjects.Sprites;
 
-public abstract class Character extends ImageViewObject implements Moveable, Destructible
+public abstract class Character extends StackPaneObject implements Moveable, Destructible, Solid
 {
-    public Character(Sprites sprites, Point2D coordinates, SimpleIntegerProperty health, double speed) {
-        super(coordinates);
+    public Character(Image[] image, Point2D coordinates, SimpleIntegerProperty health, double speed) {
+        super(image, coordinates);
         this.speed = speed;
-        this.sprites = sprites;
         this.health = health;
     }
 
@@ -22,8 +21,6 @@ public abstract class Character extends ImageViewObject implements Moveable, Des
 
     private double velocityX = 0, velocityY = 0;
     protected boolean goNorth, goSouth, goEast, goWest;
-
-    protected Sprites sprites;
 
 
 
@@ -100,48 +97,48 @@ public abstract class Character extends ImageViewObject implements Moveable, Des
 
     @Override
     public void rotateImage() {
-        Image image = sprites.getSprite(Angle.SOUTH);
+        double rotate = 0;
 
         if(goEast)
         {
-            image = sprites.getSprite(Angle.EAST);
+            rotate = Angle.EAST;
         }
         else if(goWest)
         {
-            image = sprites.getSprite(Angle.WEST);
+            rotate = Angle.WEST;
         }
 
         if(goNorth)
         {
             if(goEast)
             {
-                image = sprites.getSprite(Angle.NORTH_EAST);
+                rotate = Angle.NORTH_EAST;
             }
             else if(goWest)
             {
-                image = sprites.getSprite(Angle.NORTH_WEST);
+                rotate = Angle.NORTH_WEST;
             }
             else
             {
-                image = sprites.getSprite(Angle.NORTH);
+                rotate = Angle.NORTH;
             }
         }
         else if(goSouth)
         {
             if(goEast)
             {
-                image = sprites.getSprite(Angle.SOUTH_EAST);
+                rotate = Angle.SOUTH_EAST;
             }
             else if(goWest)
             {
-                image = sprites.getSprite(Angle.SOUTH_WEST);
+                rotate = Angle.SOUTH_WEST;
             }
             else
             {
-                image = sprites.getSprite(Angle.SOUTH);
+                rotate = Angle.SOUTH;
             }
         }
 
-        super.setImage(image);
+        super.setRotate(rotate);
     }
 }

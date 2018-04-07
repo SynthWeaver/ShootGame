@@ -3,12 +3,13 @@ package walkgame.objects.microObjects.guns;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import walkgame.objects.cast.bullets.Bullet;
 
 public abstract class SemiAutomaticGun extends Gun {
 
-    SemiAutomaticGun(String name, SimpleIntegerProperty ammoCount, int clipSize, double reloadTime) {
-        super(name, ammoCount, clipSize, reloadTime);
+    SemiAutomaticGun(String name, Image image, SimpleIntegerProperty ammoCount, int clipSize, double reloadTime) {
+        super(name, image, ammoCount, clipSize, reloadTime);
     }
 
     @Override

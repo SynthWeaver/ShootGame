@@ -48,7 +48,7 @@ public class TestClasses {
         MainView.addScene(scene);
 
         room = new Room(new Point2D(0,0));
-        player = new Player(MainView.playerSpawn, "Jack", new Pistol());
+        player = new Player( "Jack", new Pistol());
 
     }
 }

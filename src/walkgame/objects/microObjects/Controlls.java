@@ -51,7 +51,6 @@ public class Controlls {
         return pressedButtons;
     }
 
-    @Deprecated
     public ArrayList<Key> getReleasedButtons()
     {
         ArrayList<Key> releasedButtons = new ArrayList<>();

@@ -2,13 +2,14 @@ package walkgame.objects.microObjects.guns;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 
 public abstract class AutomaticGun extends Gun {
 
     private double rateOfFire;
 
-    AutomaticGun(String name, SimpleIntegerProperty ammoCount, int clipSize, double rateOfFire, double reloadTime) {
-        super(name, ammoCount, clipSize, reloadTime);
+    AutomaticGun(String name, Image image, SimpleIntegerProperty ammoCount, int clipSize, double rateOfFire, double reloadTime) {
+        super(name, image, ammoCount, clipSize, reloadTime);
         this.rateOfFire = rateOfFire;
     }
 

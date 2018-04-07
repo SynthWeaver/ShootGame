@@ -9,7 +9,9 @@ import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
 import walkgame.interfaces.Shootable;
 import walkgame.objects.map.Room;
-import walkgame.objects.microObjects.*;
+import walkgame.objects.microObjects.Controlls;
+import walkgame.objects.microObjects.Functions;
+import walkgame.objects.microObjects.Key;
 import walkgame.objects.microObjects.guns.Gun;
 import walkgame.objects.parentClasses.Character;
 import walkgame.views.parentClasses.MainView;
@@ -18,39 +20,33 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     public static Group group = new Group();
 
+    private static final Image STANDARD_IMAGE = new Image("walkgame/res/player/player.png");
     private static final SimpleIntegerProperty PLAYER_HEALTH = new SimpleIntegerProperty(100);
     private static final double PLAYER_SPEED = 0;
-    public static final Point2D PLAYER_SIZE  = new Point2D(32,32);
-    private static final boolean isSolid = true;
 
     private String name;
     private Gun currentGun;
     private Room currentRoom;
 
-    private static final Sprites PLAYER_SPRITES = new Sprites(
-            new Image("walkgame/res/player/none/north.png"),
-            new Image("walkgame/res/player/none/north_east.png"),
-            new Image("walkgame/res/player/none/east.png"),
-            new Image("walkgame/res/player/none/south_east.png"),
-            new Image("walkgame/res/player/none/south.png"),
-            new Image("walkgame/res/player/none/south_west.png"),
-            new Image("walkgame/res/player/none/west.png"),
-            new Image("walkgame/res/player/none/north_west.png")
-    );
 
-
-    public Player(Sprites sprites, Point2D playerSpawn, String name, Gun currentGun)
+    public Player(Image[] image, String name, Gun currentGun)
     {
-        super(sprites, playerSpawn, PLAYER_HEALTH, PLAYER_SPEED);
+        super(image, new Point2D(0,0), PLAYER_HEALTH, PLAYER_SPEED);
         this.name = name;
         this.currentGun = currentGun;
         this.currentRoom =  (Room) Room.group.getChildren().get(0);
-        super.setImage(sprites.getSprite(Angle.SOUTH));
+
+
+        Point2D playerSize = super.getSize();
+        Point2D playerSpawn = new Point2D(MainView.getScreenCenter().getX() - (playerSize.getX() / 2f) , MainView.getScreenCenter().getY() - (playerSize.getY() / 2f));//todo: moet anders
+
+        super.setX(playerSpawn.getX());
+        super.setY(playerSpawn.getY());
     }
 
-    public Player(Point2D playerSpawn, String name, Gun currentGun)
+    public Player( String name, Gun currentGun)
     {
-        this(PLAYER_SPRITES, playerSpawn, name, currentGun);
+        this(new Image[]{STANDARD_IMAGE, currentGun.getImage()}, name, currentGun);
     }
 
     @Override
@@ -78,10 +74,25 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
+    public Point2D getSceneCenter() {
+        return Hud.hudToMovableGroup(super.getSceneCenter());
+    }
+
+    @Override
     public Point2D getMaxPoint2D()
     {
         return Hud.hudToMovableGroup(super.getMaxPoint2D());
     }
+
+    /*@Override
+    public double getRealWidth() {
+        return Player.STANDARD_IMAGE.getWidth();
+    }
+
+    @Override
+    public double getRealHeight() {
+        return Player.STANDARD_IMAGE.getHeight();
+    }*/
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
@@ -93,13 +104,14 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public boolean contains(Point2D point2D) {
-        Point2D playerCoordinates = this.getPoint2D();
+    public boolean contains(Point2D point2D) {//todo: heeft nog bugs
+        Point2D relativeCenter = Hud.hudToMovableGroup(super.getSceneCenter());
 
-        double playerX = playerCoordinates.getX();
-        double playerY = playerCoordinates.getY();
-        double playerWidth = super.getWidth();
-        double playerHeight = super.getHeight();
+        double playerWidth = Player.STANDARD_IMAGE.getWidth();
+        double playerHeight = Player.STANDARD_IMAGE.getHeight();
+
+        double playerX = relativeCenter.getX() - (playerWidth / 2f);
+        double playerY = relativeCenter.getY() - (playerHeight / 2f);
 
         BoundingBox relativePlayerBox = new BoundingBox(playerX, playerY, playerWidth, playerHeight);
 
@@ -114,44 +126,9 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     @Override
     public void rotateImage(Point2D mouseCoordinates) {
-        Image image = sprites.getSprite(Angle.SOUTH);
         double angle = Functions.getAngle(MainView.getScreenCenter(), mouseCoordinates);
 
-
-        if(angle > Angle.NORTH_NORTH_EAST && angle < Angle.NORTH_EAST_EAST)
-        {
-            image = sprites.getSprite(Angle.NORTH_EAST);
-        }
-        else if(angle > Angle.NORTH_NORTH_EAST && angle < Angle.SOUTH_EAST_EAST)
-        {
-            image = sprites.getSprite(Angle.EAST);
-        }
-        else if(angle > Angle.SOUTH_EAST_EAST && angle < Angle.SOUTH_SOUTH_EAST)
-        {
-            image = sprites.getSprite(Angle.SOUTH_EAST);
-        }
-        else if(angle > Angle.SOUTH_SOUTH_EAST && angle < Angle.SOUTH_SOUTH_WEST)
-        {
-            image = sprites.getSprite(Angle.SOUTH);
-        }
-        else if(angle > Angle.SOUTH_SOUTH_WEST && angle < Angle.SOUTH_WEST_WEST)
-        {
-            image = sprites.getSprite(Angle.SOUTH_WEST);
-        }
-        else if(angle > Angle.SOUTH_WEST_WEST && angle < Angle.NORTH_WEST_WEST)
-        {
-            image = sprites.getSprite(Angle.WEST);
-        }
-        else if(angle > Angle.NORTH_WEST_WEST && angle < Angle.NORTH_NORTH_WEST)
-        {
-            image = sprites.getSprite(Angle.NORTH_WEST);
-        }
-        else if(angle > Angle.NORTH_NORTH_WEST || angle < Angle.NORTH_NORTH_EAST)
-        {
-            image = sprites.getSprite(Angle.NORTH);
-        }
-
-        super.setImage(image);
+        super.setRotate(angle);
     }
 
     @Override
@@ -206,11 +183,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     @Override
     public void destroy() {
         Player.group.getChildren().remove(this);
-    }
-
-    @Override
-    public boolean isSolid() {
-        return isSolid;
     }
 
     @Override

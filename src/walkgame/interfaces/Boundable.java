@@ -12,6 +12,7 @@ public interface Boundable {
     double getMaxY();
     double getWidth();
     double getHeight();
+    Point2D getSize();
     double getSceneHorizontalCenter();
     double getSceneVerticalCenter();
     Point2D getSceneCenter();
@@ -21,6 +22,4 @@ public interface Boundable {
 
     boolean contains(Point2D point2D);
     boolean contains(double x, double y);
-
-    boolean isSolid();
 }

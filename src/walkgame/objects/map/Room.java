@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Moveable;
+import walkgame.interfaces.Solid;
 import walkgame.objects.cast.Fog;
 import walkgame.objects.microObjects.Compass;
 import walkgame.objects.parentClasses.ImageViewObject;
@@ -31,7 +32,6 @@ public class Room extends ImageViewObject
     public Point2D SOUTH_ROOM_COORDINATES;
     public Point2D WEST_ROOM_COORDINATES;
 
-    private static final boolean isSolid = false;
     public static final Image STANDARD_IMAGE = new Image("walkgame/res/map/room.png");
 
     public boolean visited;
@@ -183,7 +183,7 @@ public class Room extends ImageViewObject
 
         for (ImageViewObject sollidNode : sollidObjects)//todo: player kan via deur vast zitten in de muur.
         {
-            if(!sollidNode.equals(moveableNode) && sollidNode.isSolid())
+            if(!sollidNode.equals(moveableNode) && sollidNode instanceof Solid)
             {
                 //North
                 if(moveableNode.contains(sollidNode.getX() , sollidNode.getMaxY() + velocityY) && !direction.contains(Compass.NORTH))
@@ -239,11 +239,6 @@ public class Room extends ImageViewObject
                 room.fog.showFog();
             }
         }
-    }
-
-    @Override
-    public boolean isSolid() {
-        return isSolid;
     }
 
     @Override

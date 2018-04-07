@@ -45,7 +45,7 @@ public class FirstViewMainController extends MainController {
 
     public void mouseClick(Point2D mouseCoordinates)
     {
-        Player player = MainView.getCurrentPlayer();//todo: scene coordinates
+        Player player = MainView.getCurrentPlayer();
 
         Point2D relativePlayerCenter =  Hud.hudToMovableGroup(player.getSceneCenter());
         Point2D relativeMouseCoordinates = Hud.hudToMovableGroup(mouseCoordinates);

@@ -3,9 +3,9 @@ package walkgame.objects.parentClasses;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import walkgame.interfaces.ImageViewInterface;
+import walkgame.interfaces.ObjectInGame;
 
-public abstract class ImageViewObject extends ImageView implements ImageViewInterface
+public abstract class ImageViewObject extends ImageView implements ObjectInGame
 {
     public ImageViewObject(Point2D point2D)
     {
@@ -42,9 +42,6 @@ public abstract class ImageViewObject extends ImageView implements ImageViewInte
     }
 
     @Override
-    public abstract boolean isSolid();
-
-    @Override
     public abstract void addNodeToList();
 
     @Override
@@ -69,6 +66,12 @@ public abstract class ImageViewObject extends ImageView implements ImageViewInte
     public double getHeight()
     {
         return this.getBoundsInParent().getHeight();
+    }
+
+    @Override
+    public Point2D getSize()
+    {
+        return new Point2D(this.getWidth(), this.getHeight());
     }
 
     @Override

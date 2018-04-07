@@ -30,7 +30,6 @@ public abstract class MainView extends gameloop.View {
     protected static SceneBundle sceneBundle = new SceneBundle();
 
     public static Point2D screenSize = new Point2D(300, 300);
-    public static Point2D playerSpawn = new Point2D(MainView.getScreenCenter().getX() - (Player.PLAYER_SIZE.getX() / 2f) , MainView.getScreenCenter().getY() - (Player.PLAYER_SIZE.getY() / 2f));//todo: moet anders
 
     public static final ArrayList<Controllable> CONTROLLABLE_LIST = new ArrayList<>();
     public static final ArrayList<Destructible> DESTRUCTIBLE_LIST = new ArrayList<>();

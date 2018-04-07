@@ -7,19 +7,19 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Destructible;
 import walkgame.interfaces.Moveable;
+import walkgame.interfaces.Solid;
 import walkgame.objects.hud.Hud;
 import walkgame.objects.hud.Player;
 import walkgame.objects.microObjects.Functions;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
 
-public abstract class Bullet extends ImageViewObject implements Moveable, Destructible {
+public abstract class Bullet extends ImageViewObject implements Moveable, Destructible, Solid {
 
     public static Group group = new Group();
 
     private static final int DEFAULT_HEALTH = 1;
     private static final double DEFAULT_SPEED = 4;
-    private static final boolean isSolid = true;
 
     private SimpleIntegerProperty health = new SimpleIntegerProperty();
     private double speed;
@@ -132,11 +132,6 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
     @Override
     public void rotateImage() {
 
-    }
-
-    @Override
-    public boolean isSolid() {
-        return isSolid;
     }
 
     @Override

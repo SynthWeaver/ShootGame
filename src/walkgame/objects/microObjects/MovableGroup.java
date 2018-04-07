@@ -12,8 +12,6 @@ import java.util.Collection;
 
 public class MovableGroup extends javafx.scene.Group implements Controllable, Moveable
 {
-    private static final boolean isSolid = false;
-
     private double speed = 1.5;
     private double velocityX = 0;
     private double velocityY = 0;
@@ -143,6 +141,12 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     }
 
     @Override
+    public Point2D getSize()
+    {
+        return new Point2D(this.getWidth(), this.getHeight());
+    }
+
+    @Override
     public double getSceneHorizontalCenter()
     {
         return getX() + (getWidth() / 2f);
@@ -249,11 +253,6 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         else if(k == Controlls.left) {
             goWest = false;
         }
-    }
-
-    @Override
-    public boolean isSolid() {
-        return isSolid;
     }
 
     @Override

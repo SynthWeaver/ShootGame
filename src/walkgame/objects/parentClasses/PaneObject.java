@@ -3,10 +3,11 @@ package walkgame.objects.parentClasses;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import walkgame.interfaces.ImageViewInterface;
+import walkgame.interfaces.ObjectInGame;
 
-public abstract class PaneObject extends Pane implements ImageViewInterface
+public abstract class PaneObject extends Pane implements ObjectInGame
 {
     public PaneObject(Point2D coordinates)
     {
@@ -75,6 +76,12 @@ public abstract class PaneObject extends Pane implements ImageViewInterface
     }
 
     @Override
+    public Point2D getSize()
+    {
+        return new Point2D(super.getWidth(), super.getHeight());
+    }
+
+    @Override
     public double getSceneHorizontalCenter()
     {
         return getX() + (getWidth() / 2f);
@@ -112,5 +119,10 @@ public abstract class PaneObject extends Pane implements ImageViewInterface
     public void setY(double y)
     {
         super.setLayoutY(y);
+    }
+
+    @Override
+    public Image getImage() {
+        return null;//todo: moet nog gefixt worden
     }
 }
