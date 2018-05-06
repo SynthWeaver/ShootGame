@@ -1,14 +1,10 @@
 package walkgame.objects.map;
 
 import javafx.geometry.Point2D;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import walkgame.interfaces.Moveable;
-import walkgame.interfaces.Solid;
 import walkgame.objects.cast.Fog;
-import walkgame.objects.microObjects.Compass;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
 

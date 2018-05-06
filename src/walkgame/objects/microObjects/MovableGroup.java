@@ -1,10 +1,10 @@
 package walkgame.objects.microObjects;
 
 import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
-import walkgame.objects.hud.Hud;
 import walkgame.objects.hud.Player;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
@@ -55,7 +55,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
             velocityX = 0;
         }
 
-        checkCollision();
+        checkCollision();//if player has a collision make this velocity 0
 
         if(velocityX != 0 || velocityY != 0 ) {
             double x = getX();
@@ -69,30 +69,31 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     private void checkCollision() {
         //check if player has collision with something sollit from player currents room
         Player player = MainView.getCurrentPlayer();
-        //player.setVelocityX(this.velocityX);
-        //player.setVelocityY(this.velocityY);
 
         ArrayList<ImageViewObject> solidObjects = player.getCurrentRoom().getSollidObjects();
 
-        Point2D playerPoint2D = Hud.hudToMovableGroup(player.getPoint2D());
-        double playerX = playerPoint2D.getX();
-        double playerY = playerPoint2D.getY();
+        Rectangle2D playerRectangle = player.getRelativeRectangle2D();
+        double playerX = playerRectangle.getMinX();
+        double playerY = playerRectangle.getMinY();
+        double playerWidth = playerRectangle.getWidth();
+        double playerHeight = playerRectangle.getHeight();
 
         for(ImageViewObject solidObject : solidObjects)
         {
-            if(this.velocityX < 0 && solidObject.intersects(playerX, playerY, player.getRealWidth() + 1, player.getRealHeight()))
+            //velocity is backwards because movableObject goes the other way
+            if(this.velocityX < 0 && solidObject.intersects(playerX, playerY, playerWidth + 1, playerHeight))
             {
                 this.velocityX = 0;
             }
-            if(this.velocityX > 0 && solidObject.intersects(playerX - 1, playerY, player.getRealWidth(), player.getRealHeight()))
+            if(this.velocityX > 0 && solidObject.intersects(playerX - 1, playerY, playerWidth, playerHeight))
             {
                 this.velocityX = 0;
             }
-            if(this.velocityY > 0 && solidObject.intersects(playerX, playerY, player.getRealWidth(), player.getRealHeight() + 1))
+            if(this.velocityY < 0 && solidObject.intersects(playerX, playerY, playerWidth, playerHeight + 1))
             {
                 this.velocityY = 0;
             }
-            if(this.velocityY < 0 && solidObject.intersects(playerX, playerY -1, player.getRealWidth(), player.getRealHeight()))
+            if(this.velocityY > 0 && solidObject.intersects(playerX, playerY -1, playerWidth, playerHeight))
             {
                 this.velocityY = 0;
             }

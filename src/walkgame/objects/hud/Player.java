@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -29,6 +30,8 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     private String name;
     private Gun currentGun;
     private Room currentRoom;
+
+    private final double SPRITE_SIZE = 32;
 
 
     public Player(Image[] image, String name, Gun currentGun)
@@ -177,6 +180,23 @@ public class Player extends Character implements Controllable, Nameable, Shootab
         else if(k == Controlls.reload) {
             this.currentGun.reload();
         }
+    }
+
+    public Rectangle2D getRelativeRectangle2D()
+    {
+        Point2D point2D = Hud.hudToMovableGroup(this.getX(), this.getY());
+        double x = point2D.getX();
+        double y = point2D.getY();
+        double height = super.getHeight();
+        double weight = super.getWidth();
+
+        double centerX = x + (weight / 2f);
+        double centerY = y + (height / 2f);
+
+        double newX = centerX - (SPRITE_SIZE / 2f);
+        double newY = centerY - (SPRITE_SIZE / 2f);
+
+        return new Rectangle2D(newX, newY, SPRITE_SIZE, SPRITE_SIZE);
     }
 
     @Override
