@@ -100,16 +100,6 @@ public abstract class PaneObject extends Pane implements ObjectInGame
     }
 
     @Override
-    public boolean contains(double localX, double localY) {
-        return this.contains(new Point2D(localX, localY));
-    }
-
-    @Override
-    public boolean contains(Point2D localPoint) {
-        return this.getSceneBounds().contains(localPoint);
-    }
-
-    @Override
     public void setX(double x)
     {
         super.setLayoutX(x);

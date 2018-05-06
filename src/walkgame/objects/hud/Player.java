@@ -1,12 +1,9 @@
 package walkgame.objects.hud;
 
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Nameable;
@@ -94,33 +91,6 @@ public class Player extends Character implements Controllable, Nameable, Shootab
     }
 
     @Override
-    public boolean contains(double localX, double localY) {
-        return this.contains(new Point2D(localX, localY));
-    }
-
-    @Override
-    public boolean contains(Point2D point2D) {//todo: heeft nog bugs
-        Bounds bounds = getPlayerImageBounds();
-
-        Point2D relativeCoordinate = this.getPoint2D();
-
-        double playerX = relativeCoordinate.getX() + bounds.getMinX();
-        double playerY = relativeCoordinate.getY() + bounds.getMinY();
-        double playerWidth = bounds.getWidth();
-        double playerHeight = bounds.getHeight();
-
-        BoundingBox relativePlayerBox = new BoundingBox(playerX, playerY, playerWidth, playerHeight);
-
-        return relativePlayerBox.contains(point2D);
-    }
-
-    private Bounds getPlayerImageBounds()
-    {
-        Node node = super.getChildren().get(0);
-        return node.getBoundsInParent();
-    }
-
-    @Override
     public void move()
     {
         return;
@@ -184,17 +154,10 @@ public class Player extends Character implements Controllable, Nameable, Shootab
 
     public Rectangle2D getRelativeRectangle2D()
     {
-        Point2D point2D = Hud.hudToMovableGroup(this.getX(), this.getY());
-        double x = point2D.getX();
-        double y = point2D.getY();
-        double height = super.getHeight();
-        double weight = super.getWidth();
+        Point2D center = this.getCenter();
 
-        double centerX = x + (weight / 2f);
-        double centerY = y + (height / 2f);
-
-        double newX = centerX - (SPRITE_SIZE / 2f);
-        double newY = centerY - (SPRITE_SIZE / 2f);
+        double newX = center.getX() - (SPRITE_SIZE / 2f);
+        double newY = center.getY() - (SPRITE_SIZE / 2f);
 
         return new Rectangle2D(newX, newY, SPRITE_SIZE, SPRITE_SIZE);
     }

@@ -15,7 +15,7 @@ public class Wall extends ImageViewObject implements Solid {
     public Wall(Point2D coordinates, Room room) {
         super(STANDARD_IMAGE, coordinates);
         this.room = room;
-        room.sollidObjects.add(this);
+        room.containsObjects.add(this);
     }
 
     @Override

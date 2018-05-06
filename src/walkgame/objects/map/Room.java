@@ -22,7 +22,7 @@ public class Room extends ImageViewObject
     public Room roomSouth;
     public Room roomWest;
     public ArrayList<Room> nextRooms;
-    public ArrayList<ImageViewObject> sollidObjects = new ArrayList<>();
+    public ArrayList<ImageViewObject> containsObjects = new ArrayList<>();//todo: alleen als een object lid is van interface solid is mag hij solid zijn
 
     public Point2D NORTH_ROOM_COORDINATES;
     public Point2D EAST_ROOM_COORDINATES;
@@ -185,9 +185,9 @@ public class Room extends ImageViewObject
         }
     }
 
-    public ArrayList<ImageViewObject> getSollidObjects()
+    public ArrayList<ImageViewObject> getContainsObjects()
     {
-        return sollidObjects;
+        return containsObjects;
     }
 
     @Override

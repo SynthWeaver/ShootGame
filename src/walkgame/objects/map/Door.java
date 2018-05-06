@@ -14,7 +14,7 @@ public class Door extends ImageViewObject {
     public Door(Point2D coordinates, Room room) {
         super(STANDARD_IMAGE, coordinates);
         this.room = room;
-        room.sollidObjects.add(this);
+        room.containsObjects.add(this);
     }
 
     @Override

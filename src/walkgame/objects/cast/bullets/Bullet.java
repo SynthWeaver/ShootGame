@@ -98,7 +98,7 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
         Point2D screen = Hud.hudToMovableGroup(new Point2D(0,0));
         Point2D screenSize = Hud.hudToMovableGroup(MainView.screenSize);
 
-        if(hasCollision())//todo: een of andere bug kan ik door de muur schieten (links boven schuin)
+        if(hasCollision())
         {
             this.setHealth(0);
         }
@@ -121,7 +121,7 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
     {
         for(Node node : Player.group.getChildren())
         {
-            ArrayList<ImageViewObject> solidObjects = ((Player) node).getCurrentRoom().getSollidObjects();
+            ArrayList<ImageViewObject> solidObjects = ((Player) node).getCurrentRoom().getContainsObjects();
 
             for(ImageViewObject imageViewObject : solidObjects)
             {

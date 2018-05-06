@@ -9,7 +9,7 @@ public class Controlls {
     public static Key right = new Key('D');
     public static Key down = new Key('S');
     public static Key left = new Key('A');
-    public static Key reload = new Key('R');//todo: reload werkt niet
+    public static Key reload = new Key('R');
 
 
     public void pressButton(Character keyPressed)

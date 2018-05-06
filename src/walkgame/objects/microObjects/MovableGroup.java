@@ -70,7 +70,7 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
         //check if player has collision with something sollit from player currents room
         Player player = MainView.getCurrentPlayer();
 
-        ArrayList<ImageViewObject> solidObjects = player.getCurrentRoom().getSollidObjects();
+        ArrayList<ImageViewObject> solidObjects = player.getCurrentRoom().getContainsObjects();
 
         Rectangle2D playerRectangle = player.getRelativeRectangle2D();
         double playerX = playerRectangle.getMinX();
