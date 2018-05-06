@@ -1,6 +1,7 @@
 package walkgame.objects.map;
 
 import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -164,60 +165,7 @@ public class Room extends ImageViewObject
         }
     }
 
-    /**
-     * Compares the parameter with all Sollid objects in this room
-     * @param moveableNode A Moveable object that can be compared
-     * @return velocityX and VelocityY
-     */
-    public ArrayList<Character> getCollisionWith(Moveable moveableNode)
-    {
-        double velocityX = moveableNode.getVelocityX();
-        double velocityY = moveableNode.getVelocityY();
 
-
-        ArrayList<Character> direction = new ArrayList<>();
-
-        if(velocityX == 0 && velocityY == 0 ) {//if velocity == null, stop method
-            return direction;
-        }
-
-        for (ImageViewObject sollidNode : sollidObjects)//todo: player kan via deur vast zitten in de muur.
-        {
-            if(!sollidNode.equals(moveableNode) && sollidNode instanceof Solid)
-            {
-                //North
-                if(moveableNode.contains(sollidNode.getX() , sollidNode.getMaxY() + velocityY) && !direction.contains(Compass.NORTH))
-                {
-                    direction.add(Compass.NORTH);
-                }
-                //East
-                if(moveableNode.contains(sollidNode.getX() + velocityX, sollidNode.getY()) && !direction.contains(Compass.EAST))
-                {
-                    direction.add(Compass.EAST);
-                }
-                //South
-                if(moveableNode.contains(sollidNode.getX() , sollidNode.getY() + velocityY) && !direction.contains(Compass.SOUTH))
-                {
-                    direction.add(Compass.SOUTH);
-                }
-                //West
-                if(moveableNode.contains(sollidNode.getMaxX() + velocityX, sollidNode.getMaxY()) && !direction.contains(Compass.WEST))
-                {
-                    direction.add(Compass.WEST);
-                }
-                if(direction.size() >= 2)
-                {
-                    break;
-                }
-            }
-        }
-        return direction;
-    }
-
-    public boolean hasCollisionWith(Moveable moveableNode)
-    {
-        return getCollisionWith(moveableNode).size() >= 1;
-    }
 
     private void scoutFog()
     {
@@ -239,6 +187,11 @@ public class Room extends ImageViewObject
                 room.fog.showFog();
             }
         }
+    }
+
+    public ArrayList<ImageViewObject> getSollidObjects()
+    {
+        return sollidObjects;
     }
 
     @Override

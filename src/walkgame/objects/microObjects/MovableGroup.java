@@ -4,7 +4,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import walkgame.interfaces.Controllable;
 import walkgame.interfaces.Moveable;
+import walkgame.objects.hud.Hud;
 import walkgame.objects.hud.Player;
+import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
 
 import java.util.ArrayList;
@@ -67,18 +69,33 @@ public class MovableGroup extends javafx.scene.Group implements Controllable, Mo
     private void checkCollision() {
         //check if player has collision with something sollit from player currents room
         Player player = MainView.getCurrentPlayer();
-        player.setVelocityX(this.velocityX);
-        player.setVelocityY(this.velocityY);
+        //player.setVelocityX(this.velocityX);
+        //player.setVelocityY(this.velocityY);
 
-        ArrayList<Character> directionList = player.getCurrentRoom().getCollisionWith(player);
+        ArrayList<ImageViewObject> solidObjects = player.getCurrentRoom().getSollidObjects();
 
-        if(directionList.contains(Compass.EAST) || directionList.contains(Compass.WEST))
+        Point2D playerPoint2D = Hud.hudToMovableGroup(player.getPoint2D());
+        double playerX = playerPoint2D.getX();
+        double playerY = playerPoint2D.getY();
+
+        for(ImageViewObject solidObject : solidObjects)
         {
-            this.velocityX = 0;
-        }
-        if(directionList.contains(Compass.NORTH) || directionList.contains(Compass.SOUTH))
-        {
-            this.velocityY = 0;
+            if(this.velocityX < 0 && solidObject.intersects(playerX, playerY, player.getRealWidth() + 1, player.getRealHeight()))
+            {
+                this.velocityX = 0;
+            }
+            if(this.velocityX > 0 && solidObject.intersects(playerX - 1, playerY, player.getRealWidth(), player.getRealHeight()))
+            {
+                this.velocityX = 0;
+            }
+            if(this.velocityY > 0 && solidObject.intersects(playerX, playerY, player.getRealWidth(), player.getRealHeight() + 1))
+            {
+                this.velocityY = 0;
+            }
+            if(this.velocityY < 0 && solidObject.intersects(playerX, playerY -1, player.getRealWidth(), player.getRealHeight()))
+            {
+                this.velocityY = 0;
+            }
         }
     }
 

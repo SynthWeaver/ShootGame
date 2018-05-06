@@ -14,6 +14,8 @@ import walkgame.objects.microObjects.Functions;
 import walkgame.objects.parentClasses.ImageViewObject;
 import walkgame.views.parentClasses.MainView;
 
+import java.util.ArrayList;
+
 public abstract class Bullet extends ImageViewObject implements Moveable, Destructible, Solid {
 
     public static Group group = new Group();
@@ -117,13 +119,16 @@ public abstract class Bullet extends ImageViewObject implements Moveable, Destru
 
     private boolean hasCollision()
     {
-
         for(Node node : Player.group.getChildren())
         {
-            Player player = (Player) node;
-            if(player.getCurrentRoom().hasCollisionWith(this))
+            ArrayList<ImageViewObject> solidObjects = ((Player) node).getCurrentRoom().getSollidObjects();
+
+            for(ImageViewObject imageViewObject : solidObjects)
             {
-                return true;
+                if(this.intersects(imageViewObject.getLayoutBounds()))
+                {
+                    return true;
+                }
             }
         }
         return false;
